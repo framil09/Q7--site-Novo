@@ -1,0 +1,2772 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Qode7 — Tecnologia que Transforma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #060d1f;
+      --navy2: #0b1630;
+      --blue: #1a3a6e;
+      --accent: #2563eb;
+      --accent2: #06b6d4;
+      --q7-grad: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+      --gold: #d4a843;
+      --gold2: #f0c96a;
+      --white: #ffffff;
+      --gray: #a0aec0;
+      --light: #e8edf7;
+    }
+
+    /* ══ LOGO [Q7] ══ */
+    .q7-logo {
+      display: inline-flex; align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 900; font-size: 1.65rem;
+      letter-spacing: -1px; line-height: 1;
+      background: var(--q7-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; text-decoration: none;
+      filter: drop-shadow(0 0 12px rgba(6,182,212,0.35));
+      transition: filter 0.3s;
+    }
+    .q7-logo:hover { filter: drop-shadow(0 0 20px rgba(6,182,212,0.6)); }
+    .q7-logo .bracket { font-weight: 300; opacity: 0.85; }
+    .q7-logo-sub {
+      display: block; font-size: 0.45rem; font-weight: 600;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      background: none; -webkit-text-fill-color: rgba(255,255,255,0.35);
+      margin-top: 2px;
+    }
+
+    /* ══ ANIMATED PAGE BACKGROUND ══ */
+    #bg-canvas {
+      position: fixed; inset: 0; z-index: -1;
+      pointer-events: none;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: transparent;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 6%;
+      height: 74px;
+      display: flex; align-items: center; gap: 0;
+      background: rgba(6,13,31,0.75);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border-bottom: 1px solid rgba(6,182,212,0.1);
+      transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+    nav::after {
+      content: '';
+      position: absolute; bottom: 0; left: 6%; right: 6%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(6,182,212,0.25) 30%, rgba(37,99,235,0.25) 70%, transparent);
+      pointer-events: none;
+    }
+    nav.scrolled {
+      height: 62px;
+      background: rgba(6,13,31,0.94);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    }
+    .nav-cta-outline {
+      font-size: 0.82rem; font-weight: 600; color: var(--accent2);
+      text-decoration: none; padding: 8px 18px;
+      border: 1px solid rgba(6,182,212,0.35);
+      border-radius: 8px;
+      transition: all 0.3s cubic-bezier(.23,1,.32,1);
+      white-space: nowrap;
+      background: rgba(6,182,212,0.06);
+      letter-spacing: 0.2px;
+    }
+    .nav-cta-outline:hover {
+      background: rgba(6,182,212,0.15);
+      border-color: rgba(6,182,212,0.7);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(6,182,212,0.2);
+    }
+    .nav-logo {
+      font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--accent2), var(--gold2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; flex: 1; justify-content: center; }
+    .nav-links a {
+      color: var(--gray); font-size: 0.9rem; font-weight: 500;
+      text-decoration: none;
+      position: relative; padding-bottom: 4px;
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+    }
+    /* linha base — sempre visível, muito fraca */
+    .nav-links a::before {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px; background: rgba(255,255,255,0.08);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+    }
+    /* linha de destaque — gradiente azul */
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--accent2), var(--gold2));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+      box-shadow: 0 0 8px rgba(91,142,249,0.5);
+    }
+    .nav-links a:hover {
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+    .nav-links a:hover::before { transform: scaleX(1); }
+    .nav-links a:hover::after  { transform: scaleX(1); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent), #1255d4);
+      color: white; border: none; padding: 10px 24px;
+      border-radius: 8px; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s; letter-spacing: 0.3px;
+      box-shadow: 0 4px 20px rgba(47, 110, 247, 0.35);
+    }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(47, 110, 247, 0.5);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 100px 5% 80px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(180deg, rgba(6,13,31,0.3) 0%, rgba(6,13,31,0.6) 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    /* ── AURORA BACKGROUND (21st.dev style) ── */
+    .aurora-container {
+      position: absolute; inset: 0; z-index: 0; overflow: hidden;
+    }
+    .aurora-layer {
+      position: absolute; inset: -50%; width: 200%; height: 200%;
+      opacity: 0.6; mix-blend-mode: screen;
+    }
+    .aurora-layer-1 {
+      background: radial-gradient(ellipse 60% 40% at 30% 40%, rgba(47,110,247,0.55) 0%, transparent 60%),
+                  radial-gradient(ellipse 40% 50% at 70% 60%, rgba(91,142,249,0.3) 0%, transparent 50%);
+      animation: aurora1 12s ease-in-out infinite alternate;
+    }
+    .aurora-layer-2 {
+      background: radial-gradient(ellipse 50% 35% at 70% 30%, rgba(120,80,255,0.35) 0%, transparent 55%),
+                  radial-gradient(ellipse 45% 40% at 20% 70%, rgba(212,168,67,0.2) 0%, transparent 50%);
+      animation: aurora2 15s ease-in-out infinite alternate;
+    }
+    .aurora-layer-3 {
+      background: radial-gradient(ellipse 55% 45% at 50% 50%, rgba(0,180,150,0.18) 0%, transparent 60%),
+                  radial-gradient(ellipse 30% 50% at 80% 80%, rgba(47,110,247,0.25) 0%, transparent 55%);
+      animation: aurora3 10s ease-in-out infinite alternate;
+    }
+    @keyframes aurora1 {
+      0%   { transform: translate(0%,0%) rotate(0deg) scale(1); }
+      100% { transform: translate(5%,3%) rotate(8deg) scale(1.08); }
+    }
+    @keyframes aurora2 {
+      0%   { transform: translate(0%,0%) rotate(0deg) scale(1.05); }
+      100% { transform: translate(-4%,5%) rotate(-10deg) scale(1); }
+    }
+    @keyframes aurora3 {
+      0%   { transform: translate(3%,-2%) rotate(5deg) scale(1); }
+      100% { transform: translate(-3%,4%) rotate(-5deg) scale(1.1); }
+    }
+    /* Keep orb variables for other sections */
+    .hero-orb1, .hero-orb2, .hero-orb3 { display: none; }
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 30px) scale(1.06); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(20px, -20px) scale(1.1); }
+    }
+
+    /* ── SHINY BORDER (21st.dev style) ── */
+    @keyframes shineBorder {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .shiny-border {
+      position: relative; border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid transparent;
+      background-clip: padding-box;
+    }
+    .shiny-border::before {
+      content: ''; position: absolute; inset: -1px;
+      border-radius: inherit;
+      background: linear-gradient(90deg,
+        transparent 0%, transparent 25%,
+        rgba(91,142,249,0.7) 50%,
+        transparent 75%, transparent 100%);
+      background-size: 250% 100%;
+      animation: shineBorder 3.5s linear infinite;
+      z-index: -1;
+    }
+    .shiny-border-gold::before {
+      background: linear-gradient(90deg,
+        transparent 0%, transparent 25%,
+        rgba(240,201,106,0.8) 50%,
+        transparent 75%, transparent 100%);
+      background-size: 250% 100%;
+      animation: shineBorder 4s linear infinite;
+    }
+
+    /* ── SPOTLIGHT CARDS (21st.dev style) ── */
+    .spotlight-card { position: relative; overflow: hidden; }
+    .spotlight-card .spotlight-glow {
+      position: absolute; inset: 0; opacity: 0;
+      background: radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(47,110,247,0.18) 0%, transparent 55%);
+      transition: opacity 0.3s; pointer-events: none; z-index: 0;
+    }
+    .spotlight-card:hover .spotlight-glow { opacity: 1; }
+    .spotlight-card > *:not(.spotlight-glow) { position: relative; z-index: 1; }
+
+    /* ── ANIMATED BEAM (21st.dev style) ── */
+    .beam-container { position: relative; }
+    .beam-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: visible; }
+    @keyframes beamMove {
+      0%   { stroke-dashoffset: 1000; opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+    .beam-path {
+      fill: none; stroke-width: 1.5;
+      stroke-dasharray: 60 940;
+      stroke-linecap: round;
+    }
+    .beam-path-1 { stroke: url(#beamGrad1); animation: beamMove 3s linear infinite; }
+    .beam-path-2 { stroke: url(#beamGrad2); animation: beamMove 3s 1s linear infinite; }
+    .beam-path-3 { stroke: url(#beamGrad3); animation: beamMove 3s 2s linear infinite; }
+
+    /* ── BENTO GRID (21st.dev style) ── */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: auto;
+      gap: 16px;
+    }
+    .bento-cell {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 32px 28px;
+      transition: all 0.4s; overflow: hidden; position: relative;
+    }
+    .bento-cell:hover {
+      border-color: rgba(47,110,247,0.3);
+      box-shadow: 0 0 0 1px rgba(47,110,247,0.1), 0 20px 60px rgba(47,110,247,0.1);
+      transform: translateY(-3px);
+    }
+    .bento-cell.span2 { grid-column: span 2; }
+    .bento-cell.span3 { grid-column: span 3; }
+    .bento-cell.span4 { grid-column: span 4; }
+    .bento-cell.span6 { grid-column: span 6; }
+    .bento-cell.tall { grid-row: span 2; }
+    .bento-icon {
+      width: 40px; height: 40px; border-radius: 10px; margin-bottom: 20px;
+      background: linear-gradient(135deg, rgba(47,110,247,0.25), rgba(47,110,247,0.06));
+      border: 1px solid rgba(47,110,247,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--accent2); font-weight: 700;
+    }
+    .bento-cell h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .bento-cell p { font-size: 0.85rem; color: var(--gray); line-height: 1.65; }
+    .bento-tag {
+      display: inline-block; margin-top: 16px; padding: 4px 12px;
+      background: rgba(47,110,247,0.1); border: 1px solid rgba(47,110,247,0.2);
+      border-radius: 100px; font-size: 0.72rem; color: var(--accent2); font-weight: 600;
+    }
+    .bento-big-num {
+      font-size: 4rem; font-weight: 900; letter-spacing: -3px; line-height: 1;
+      background: linear-gradient(135deg, var(--white), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .bento-cell .bento-bg-icon {
+      position: absolute; right: -10px; bottom: -10px;
+      font-size: 5rem; opacity: 0.06; pointer-events: none;
+      transition: transform 0.4s;
+    }
+    .bento-cell:hover .bento-bg-icon { transform: scale(1.15) rotate(-5deg); }
+    @media (max-width: 900px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); }
+      .bento-cell.span2, .bento-cell.span3, .bento-cell.span4, .bento-cell.span6 { grid-column: span 2; }
+    }
+    @media (max-width: 540px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-cell.span2, .bento-cell.span3, .bento-cell.span4, .bento-cell.span6 { grid-column: span 1; }
+    }
+
+    /* ── MAGNETIC BUTTON (21st.dev style) ── */
+    .btn-magnetic { transition: transform 0.2s cubic-bezier(.23,1,.32,1), box-shadow 0.2s; }
+
+    /* ── GLOWING STAT CARDS ── */
+    .stat-card.glow-card {
+      position: relative; overflow: hidden;
+    }
+    .stat-card.glow-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(47,110,247,0.12) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.4s; pointer-events: none;
+    }
+    .stat-card.glow-card:hover::after { opacity: 1; }
+
+    /* Canvas particles */
+    #hero-canvas { position: absolute; inset: 0; z-index: 0; opacity: 0.5; }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      flex: 0 0 auto; width: 460px;
+      text-align: left;
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .hero-content h1 { text-align: left; }
+    .hero-content p   { text-align: left; max-width: 460px; }
+    .hero-content .hero-tagline { text-align: left; }
+
+    /* Typewriter cursor */
+    .typewriter-wrap { display: inline; }
+    .cursor {
+      display: inline-block; width: 3px; height: 0.85em;
+      background: var(--accent2); margin-left: 2px;
+      vertical-align: middle; border-radius: 2px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* Hero dashboard 3D */
+    .hero-dashboard-wrap {
+      position: relative; z-index: 1;
+      flex: 0 0 auto; width: 520px;
+      animation: heroFadeSlide 1s 0.5s ease both;
+    }
+    @keyframes heroFadeSlide {
+      from { opacity: 0; transform: translateX(50px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .hero-dash-tilt {
+      transform: perspective(1200px) rotateY(-8deg) rotateX(3deg);
+      transform-origin: left center;
+      border-radius: 16px; overflow: hidden;
+      box-shadow:
+        0 40px 100px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(47,110,247,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: transform 0.6s ease;
+    }
+    .hero-dash-tilt:hover {
+      transform: perspective(1200px) rotateY(-4deg) rotateX(1deg) scale(1.01);
+    }
+    .hero-dash-bar {
+      background: #111827; padding: 10px 16px;
+      display: flex; align-items: center; gap: 7px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .hdb { width: 11px; height: 11px; border-radius: 50%; }
+    .hdb.r{background:#ff5f57;} .hdb.y{background:#ffbd2e;} .hdb.g{background:#28c840;}
+    .hero-dash-url {
+      flex:1; background: rgba(255,255,255,0.06); border-radius: 5px;
+      padding: 4px 10px; font-size: 0.65rem; color: var(--gray); margin: 0 10px;
+    }
+    .hero-dash-body {
+      background: #0f172a;
+      display: flex; min-height: 340px;
+    }
+
+    /* Floating metric badges */
+    .hero-metric {
+      position: absolute; z-index: 2;
+      background: rgba(6,13,31,0.9);
+      border: 1px solid rgba(47,110,247,0.3);
+      border-radius: 14px; padding: 12px 18px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      white-space: nowrap;
+    }
+    .hero-metric.m1 { top: 18%; left: -50px; animation: metricFloat 5s ease-in-out infinite; }
+    .hero-metric.m2 { bottom: 22%; left: -30px; animation: metricFloat 6s 1s ease-in-out infinite; }
+    .hero-metric.m3 { top: 10%; right: -10px; animation: metricFloat 7s 0.5s ease-in-out infinite; }
+    @keyframes metricFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .metric-val { font-size: 1.3rem; font-weight: 800; color: var(--accent2); }
+    .metric-val.gold { color: var(--gold2); }
+    .metric-val.green { color: #68d391; }
+    .metric-lbl { font-size: 0.7rem; color: var(--gray); margin-top: 2px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(47, 110, 247, 0.12);
+      border: 1px solid rgba(47, 110, 247, 0.3);
+      padding: 8px 18px; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 600; color: var(--accent2);
+      letter-spacing: 0.8px; text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeInDown 0.8s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 8px var(--accent2);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800; line-height: 1.12; letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.9s 0.1s ease both;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent2) 0%, var(--gold2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.1rem; line-height: 1.75; color: var(--gray);
+      max-width: 560px; margin-bottom: 44px;
+      animation: fadeInUp 0.9s 0.2s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeInUp 0.9s 0.3s ease both;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #1255d4);
+      color: white; border: none; padding: 16px 36px;
+      border-radius: 10px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: all 0.3s; letter-spacing: 0.3px;
+      box-shadow: 0 8px 30px rgba(47, 110, 247, 0.4);
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(47, 110, 247, 0.55);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white); border: 1.5px solid rgba(255,255,255,0.2);
+      padding: 16px 36px; border-radius: 10px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent2); color: var(--accent2);
+      transform: translateY(-3px);
+    }
+
+    .hero-visual {
+      position: absolute; right: 5%; top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      animation: fadeInRight 1s 0.4s ease both;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(47,110,247,0.2);
+      border-radius: 20px; padding: 28px 32px;
+      backdrop-filter: blur(20px);
+      width: 280px;
+    }
+    .hero-card + .hero-card { margin-top: 16px; }
+    .card-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 14px;
+    }
+    .card-icon.blue { background: rgba(47,110,247,0.2); }
+    .card-icon.gold { background: rgba(212,168,67,0.2); }
+    .hero-card h4 { font-size: 0.85rem; color: var(--gray); font-weight: 500; margin-bottom: 6px; }
+    .hero-card .card-val { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px; }
+    .hero-card .card-val.accent { color: var(--accent2); }
+    .hero-card .card-val.gold { color: var(--gold2); }
+    .hero-card .card-sub { font-size: 0.8rem; color: var(--gray); margin-top: 4px; }
+
+    /* ─── LOGOS STRIP ─── */
+    .logos-strip {
+      padding: 40px 5%;
+      background: rgba(6,13,31,0.4);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+    }
+    .logos-label {
+      text-align: center; font-size: 0.8rem; color: var(--gray);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 28px;
+    }
+    .logos-track {
+      display: flex; gap: 60px; align-items: center;
+      animation: scroll-logos 25s linear infinite;
+      width: max-content;
+    }
+    .logos-track:hover { animation-play-state: paused; }
+    @keyframes scroll-logos {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .logo-item {
+      font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.2);
+      white-space: nowrap; letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+    .logo-item:hover { color: rgba(255,255,255,0.5); }
+
+    /* ─── SECTION COMMON ─── */
+    section { padding: 100px 5%; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--accent2);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800; letter-spacing: -1px; line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--gray);
+      line-height: 1.7; max-width: 560px;
+    }
+    .section-head { margin-bottom: 64px; }
+
+    /* ─── STATS ─── */
+    .stats-section {
+      background: rgba(6,13,31,0.45);
+      backdrop-filter: blur(4px);
+      position: relative; overflow: hidden;
+    }
+    .stats-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(47,110,247,0.08) 0%, transparent 70%);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; position: relative; z-index: 1;
+    }
+    .stat-card {
+      padding: 50px 36px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      transform: scaleX(0); transition: transform 0.4s;
+    }
+    .stat-card:hover { background: rgba(47,110,247,0.08); transform: translateY(-4px); }
+    .stat-card:hover::before { transform: scaleX(1); }
+    .stat-icon { font-size: 2rem; margin-bottom: 20px; }
+    .stat-num {
+      font-size: 3.2rem; font-weight: 900; letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--white), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-num .plus { font-size: 2rem; vertical-align: top; margin-top: 6px; display: inline-block; }
+    .stat-label {
+      font-size: 0.9rem; color: var(--gray); font-weight: 500;
+      margin-top: 12px; line-height: 1.4;
+    }
+
+    /* ─── SERVICES ─── */
+    .services-section { background: rgba(6,13,31,0.35); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 40px 32px;
+      transition: all 0.4s ease; cursor: default;
+      position: relative; overflow: hidden;
+    }
+    .service-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(47,110,247,0.08), transparent);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .service-card:hover {
+      border-color: rgba(47,110,247,0.35);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(47,110,247,0.15);
+    }
+    .service-card:hover::after { opacity: 1; }
+    .service-icon {
+      width: 60px; height: 60px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 24px;
+      background: linear-gradient(135deg, rgba(47,110,247,0.2), rgba(47,110,247,0.05));
+      border: 1px solid rgba(47,110,247,0.2);
+      position: relative; z-index: 1;
+    }
+    .service-card h3 {
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+    .service-card p {
+      font-size: 0.9rem; color: var(--gray); line-height: 1.7;
+      position: relative; z-index: 1;
+    }
+    .service-tag {
+      display: inline-block; margin-top: 20px; padding: 5px 14px;
+      background: rgba(47,110,247,0.1); border: 1px solid rgba(47,110,247,0.2);
+      border-radius: 100px; font-size: 0.75rem; color: var(--accent2); font-weight: 600;
+      position: relative; z-index: 1;
+    }
+
+    /* ─── PRODUTOS ─── */
+    .produtos-section {
+      background: linear-gradient(180deg, #08122a 0%, #060d1f 100%);
+      position: relative; overflow: hidden;
+    }
+    .produto-block {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center;
+      margin-bottom: 100px;
+    }
+    .produto-block:last-child { margin-bottom: 0; }
+    .produto-block.reverse { direction: rtl; }
+    .produto-block.reverse > * { direction: ltr; }
+
+    .produto-content { position: relative; z-index: 1; }
+    .produto-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .produto-badge.pub {
+      background: rgba(99, 179, 237, 0.12);
+      border: 1px solid rgba(99, 179, 237, 0.3);
+      color: #90cdf4;
+    }
+    .produto-badge.contrato {
+      background: rgba(212, 168, 67, 0.12);
+      border: 1px solid rgba(212, 168, 67, 0.3);
+      color: var(--gold2);
+    }
+    .produto-content h2 {
+      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      font-weight: 800; letter-spacing: -1px; line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .produto-content p {
+      font-size: 0.97rem; color: var(--gray); line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .modulos-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin: 28px 0;
+    }
+    .modulo-tag {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      font-size: 0.82rem; color: var(--light); font-weight: 500;
+      transition: all 0.3s;
+    }
+    .modulo-tag:hover {
+      border-color: rgba(47,110,247,0.3);
+      background: rgba(47,110,247,0.06);
+      transform: translateX(4px);
+    }
+    .modulo-dot {
+      width: 8px; height: 8px; min-width: 8px;
+      border-radius: 50%; background: var(--accent2);
+    }
+    .modulo-dot.gold { background: var(--gold2); }
+
+    .produto-screen {
+      position: relative; z-index: 1;
+      border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(47,110,247,0.2);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .produto-screen-bar {
+      background: #111827; padding: 12px 18px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .bar-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .bar-dot.r { background: #ff5f57; }
+    .bar-dot.y { background: #ffbd2e; }
+    .bar-dot.g { background: #28c840; }
+    .bar-url {
+      flex: 1; background: rgba(255,255,255,0.05); border-radius: 6px;
+      padding: 5px 12px; font-size: 0.72rem; color: var(--gray);
+      margin: 0 12px;
+    }
+
+    /* Plataforma Municipal mockup */
+    .pm-mockup {
+      background: #0f172a; min-height: 340px;
+      display: flex; overflow: hidden;
+    }
+    .pm-sidebar {
+      width: 200px; min-width: 200px;
+      background: #111827; border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 0;
+    }
+    .pm-logo-bar {
+      padding: 0 18px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 16px;
+    }
+    .pm-logo-bar .logo { font-size: 0.95rem; font-weight: 800; color: var(--accent2); }
+    .pm-logo-bar .sub { font-size: 0.65rem; color: var(--gray); margin-top: 2px; }
+    .pm-nav-group { padding: 0 12px; margin-bottom: 18px; }
+    .pm-nav-label { font-size: 0.6rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; padding: 0 6px; margin-bottom: 6px; }
+    .pm-nav-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px; border-radius: 8px;
+      font-size: 0.72rem; color: var(--gray); cursor: default;
+      transition: all 0.2s;
+    }
+    .pm-nav-item.active { background: rgba(47,110,247,0.15); color: white; }
+    .pm-nav-item .icon { font-size: 0.9rem; }
+    .pm-main { flex: 1; padding: 20px; overflow: hidden; }
+    .pm-top-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .pm-title { font-size: 1rem; font-weight: 700; }
+    .pm-subtitle { font-size: 0.65rem; color: var(--gray); margin-top: 2px; }
+    .pm-modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .pm-mod-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; padding: 14px 12px;
+      transition: all 0.25s cubic-bezier(.23,1,.32,1); cursor: default;
+    }
+    .pm-mod-hover:hover {
+      border-color: rgba(47,110,247,0.45);
+      background: rgba(47,110,247,0.1);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(47,110,247,0.2);
+    }
+    .pm-mod-icon { font-size: 1.3rem; margin-bottom: 8px; }
+    .pm-mod-name { font-size: 0.7rem; font-weight: 700; margin-bottom: 3px; }
+    .pm-mod-desc { font-size: 0.6rem; color: var(--gray); line-height: 1.4; }
+    .pm-mod-status {
+      display: inline-block; margin-top: 8px; padding: 2px 8px;
+      border-radius: 100px; font-size: 0.58rem; font-weight: 600;
+    }
+    .pm-mod-status.active { background: rgba(72,199,142,0.15); color: #68d391; }
+    .pm-mod-status.new { background: rgba(47,110,247,0.15); color: var(--accent2); }
+
+    /* Contratos mockup */
+    .ct-mockup {
+      background: #0f172a; min-height: 340px; padding: 20px;
+    }
+    #ct-screen .ct-parallax-layer {
+      transition: transform 0.24s cubic-bezier(.22,1,.36,1);
+      will-change: transform;
+      transform-style: preserve-3d;
+    }
+    .ct-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .ct-title { font-size: 0.95rem; font-weight: 700; }
+    .ct-badge-active {
+      background: rgba(72,199,142,0.15); color: #68d391;
+      font-size: 0.7rem; font-weight: 600; padding: 4px 12px; border-radius: 100px;
+    }
+    .ct-stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px; }
+    .ct-stat {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 12px 14px;
+    }
+    .ct-stat .n { font-size: 1.4rem; font-weight: 800; color: var(--accent2); }
+    .ct-stat .l { font-size: 0.62rem; color: var(--gray); margin-top: 3px; }
+    .ct-table-head {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
+      gap: 8px; padding: 8px 12px;
+      font-size: 0.62rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .ct-row {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
+      gap: 8px; padding: 10px 12px;
+      background: rgba(255,255,255,0.025); border-radius: 8px; margin-bottom: 6px;
+      border: 1px solid rgba(255,255,255,0.05);
+      align-items: center; font-size: 0.68rem;
+    }
+    .ct-row .contract-name { font-weight: 600; }
+    .ct-row .contract-val { color: var(--gold2); font-weight: 600; }
+    .ct-pill {
+      display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 0.6rem; font-weight: 700;
+    }
+    .ct-pill.signed { background: rgba(72,199,142,0.15); color: #68d391; }
+    .ct-pill.pending { background: rgba(240,201,106,0.15); color: var(--gold2); }
+    .ct-pill.review { background: rgba(47,110,247,0.15); color: var(--accent2); }
+    .ct-sign-btn {
+      background: linear-gradient(135deg, var(--accent), #1255d4);
+      border: none; color: white; padding: 4px 12px; border-radius: 6px;
+      font-size: 0.62rem; font-weight: 600; cursor: pointer;
+    }
+
+    @media (max-width: 1000px) {
+      .produto-block, .produto-block.reverse { grid-template-columns: 1fr; direction: ltr; gap: 40px; }
+      .pm-mockup { flex-direction: column; }
+      .pm-sidebar { width: 100%; min-width: unset; display: flex; gap: 12px; padding: 12px; overflow-x: auto; }
+    }
+
+    /* ─── ABOUT / GRANDE PORTE ─── */
+    .about-section {
+      background: rgba(6,13,31,0.4);
+      position: relative; overflow: hidden;
+    }
+    .about-section::before {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(47,110,247,0.1) 0%, transparent 70%);
+      transform: translate(30%, -30%);
+    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-content { position: relative; z-index: 1; }
+    .about-content .section-title { margin-bottom: 28px; }
+    .about-content p { font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px; }
+
+    .about-pillars { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+    .pillar {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      transition: all 0.3s;
+    }
+    .pillar:hover {
+      border-color: rgba(47,110,247,0.3);
+      background: rgba(47,110,247,0.05);
+      transform: translateX(6px);
+    }
+    .pillar-icon {
+      width: 42px; height: 42px; min-width: 42px;
+      background: linear-gradient(135deg, rgba(47,110,247,0.25), rgba(47,110,247,0.05));
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .pillar-text h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .pillar-text p { font-size: 0.85rem; color: var(--gray); line-height: 1.5; }
+
+    .about-visual { position: relative; z-index: 1; }
+    .about-visual-inner {
+      background: linear-gradient(135deg, rgba(47,110,247,0.1), rgba(212,168,67,0.05));
+      border: 1px solid rgba(47,110,247,0.2);
+      border-radius: 24px; padding: 48px 40px;
+      position: relative; overflow: hidden;
+    }
+    .about-visual-inner::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(47,110,247,0.2) 0%, transparent 70%);
+    }
+    .big-number {
+      font-size: 6rem; font-weight: 900; letter-spacing: -4px; line-height: 1;
+      background: linear-gradient(135deg, var(--accent2), var(--gold2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .big-number-label {
+      font-size: 1.2rem; font-weight: 600; color: var(--gray);
+      margin-bottom: 36px;
+    }
+    .mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .mini-stat {
+      padding: 20px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+    }
+    .mini-stat .n {
+      font-size: 1.8rem; font-weight: 800; letter-spacing: -1px;
+      background: linear-gradient(135deg, white, var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .mini-stat .l { font-size: 0.8rem; color: var(--gray); margin-top: 4px; }
+
+    /* ─── TIMELINE ─── */
+    .timeline-section { background: var(--navy); }
+    .timeline { position: relative; padding-left: 36px; max-width: 700px; margin: 0 auto; }
+    .timeline::before {
+      content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--gold), transparent);
+    }
+    .timeline-item { position: relative; padding-bottom: 48px; }
+    .timeline-dot {
+      position: absolute; left: -30px; top: 4px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 16px rgba(47,110,247,0.6);
+      border: 3px solid var(--navy);
+    }
+    .timeline-year {
+      font-size: 0.8rem; font-weight: 700; color: var(--accent2);
+      letter-spacing: 1px; margin-bottom: 8px;
+    }
+    .timeline-item h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .timeline-item p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
+    /* ─── CASES / DEPOIMENTOS ─── */
+    .cases-section { background: rgba(6,13,31,0.35); position: relative; overflow: hidden; }
+    .cases-tabs {
+      display: flex; gap: 10px; margin-bottom: 56px; flex-wrap: wrap;
+    }
+    .case-tab {
+      padding: 9px 22px; border-radius: 100px; font-size: 0.82rem; font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.1); color: var(--gray);
+      cursor: pointer; transition: all 0.3s; background: transparent;
+    }
+    .case-tab.active, .case-tab:hover {
+      background: rgba(47,110,247,0.15); border-color: rgba(47,110,247,0.4); color: white;
+    }
+    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 72px; }
+    .case-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 36px 30px; position: relative; overflow: hidden;
+      transition: all 0.4s;
+    }
+    .case-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .case-card.gold-top::before { background: linear-gradient(90deg, var(--gold), var(--gold2)); }
+    .case-card.green-top::before { background: linear-gradient(90deg, #38a169, #68d391); }
+    .case-card:hover { border-color: rgba(47,110,247,0.3); transform: translateY(-5px); box-shadow: 0 20px 60px rgba(47,110,247,0.12); }
+    .case-card:hover::before { opacity: 1; }
+    .case-result {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(47,110,247,0.1); border: 1px solid rgba(47,110,247,0.2);
+      border-radius: 8px; padding: 8px 14px; margin-bottom: 20px;
+    }
+    .case-result.gold { background: rgba(212,168,67,0.1); border-color: rgba(212,168,67,0.25); }
+    .case-result.green { background: rgba(56,161,105,0.1); border-color: rgba(56,161,105,0.25); }
+    .case-result-num { font-size: 1.5rem; font-weight: 900; color: var(--accent2); }
+    .case-result-num.gold { color: var(--gold2); }
+    .case-result-num.green { color: #68d391; }
+    .case-result-label { font-size: 0.72rem; color: var(--gray); line-height: 1.3; }
+    .case-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .case-card p { font-size: 0.875rem; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+    .case-client {
+      display: flex; align-items: center; gap: 12px;
+      padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .case-avatar {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 800; color: white;
+    }
+    .case-client-name { font-size: 0.82rem; font-weight: 700; }
+    .case-client-role { font-size: 0.72rem; color: var(--gray); }
+    .case-sector-tag {
+      margin-left: auto; padding: 4px 12px; border-radius: 100px;
+      font-size: 0.65rem; font-weight: 700;
+      background: rgba(47,110,247,0.1); color: var(--accent2);
+    }
+    .case-sector-tag.pub { background: rgba(56,161,105,0.1); color: #68d391; }
+
+    /* Depoimentos */
+    .testimonials-strip {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; padding: 28px 28px;
+      position: relative; transition: all 0.3s;
+    }
+    .testimonial-card:hover { border-color: rgba(47,110,247,0.25); background: rgba(47,110,247,0.04); }
+    .quote-mark {
+      font-size: 3rem; line-height: 1; color: var(--accent);
+      opacity: 0.3; margin-bottom: 8px; font-family: Georgia, serif;
+    }
+    .testimonial-card blockquote {
+      font-size: 0.92rem; color: var(--light); line-height: 1.75;
+      font-style: italic; margin-bottom: 20px;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .t-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .t-name { font-size: 0.85rem; font-weight: 700; }
+    .t-role { font-size: 0.72rem; color: var(--gray); }
+    .stars { color: #f6c90e; font-size: 0.75rem; margin-bottom: 12px; }
+
+    @media (max-width: 900px) {
+      .cases-grid { grid-template-columns: 1fr; }
+      .testimonials-strip { grid-template-columns: 1fr; }
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: rgba(6,13,31,0.5);
+      backdrop-filter: blur(8px);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 90% at 50% 50%, rgba(47,110,247,0.15) 0%, transparent 70%);
+    }
+    .cta-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .cta-section .section-title { margin-bottom: 20px; }
+    .cta-section .section-sub { margin: 0 auto 44px; text-align: center; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-badge {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 36px; justify-content: center;
+    }
+    .cta-badge-item {
+      font-size: 0.82rem; color: var(--gray);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .cta-badge-item::before { content: '✓'; color: var(--accent2); font-weight: 700; }
+    .cta-sep { color: rgba(255,255,255,0.1); }
+
+    /* ─── COOKIE BANNER ─── */
+    .cookie-banner {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 2500;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(7,14,32,0.96);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+      backdrop-filter: blur(12px);
+      display: none;
+    }
+    .cookie-banner.show { display: block; }
+    .cookie-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .cookie-text {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .cookie-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .cookie-btn {
+      border: 1px solid rgba(255,255,255,0.18);
+      background: transparent;
+      color: var(--white);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .cookie-btn:hover { border-color: rgba(6,182,212,0.6); color: var(--accent2); }
+    .cookie-btn.primary {
+      background: linear-gradient(135deg, var(--accent), #1255d4);
+      border-color: rgba(37,99,235,0.8);
+    }
+    .cookie-link {
+      font-size: 0.78rem;
+      color: var(--accent2);
+      text-decoration: none;
+      margin-left: auto;
+    }
+    .cookie-link:hover { text-decoration: underline; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: rgba(3,7,15,0.7);
+      backdrop-filter: blur(12px);
+      padding: 60px 5% 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      position: relative; overflow: hidden;
+    }
+    #footer-canvas {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.7;
+    }
+    /* ── FOOTER BLOBS VISÍVEIS ── */
+    .footer-blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); pointer-events: none; z-index: 0;
+    }
+    .fb1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(47,110,247,0.55) 0%, transparent 70%);
+      bottom: -120px; left: -80px;
+      animation: fb1move 12s ease-in-out infinite alternate;
+    }
+    .fb2 {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(120,80,255,0.45) 0%, transparent 70%);
+      bottom: -60px; right: 10%;
+      animation: fb1move 15s 2s ease-in-out infinite alternate-reverse;
+    }
+    .fb3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(212,168,67,0.3) 0%, transparent 70%);
+      top: 20px; left: 38%;
+      animation: fb1move 10s 1s ease-in-out infinite alternate;
+    }
+    .fb4 {
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(0,180,150,0.25) 0%, transparent 70%);
+      top: -40px; right: 25%;
+      animation: fb1move 13s 3s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes fb1move {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(30px, -20px) scale(1.08); }
+      100% { transform: translate(-20px, 25px) scale(0.95); }
+    }
+    /* linha luminosa no topo do footer */
+    footer::before {
+      content: '';
+      position: absolute; top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(47,110,247,0.6) 30%, rgba(240,201,106,0.5) 70%, transparent);
+      animation: lineGlow 4s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+    @keyframes lineGlow {
+      0%   { opacity: 0.5; left: 15%; right: 15%; }
+      100% { opacity: 1;   left: 5%;  right: 5%; }
+    }
+    .footer-watermark {
+      position: absolute; right: 4%; bottom: -20px;
+      font-size: clamp(8rem, 14vw, 18rem); font-weight: 900;
+      color: rgba(255,255,255,0.018); line-height: 1; letter-spacing: -6px;
+      pointer-events: none; z-index: 0; user-select: none;
+      animation: wmPulse 8s ease-in-out infinite;
+    }
+    @keyframes wmPulse {
+      0%,100% { opacity: 0.8; transform: translateY(0); }
+      50%      { opacity: 1;   transform: translateY(-8px); }
+    }
+    .footer-grid, .footer-bottom { position: relative; z-index: 1; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+    .footer-brand .nav-logo { font-size: 1.4rem; display: block; margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; max-width: 280px; }
+    .footer-col h5 { font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; letter-spacing: 0.3px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a {
+      font-size: 0.85rem; color: var(--gray); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.8rem; color: rgba(255,255,255,0.3);
+    }
+    .footer-accent {
+      color: var(--accent2); font-weight: 600;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translate(40px, -50%); }
+      to   { opacity: 1; transform: translate(0, -50%); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0; transform: translateX(-40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0; transform: translateX(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── SCROLL PROGRESS BAR ── */
+    #scroll-bar {
+      position: fixed; top: 0; left: 0; z-index: 2000;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 0.08s linear;
+    }
+
+    /* ── HERO TAGLINE ── */
+    .hero-tagline {
+      font-size: clamp(1rem, 1.6vw, 1.25rem) !important;
+      font-weight: 600 !important;
+      color: white !important;
+      letter-spacing: -0.3px;
+      line-height: 1.4 !important;
+      margin-bottom: 14px !important;
+      background: linear-gradient(135deg, #fff 30%, var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── MARQUEE FAIXA ── */
+    .marquee-strip {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      overflow: hidden; padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: rgba(6,13,31,0.35);
+      backdrop-filter: blur(8px);
+    }
+    .marquee-track {
+      display: flex; gap: 0; width: max-content;
+      animation: marqueeScroll 30s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marqueeScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-item {
+      display: flex; align-items: center; gap: 24px;
+      padding: 0 32px; white-space: nowrap;
+      font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.45);
+      letter-spacing: 0.5px;
+    }
+    .marquee-item .dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--accent2); opacity: 0.7;
+    }
+
+    /* ── REVEAL ANIMATIONS — profissional ── */
+    .reveal, .reveal-left, .reveal-right {
+      will-change: opacity, transform;
+    }
+
+    /* ── GLOWING SECTION LABEL ── */
+    .section-label {
+      position: relative; display: inline-block;
+    }
+    .section-label::after {
+      content: ''; position: absolute; left: 0; bottom: -4px;
+      height: 1px; width: 100%;
+      background: linear-gradient(90deg, var(--accent2), transparent);
+    }
+
+    /* ── STAGGER DELAYS ── */
+    .stagger-1 { transition-delay: 0.08s !important; }
+    .stagger-2 { transition-delay: 0.16s !important; }
+    .stagger-3 { transition-delay: 0.24s !important; }
+    .stagger-4 { transition-delay: 0.32s !important; }
+    .stagger-5 { transition-delay: 0.40s !important; }
+    .stagger-6 { transition-delay: 0.48s !important; }
+
+    /* ── CARD HOVER — lift profissional ── */
+    .service-card { transition: transform 0.35s cubic-bezier(.23,1,.32,1), border-color 0.35s, box-shadow 0.35s; }
+    .service-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 24px 60px rgba(47,110,247,0.18), 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    /* ── HERO LINE SWEEP ── */
+    @keyframes lineSweep {
+      from { transform: scaleX(0); transform-origin: left; }
+      to   { transform: scaleX(1); transform-origin: left; }
+    }
+    .line-sweep { animation: lineSweep 1s 1s cubic-bezier(.16,1,.3,1) both; }
+
+    /* ── SCROLL INDICATOR ── */
+    @keyframes scrollPulse {
+      0%,100% { transform: scaleY(1); opacity: 0.6; }
+      50%      { transform: scaleY(1.4); opacity: 1; }
+    }
+
+    /* ── HERO GRADIENT ANIMATED ── */
+    @keyframes gradientShift {
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    .highlight {
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease infinite;
+    }
+
+    /* ── SMOOTH COUNTER ── */
+    .counter-wrap { font-variant-numeric: tabular-nums; }
+
+    /* ── NÚMERO HERO — aparecer ── */
+    @keyframes numFadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-stat { animation: numFadeUp 0.7s ease both; }
+    .hero-stat:nth-child(1) { animation-delay: 0.9s; }
+    .hero-stat:nth-child(3) { animation-delay: 1.05s; }
+    .hero-stat:nth-child(5) { animation-delay: 1.2s; }
+
+    /* ── AURORA — mais viva ── */
+    .aurora-layer { opacity: 0.75; }
+
+    /* ── CASE CARD HOVER ── */
+    .case-card {
+      transition: transform 0.35s cubic-bezier(.23,1,.32,1), border-color 0.35s, box-shadow 0.35s;
+    }
+    .case-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    /* ── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .hero-visual { display: none; }
+      .hero-dashboard-wrap { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .cookie-actions { flex-direction: column; align-items: stretch; }
+      .cookie-link { margin-left: 0; }
+      section { padding: 72px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───────── NAVBAR ───────── -->
+<!-- Background animation — fixed, atrás de tudo -->
+<canvas id="bg-canvas"></canvas>
+<!-- Scroll progress -->
+<div id="scroll-bar"></div>
+
+<nav id="navbar">
+  <a href="#" style="text-decoration:none;">
+    <span class="q7-logo"><span class="bracket">[</span>Q7<span class="bracket">]</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#produtos">Plataformas</a></li>
+    <li><a href="empresa.html">Empresa</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- ───────── HERO ───────── -->
+<section class="hero" style="min-height:100vh; padding:110px 6% 100px; display:flex; align-items:center; justify-content:center; gap:60px; position:relative;">
+  <div class="hero-grid"></div>
+  <!-- Vinheta: escurece bordas, abre o centro para os orbs aparecerem -->
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 90% 80% at 35% 50%, transparent 30%, rgba(6,13,31,0.55) 100%),
+      linear-gradient(180deg, rgba(6,13,31,0.45) 0%, transparent 40%, transparent 70%, rgba(6,13,31,0.6) 100%);"></div>
+
+  <!-- ESQUERDA: texto -->
+  <div class="hero-content">
+    <div class="hero-badge" style="animation: fadeInDown 0.8s ease both;">Software · Setor Público · IA · Cloud</div>
+    <h1 style="animation: fadeInUp 0.9s 0.15s ease both; font-size:clamp(2.6rem,4.5vw,4.2rem); letter-spacing:-2px;">
+      Software que<br/>
+      <span class="highlight typewriter-wrap" id="typewriter-target">resolve</span><br/>
+      de verdade.
+    </h1>
+    <p class="hero-tagline" style="animation: fadeInUp 0.9s 0.25s ease both;">
+      Quando o projeto é crítico, o mercado chama a Qode7.
+    </p>
+    <p style="animation: fadeInUp 0.9s 0.35s ease both;">
+      Do setor público à indústria — mais de 10 anos entregando o que outros não conseguiram.
+    </p>
+
+    <!-- Stats -->
+    <div style="display:flex; gap:28px; margin-top:44px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.07); animation: fadeInUp 0.9s 0.55s ease both;">
+      <div>
+        <div style="font-size:1.8rem; font-weight:900; color:var(--accent2); letter-spacing:-1px;">+500</div>
+        <div style="font-size:0.72rem; color:var(--gray); margin-top:3px; text-transform:uppercase; letter-spacing:0.5px;">clientes ativos</div>
+      </div>
+      <div style="width:1px; background:rgba(255,255,255,0.07);"></div>
+      <div>
+        <div style="font-size:1.8rem; font-weight:900; color:var(--gold2); letter-spacing:-1px;">+800</div>
+        <div style="font-size:0.72rem; color:var(--gray); margin-top:3px; text-transform:uppercase; letter-spacing:0.5px;">projetos entregues</div>
+      </div>
+      <div style="width:1px; background:rgba(255,255,255,0.07);"></div>
+      <div>
+        <div style="font-size:1.8rem; font-weight:900; color:#68d391; letter-spacing:-1px;">10+</div>
+        <div style="font-size:0.72rem; color:var(--gray); margin-top:3px; text-transform:uppercase; letter-spacing:0.5px;">anos de mercado</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIREITA: dashboard -->
+  <div class="hero-dashboard-wrap">
+    <div style="position:relative;">
+      <div class="hero-dash-tilt">
+        <div class="hero-dash-bar">
+          <span class="hdb r"></span><span class="hdb y"></span><span class="hdb g"></span>
+          <span class="hero-dash-url">plataforma.qode7.com/hub/municipal</span>
+          <span style="font-size:0.6rem;color:#68d391;font-weight:700;">● online</span>
+        </div>
+        <div class="hero-dash-body">
+          <!-- Sidebar compacta -->
+          <div style="width:160px;min-width:160px;background:#111827;border-right:1px solid rgba(255,255,255,0.05);padding:16px 0;">
+            <div style="padding:0 14px 14px;border-bottom:1px solid rgba(255,255,255,0.05);">
+              <div style="font-size:0.85rem;font-weight:800;color:var(--accent2);">[Q7]</div>
+              <div style="font-size:0.55rem;color:var(--gray);margin-top:1px;">SAÚDE · MANCHESTER</div>
+            </div>
+            <div style="padding:12px 8px 0;">
+              <div style="font-size:0.55rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;padding:0 6px;margin-bottom:6px;">Visão Geral</div>
+              <div style="display:flex;align-items:center;gap:7px;padding:7px 10px;background:rgba(47,110,247,0.15);border-radius:7px;margin-bottom:3px;">
+                <span style="font-size:0.8rem;">📊</span><span style="font-size:0.65rem;color:white;font-weight:600;">Dashboard Saúde</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;margin-bottom:3px;">
+                <span style="font-size:0.8rem;">📋</span><span style="font-size:0.65rem;color:var(--gray);">Protocolo Manchester</span><span style="background:rgba(47,110,247,0.2);color:var(--accent2);font-size:0.5rem;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:auto;">5P</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;">
+                <span style="font-size:0.8rem;">🔗</span><span style="font-size:0.65rem;color:var(--gray);">Integração ESF+UBS</span>
+              </div>
+              <div style="font-size:0.55rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;padding:0 6px;margin:14px 0 6px;">ESF — Família</div>
+              <div style="display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;margin-bottom:3px;">
+                <span style="font-size:0.8rem;">👪</span><span style="font-size:0.65rem;color:var(--gray);">Painel ESF</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;margin-bottom:3px;">
+                <span style="font-size:0.8rem;">🏠</span><span style="font-size:0.65rem;color:var(--gray);">Cadastro Familiar</span><span style="background:rgba(72,199,142,0.15);color:#68d391;font-size:0.5rem;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:auto;">847</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;">
+                <span style="font-size:0.8rem;">🩺</span><span style="font-size:0.65rem;color:var(--gray);">Visitas ACS</span><span style="background:rgba(255,107,107,0.15);color:#fc8181;font-size:0.5rem;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:auto;">8</span>
+              </div>
+              <div style="font-size:0.55rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;padding:0 6px;margin:14px 0 6px;">UBS — Atendimento</div>
+              <div style="display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;margin-bottom:3px;">
+                <span style="font-size:0.8rem;">🏥</span><span style="font-size:0.65rem;color:var(--gray);">Fila Manchester</span><span style="background:rgba(255,107,107,0.15);color:#fc8181;font-size:0.5rem;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:auto;">12</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;">
+                <span style="font-size:0.8rem;">💊</span><span style="font-size:0.65rem;color:var(--gray);">Estoque/Farmácia</span><span style="background:rgba(240,201,106,0.15);color:var(--gold2);font-size:0.5rem;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:auto;">3</span>
+              </div>
+            </div>
+          </div>
+          <!-- Main content -->
+          <div style="flex:1;padding:16px;overflow:hidden;">
+            <!-- Fila manchester bar -->
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <span style="font-size:0.6rem;font-weight:700;color:var(--gray);">FILA ATUAL —</span>
+              <span style="display:flex;align-items:center;gap:4px;font-size:0.6rem;font-weight:700;"><span style="width:8px;height:8px;border-radius:50%;background:#e53e3e;display:inline-block;"></span>P1 Emergência <span style="color:#e53e3e;">0</span></span>
+              <span style="display:flex;align-items:center;gap:4px;font-size:0.6rem;font-weight:700;"><span style="width:8px;height:8px;border-radius:50%;background:#dd6b20;display:inline-block;"></span>P2 M.Urgente <span style="color:#dd6b20;">2</span></span>
+              <span style="display:flex;align-items:center;gap:4px;font-size:0.6rem;font-weight:700;"><span style="width:8px;height:8px;border-radius:50%;background:#d69e2e;display:inline-block;"></span>P3 Urgente <span style="color:#d69e2e;">5</span></span>
+              <span style="display:flex;align-items:center;gap:4px;font-size:0.6rem;font-weight:700;"><span style="width:8px;height:8px;border-radius:50%;background:#38a169;display:inline-block;"></span>P4 P.Urgente <span style="color:#38a169;">4</span></span>
+              <span style="display:flex;align-items:center;gap:4px;font-size:0.6rem;font-weight:700;"><span style="width:8px;height:8px;border-radius:50%;background:#3182ce;display:inline-block;"></span>P5 N.Urgente <span style="color:#3182ce;">1</span></span>
+            </div>
+            <!-- 4 KPI cards -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;">
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 10px;">
+                <div style="font-size:0.55rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;">Famílias ESF</div>
+                <div style="font-size:1.4rem;font-weight:900;line-height:1.1;margin-top:4px;">847</div>
+                <div style="font-size:0.55rem;color:var(--gray);">8 microáreas</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,107,107,0.2);border-radius:8px;padding:10px 10px;">
+                <div style="font-size:0.55rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;">P2+P3 na Fila</div>
+                <div style="font-size:1.4rem;font-weight:900;line-height:1.1;margin-top:4px;color:#fc8181;">7</div>
+                <div style="font-size:0.55rem;color:#fc8181;">Requer atenção</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 10px;">
+                <div style="font-size:0.55rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;">Atend. UBS Hoje</div>
+                <div style="font-size:1.4rem;font-weight:900;line-height:1.1;margin-top:4px;">84</div>
+                <div style="font-size:0.55rem;color:#68d391;">▲ 12% vs ontem</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 10px;">
+                <div style="font-size:0.55rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;">P4+P5 Resolvidos</div>
+                <div style="font-size:1.4rem;font-weight:900;line-height:1.1;margin-top:4px;">71</div>
+                <div style="font-size:0.55rem;color:#68d391;">▲ 84% resolução</div>
+              </div>
+            </div>
+            <!-- Alertas -->
+            <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:10px 12px;">
+              <div style="font-size:0.6rem;font-weight:700;margin-bottom:8px;">⚠️ Alertas por Prioridade</div>
+              <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                <span style="width:6px;height:6px;border-radius:50%;background:#e53e3e;margin-top:3px;flex-shrink:0;"></span>
+                <span style="font-size:0.58rem;color:var(--light);">[P1] Família Almeida — gestante de risco, última visita há 18 dias. ESF urgente.</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                <span style="width:6px;height:6px;border-radius:50%;background:#dd6b20;margin-top:3px;flex-shrink:0;"></span>
+                <span style="font-size:0.58rem;color:var(--light);">[P2] Pedro Mendes na fila UBS — dispneia moderada. Aguardando 12min.</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#d69e2e;margin-top:3px;flex-shrink:0;"></span>
+                <span style="font-size:0.58rem;color:var(--light);">[P3] Família Souza — HiperDia descompensado, visita atrasada 30 dias.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div style="position:absolute; bottom:100px; left:50%; transform:translateX(-50%); z-index:2;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    animation: fadeInUp 1s 1.2s ease both; opacity:0.6;">
+    <span style="font-size:0.65rem; color:var(--gray); letter-spacing:1.5px; text-transform:uppercase;">scroll</span>
+    <div style="width:1px; height:36px; background:linear-gradient(180deg, var(--accent2), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- Marquee faixa no rodapé do hero -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <!-- bloco 1 -->
+      <div class="marquee-item">Desenvolvimento de Software<span class="dot"></span></div>
+      <div class="marquee-item">Plataforma Municipal<span class="dot"></span></div>
+      <div class="marquee-item">IA para Licitações<span class="dot"></span></div>
+      <div class="marquee-item">Gestão de Contratos<span class="dot"></span></div>
+      <div class="marquee-item">Cloud & Infraestrutura<span class="dot"></span></div>
+      <div class="marquee-item">Data & Analytics<span class="dot"></span></div>
+      <div class="marquee-item">Segurança & LGPD<span class="dot"></span></div>
+      <div class="marquee-item">Integração de Sistemas<span class="dot"></span></div>
+      <!-- bloco 2 — duplicado para loop -->
+      <div class="marquee-item">Desenvolvimento de Software<span class="dot"></span></div>
+      <div class="marquee-item">Plataforma Municipal<span class="dot"></span></div>
+      <div class="marquee-item">IA para Licitações<span class="dot"></span></div>
+      <div class="marquee-item">Gestão de Contratos<span class="dot"></span></div>
+      <div class="marquee-item">Cloud & Infraestrutura<span class="dot"></span></div>
+      <div class="marquee-item">Data & Analytics<span class="dot"></span></div>
+      <div class="marquee-item">Segurança & LGPD<span class="dot"></span></div>
+      <div class="marquee-item">Integração de Sistemas<span class="dot"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── SERVIÇOS ───────── -->
+<section class="services-section" id="servicos">
+  <div class="section-head reveal">
+    <div class="section-label">O que fazemos</div>
+    <h2 class="section-title">O que fazemos,<br/>e como fazemos diferente</h2>
+    <p class="section-sub">Não somos uma software house genérica. Cada projeto tem um time dedicado que entende o contexto do cliente antes de escrever a primeira linha de código.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card spotlight-card reveal">
+      <div class="spotlight-glow"></div>
+      <div class="service-icon" style="background:linear-gradient(135deg,rgba(47,110,247,0.2),rgba(47,110,247,0.05));border:1px solid rgba(47,110,247,0.2);">⚡</div>
+      <h3>Desenvolvimento de Software</h3>
+      <p>Construímos sistemas do zero ou evoluímos o que já existe. Cada projeto tem um time que entende do negócio — não só da tecnologia.</p>
+      <span class="service-tag">Web · Mobile · APIs · Integrações</span>
+    </div>
+
+    <div class="service-card spotlight-card reveal reveal-delay-1">
+      <div class="spotlight-glow"></div>
+      <div class="service-icon" style="background:linear-gradient(135deg,rgba(120,80,255,0.2),rgba(120,80,255,0.05));border:1px solid rgba(120,80,255,0.2);">◈</div>
+      <h3>Inteligência Artificial</h3>
+      <p>Não vendemos IA como tendência. Implementamos modelos que resolvem problemas reais — automação, análise preditiva e triagem de dados com resultado mensurável.</p>
+      <span class="service-tag">Modelos customizados · Automação · Predição</span>
+    </div>
+
+    <div class="service-card spotlight-card reveal reveal-delay-2">
+      <div class="spotlight-glow"></div>
+      <div class="service-icon" style="background:linear-gradient(135deg,rgba(0,180,150,0.2),rgba(0,180,150,0.05));border:1px solid rgba(0,180,150,0.2);">☁</div>
+      <h3>Cloud & Infraestrutura</h3>
+      <p>Migração, modernização e gestão contínua de infra. Reduzimos custo de operação sem abrir mão de disponibilidade ou segurança.</p>
+      <span class="service-tag">AWS · Azure · GCP</span>
+    </div>
+
+    <div class="service-card spotlight-card reveal reveal-delay-1">
+      <div class="spotlight-glow"></div>
+      <div class="service-icon" style="background:linear-gradient(135deg,rgba(212,168,67,0.2),rgba(212,168,67,0.05));border:1px solid rgba(212,168,67,0.2);">◈</div>
+      <h3>Dados & Analytics</h3>
+      <p>Transformamos dados espalhados em dashboards que gestores conseguem usar sem precisar de especialista para interpretar. BI e pipelines que viram decisão.</p>
+      <span class="service-tag" style="background:rgba(212,168,67,0.1);border-color:rgba(212,168,67,0.25);color:var(--gold2);">BI · DataOps · Dashboards executivos</span>
+    </div>
+
+    <div class="service-card spotlight-card reveal reveal-delay-2">
+      <div class="spotlight-glow"></div>
+      <div class="service-icon" style="background:linear-gradient(135deg,rgba(252,129,129,0.2),rgba(252,129,129,0.05));border:1px solid rgba(252,129,129,0.2);">◇</div>
+      <h3>Segurança & LGPD</h3>
+      <p>Adequação à lei, pentest, monitoramento e resposta a incidentes. Compliance que não para a operação nem cria burocracia desnecessária.</p>
+      <span class="service-tag">LGPD · ISO 27001 · Pentest</span>
+    </div>
+
+    <div class="service-card spotlight-card reveal reveal-delay-3">
+      <div class="spotlight-glow"></div>
+      <div class="service-icon" style="background:linear-gradient(135deg,rgba(91,142,249,0.2),rgba(91,142,249,0.05));border:1px solid rgba(91,142,249,0.2);">▣</div>
+      <h3>Integração de Sistemas</h3>
+      <p>Conectamos ERPs, APIs legadas, plataformas de terceiros e sistemas municipais que nunca foram feitos para conversar entre si.</p>
+      <span class="service-tag">ERP · API Gateway · ETL · Webhooks</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ───────── PRODUTOS ───────── -->
+<section class="produtos-section" id="produtos">
+  <div class="section-head reveal" style="text-align:center; max-width:640px; margin:0 auto 72px;">
+    <div class="section-label">Nossos produtos</div>
+    <h2 class="section-title">Soluções prontas para o<br/><span style="color:var(--accent2)">setor público</span></h2>
+    <p class="section-sub" style="margin:0 auto">Plataformas robustas desenvolvidas para modernizar a gestão pública com tecnologia de ponta.</p>
+  </div>
+
+  <!-- PRODUTO 1 — Plataforma Municipal -->
+  <div class="produto-block">
+    <div class="produto-content reveal-left">
+      <div class="produto-badge pub">🏛️ Setor Público</div>
+      <h2>Plataforma Municipal<br/><span style="color:var(--accent2)">Hub de Gestão Integrada</span></h2>
+      <p>Uma plataforma modular e escalável que centraliza todos os sistemas de gestão municipal em um único hub. Conecta departamentos, integra ERPs municipais existentes e permite adicionar novos módulos conforme a necessidade da prefeitura.</p>
+      <p>Cada módulo é independente, mas conversa com os demais — garantindo visibilidade total da gestão pública em tempo real.</p>
+      <div class="modulos-grid">
+        <div class="modulo-tag"><span class="modulo-dot"></span>Saúde Municipal</div>
+        <div class="modulo-tag"><span class="modulo-dot"></span>Educação</div>
+        <div class="modulo-tag"><span class="modulo-dot"></span>Tributação</div>
+        <div class="modulo-tag"><span class="modulo-dot"></span>Obras e Infraestrutura</div>
+        <div class="modulo-tag"><span class="modulo-dot"></span>Assistência Social</div>
+        <div class="modulo-tag"><span class="modulo-dot"></span>Gestão de Frotas</div>
+        <div class="modulo-tag"><span class="modulo-dot"></span>RH &amp; Folha</div>
+        <div class="modulo-tag"><span class="modulo-dot"></span>Integração ERP</div>
+      </div>
+      <!-- Fluxo duplo: Munícipes + Controle Interno -->
+      <div style="margin:28px 0 20px; background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.07); border-radius:16px; overflow:hidden;">
+
+        <!-- TRACK 1 — Munícipes -->
+        <div style="padding:16px 20px 14px; border-bottom:1px solid rgba(255,255,255,0.05);">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <div style="width:6px;height:6px;border-radius:50%;background:#06b6d4;box-shadow:0 0 6px #06b6d4;"></div>
+            <span style="font-size:0.65rem;font-weight:700;color:#06b6d4;text-transform:uppercase;letter-spacing:1px;">Para os Munícipes</span>
+          </div>
+          <div class="beam-container" style="position:relative;display:flex;align-items:center;justify-content:space-between;padding:4px 0;">
+            <svg style="position:absolute;top:50%;transform:translateY(-50%);left:0;width:100%;height:24px;overflow:visible;" viewBox="0 0 500 24" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="bG1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="transparent"/><stop offset="50%" stop-color="#06b6d4"/><stop offset="100%" stop-color="transparent"/>
+                </linearGradient>
+                <linearGradient id="bG2" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="transparent"/><stop offset="50%" stop-color="#06b6d4" stop-opacity="0.5"/><stop offset="100%" stop-color="transparent"/>
+                </linearGradient>
+              </defs>
+              <path fill="none" stroke="url(#bG1)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="70 430" d="M 44 12 H 456" style="animation:beamMove 2.5s linear infinite;"/>
+              <path fill="none" stroke="url(#bG2)" stroke-width="1" stroke-linecap="round" stroke-dasharray="40 460" d="M 44 12 H 456" style="animation:beamMove 2.5s 1.2s linear infinite;"/>
+            </svg>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;">👤</div>
+              <span style="font-size:0.55rem;color:var(--gray);white-space:nowrap;">Cidadão</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;">📱</div>
+              <span style="font-size:0.55rem;color:var(--gray);white-space:nowrap;">Portal</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;">📝</div>
+              <span style="font-size:0.55rem;color:var(--gray);white-space:nowrap;">Solicitação</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;">⚙️</div>
+              <span style="font-size:0.55rem;color:var(--gray);white-space:nowrap;">Módulo</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(104,211,145,0.15);border:1px solid rgba(104,211,145,0.5);display:flex;align-items:center;justify-content:center;font-size:1rem;">✅</div>
+              <span style="font-size:0.55rem;color:#68d391;white-space:nowrap;">Resolvido</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRACK 2 — Controle Interno -->
+        <div style="padding:16px 20px 16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <div style="width:6px;height:6px;border-radius:50%;background:var(--gold2);box-shadow:0 0 6px var(--gold2);"></div>
+            <span style="font-size:0.65rem;font-weight:700;color:var(--gold2);text-transform:uppercase;letter-spacing:1px;">Controle Interno</span>
+          </div>
+          <div class="beam-container" style="position:relative;display:flex;align-items:center;justify-content:space-between;padding:4px 0;">
+            <svg style="position:absolute;top:50%;transform:translateY(-50%);left:0;width:100%;height:24px;overflow:visible;" viewBox="0 0 500 24" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="bG3" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="transparent"/><stop offset="50%" stop-color="#f0c96a"/><stop offset="100%" stop-color="transparent"/>
+                </linearGradient>
+                <linearGradient id="bG4" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="transparent"/><stop offset="50%" stop-color="#f0c96a" stop-opacity="0.5"/><stop offset="100%" stop-color="transparent"/>
+                </linearGradient>
+              </defs>
+              <path fill="none" stroke="url(#bG3)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="70 430" d="M 44 12 H 456" style="animation:beamMove 3s 0.5s linear infinite;"/>
+              <path fill="none" stroke="url(#bG4)" stroke-width="1" stroke-linecap="round" stroke-dasharray="40 460" d="M 44 12 H 456" style="animation:beamMove 3s 1.8s linear infinite;"/>
+            </svg>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(240,201,106,0.15);border:1px solid rgba(240,201,106,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;">🏛️</div>
+              <span style="font-size:0.55rem;color:var(--gray);white-space:nowrap;">Gestor</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(240,201,106,0.15);border:1px solid rgba(240,201,106,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;">📊</div>
+              <span style="font-size:0.55rem;color:var(--gray);white-space:nowrap;">Dashboard</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(240,201,106,0.15);border:1px solid rgba(240,201,106,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;">🔍</div>
+              <span style="font-size:0.55rem;color:var(--gray);white-space:nowrap;">Fiscalização</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(240,201,106,0.15);border:1px solid rgba(240,201,106,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;">📄</div>
+              <span style="font-size:0.55rem;color:var(--gray);white-space:nowrap;">Relatório</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;z-index:1;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(104,211,145,0.15);border:1px solid rgba(104,211,145,0.5);display:flex;align-items:center;justify-content:center;font-size:1rem;">⚖️</div>
+              <span style="font-size:0.55rem;color:#68d391;white-space:nowrap;">TCE / TCU</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <a href="#contato" class="btn-primary btn-magnetic" style="display:inline-block; margin-top:8px;">Conhecer a plataforma →</a>
+    </div>
+
+    <div class="reveal-right">
+      <div class="produto-screen pm-hub-screen" id="pm-hub-screen"
+        style="cursor:default; transition:transform 0.15s ease, box-shadow 0.15s ease;">
+        <div class="produto-screen-bar">
+          <span class="bar-dot r"></span><span class="bar-dot y"></span><span class="bar-dot g"></span>
+          <span class="bar-url">plataforma.qode7.com/hub</span>
+          <span style="font-size:0.6rem;color:#68d391;font-weight:700;">● 8 módulos ativos</span>
+        </div>
+
+        <!-- HUB HEADER -->
+        <div style="background:#0f172a;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);
+          display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:1rem;font-weight:800;background:linear-gradient(135deg,#2563eb,#06b6d4);
+              -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">[Q7] Hub Municipal</div>
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.4);margin-top:2px;">Plataforma integrada · Prefeitura de exemplo</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="background:rgba(47,110,247,0.15);border:1px solid rgba(47,110,247,0.3);
+              color:var(--accent2);font-size:0.6rem;font-weight:700;padding:4px 10px;border-radius:6px;">+ Módulo</div>
+            <div style="background:rgba(47,110,247,0.15);border:1px solid rgba(47,110,247,0.3);
+              color:var(--accent2);font-size:0.6rem;font-weight:700;padding:4px 10px;border-radius:6px;">Integrar ERP</div>
+          </div>
+        </div>
+
+        <!-- MÓDULOS GRID 3×3 -->
+        <div style="background:#0f172a;padding:18px 20px;
+          display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+
+          <div class="pm-mod-card pm-mod-hover" style="padding:16px 14px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">🏥</div>
+            <div class="pm-mod-name">Saúde</div>
+            <div class="pm-mod-desc">UBS, ESF, Manchester, ACS</div>
+            <span class="pm-mod-status active">● Ativo</span>
+          </div>
+
+          <div class="pm-mod-card pm-mod-hover" style="padding:16px 14px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">🎓</div>
+            <div class="pm-mod-name">Educação</div>
+            <div class="pm-mod-desc">Matrículas, merenda, transporte</div>
+            <span class="pm-mod-status active">● Ativo</span>
+          </div>
+
+          <div class="pm-mod-card pm-mod-hover" style="padding:16px 14px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">💰</div>
+            <div class="pm-mod-name">Tributação</div>
+            <div class="pm-mod-desc">IPTU, ISS, dívida ativa</div>
+            <span class="pm-mod-status active">● Ativo</span>
+          </div>
+
+          <div class="pm-mod-card pm-mod-hover" style="padding:16px 14px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">🏗️</div>
+            <div class="pm-mod-name">Obras</div>
+            <div class="pm-mod-desc">Licenças, fiscalização</div>
+            <span class="pm-mod-status new">✦ Novo</span>
+          </div>
+
+          <div class="pm-mod-card pm-mod-hover" style="padding:16px 14px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">👥</div>
+            <div class="pm-mod-name">Assistência Social</div>
+            <div class="pm-mod-desc">CRAS, CREAS, benefícios</div>
+            <span class="pm-mod-status active">● Ativo</span>
+          </div>
+
+          <div class="pm-mod-card pm-mod-hover" style="padding:16px 14px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">🚗</div>
+            <div class="pm-mod-name">Frotas</div>
+            <div class="pm-mod-desc">Veículos, manutenção, rotas</div>
+            <span class="pm-mod-status active">● Ativo</span>
+          </div>
+
+          <div class="pm-mod-card pm-mod-hover" style="padding:16px 14px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">👷</div>
+            <div class="pm-mod-name">RH & Folha</div>
+            <div class="pm-mod-desc">Servidores, ponto, folha</div>
+            <span class="pm-mod-status active">● Ativo</span>
+          </div>
+
+          <div class="pm-mod-card pm-mod-hover" style="padding:16px 14px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">🔗</div>
+            <div class="pm-mod-name">Integração ERP</div>
+            <div class="pm-mod-desc">Betha, Totvs, outros ERPs</div>
+            <span class="pm-mod-status active">● Ativo</span>
+          </div>
+
+          <div class="pm-mod-card" style="padding:16px 14px;border:1px dashed rgba(47,110,247,0.25);
+            display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;
+            cursor:default;transition:all 0.3s;">
+            <div style="font-size:1.6rem;color:rgba(47,110,247,0.4);line-height:1;">＋</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.3);text-align:center;">Adicionar módulo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUTO 2 — Contratos -->
+  <div class="produto-block reverse">
+    <div class="produto-content reveal-right">
+      <div class="produto-badge contrato">📄 Gestão Pública</div>
+      <h2>Gestão de Contratos<br/><span style="color:var(--gold2)">Assinatura &amp; Compliance</span></h2>
+      <p>Plataforma completa para criação, assinatura digital e gestão do ciclo de vida de contratos públicos. Do rascunho à publicação, com auditoria total, alertas de vencimento e conformidade jurídica.</p>
+      <p>Integra com o Portal da Transparência, sistemas de licitação e o hub da Plataforma Municipal — trazendo rastreabilidade e segurança para cada documento assinado.</p>
+      <div class="modulos-grid">
+        <div class="modulo-tag"><span class="modulo-dot gold"></span>Criação de contratos</div>
+        <div class="modulo-tag"><span class="modulo-dot gold"></span>Assinatura digital</div>
+        <div class="modulo-tag"><span class="modulo-dot gold"></span>Fluxo de aprovação</div>
+        <div class="modulo-tag"><span class="modulo-dot gold"></span>Alertas de vencimento</div>
+        <div class="modulo-tag"><span class="modulo-dot gold"></span>Auditoria completa</div>
+        <div class="modulo-tag"><span class="modulo-dot gold"></span>Portal Transparência</div>
+        <div class="modulo-tag"><span class="modulo-dot gold"></span>Conformidade LGPD</div>
+        <div class="modulo-tag"><span class="modulo-dot gold"></span>Relatórios TCE/TCU</div>
+      </div>
+      <a href="#contato" class="btn-primary" style="display:inline-block; margin-top:8px; background:linear-gradient(135deg,#c59b28,#e8b84b); box-shadow:0 8px 30px rgba(212,168,67,0.35);">Conhecer o sistema →</a>
+    </div>
+
+    <div class="reveal-left">
+      <div class="produto-screen" id="ct-screen" style="transition:transform 0.15s ease, box-shadow 0.15s ease; cursor:default;">
+        <div class="produto-screen-bar">
+          <span class="bar-dot r"></span><span class="bar-dot y"></span><span class="bar-dot g"></span>
+          <span class="bar-url">contratos.qode7.com/gestao</span>
+        </div>
+        <div class="ct-mockup">
+          <div class="ct-header ct-parallax-layer" data-depth="14">
+            <div>
+              <div class="ct-title">Gestão de Contratos Públicos</div>
+              <div style="font-size:0.65rem;color:var(--gray);margin-top:2px;">Prefeitura Municipal · Exercício 2024</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <span class="ct-badge-active">● Sistema ativo</span>
+              <div style="background:rgba(47,110,247,0.15);color:var(--accent2);font-size:0.65rem;font-weight:700;padding:5px 12px;border-radius:6px;cursor:default">+ Novo Contrato</div>
+            </div>
+          </div>
+          <div class="ct-stats-row ct-parallax-layer" data-depth="22">
+            <div class="ct-stat"><div class="n">142</div><div class="l">Contratos ativos</div></div>
+            <div class="ct-stat"><div class="n" style="color:var(--gold2)">R$ 48M</div><div class="l">Valor total</div></div>
+            <div class="ct-stat"><div class="n" style="color:#68d391">98%</div><div class="l">Assinados digitalmente</div></div>
+            <div class="ct-stat"><div class="n" style="color:#fc8181">7</div><div class="l">Vencem em 30 dias</div></div>
+          </div>
+          <div class="ct-table-head ct-parallax-layer" data-depth="12">
+            <span>Contrato</span><span>Valor</span><span>Vencimento</span><span>Status</span><span>Ação</span>
+          </div>
+          <div class="ct-row ct-parallax-layer" data-depth="28">
+            <span class="contract-name">🏥 Serviços de Saúde — Hospital Mun.</span>
+            <span class="contract-val">R$ 2,4M</span>
+            <span style="color:var(--gray)">Mar/2025</span>
+            <span><span class="ct-pill signed">✓ Assinado</span></span>
+            <span><button class="ct-sign-btn">Ver</button></span>
+          </div>
+          <div class="ct-row ct-parallax-layer" data-depth="34">
+            <span class="contract-name">🚌 Transporte Escolar — Lote 03</span>
+            <span class="contract-val">R$ 890K</span>
+            <span style="color:var(--gold2)">Jan/2025 ⚠</span>
+            <span><span class="ct-pill pending">⧖ Pendente</span></span>
+            <span><button class="ct-sign-btn" style="background:linear-gradient(135deg,#c59b28,#e8b84b)">Assinar</button></span>
+          </div>
+          <div class="ct-row ct-parallax-layer" data-depth="40">
+            <span class="contract-name">🏗️ Pavimentação Distrito Industrial</span>
+            <span class="contract-val">R$ 5,1M</span>
+            <span style="color:var(--gray)">Jun/2025</span>
+            <span><span class="ct-pill review">↺ Revisão</span></span>
+            <span><button class="ct-sign-btn">Revisar</button></span>
+          </div>
+          <div class="ct-row ct-parallax-layer" data-depth="46">
+            <span class="contract-name">💡 Iluminação Pública — Contrato LED</span>
+            <span class="contract-val">R$ 1,2M</span>
+            <span style="color:var(--gray)">Dez/2025</span>
+            <span><span class="ct-pill signed">✓ Assinado</span></span>
+            <span><button class="ct-sign-btn">Ver</button></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── PRODUTO 3 — IA LICITAÇÃO ───────── -->
+<div class="produto-block" style="padding: 0 5% 100px;">
+  <div class="produto-content reveal-left">
+    <div class="produto-badge pub" style="background:rgba(120,80,255,0.12);border-color:rgba(120,80,255,0.3);color:#b794f4;">IA · Setor Público</div>
+    <h2>Inteligência Artificial<br/><span style="color:#b794f4;">para Licitações</span></h2>
+    <p>Um assistente de IA treinado especificamente para o processo licitatório brasileiro. Ele lê editais, identifica riscos, verifica habilitação, cruza dados com o histórico de licitantes e sugere estratégias de proposta — tudo em minutos, não em dias.</p>
+    <p>Funciona como um analista sênior de licitações disponível 24h: sem custo de hora extra, sem erro de digitação, sem prazo perdido por falta de atenção.</p>
+    <div class="modulos-grid">
+      <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Leitura automática de editais</div>
+      <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Análise de habilitação</div>
+      <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Mapa de riscos jurídicos</div>
+      <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Histórico de vencedores</div>
+      <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Sugestão de preço competitivo</div>
+      <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Alertas de prazo</div>
+      <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Compliance Lei 14.133/21</div>
+      <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Integração com PNCP/ComprasGov</div>
+    </div>
+    <a href="#contato" class="btn-primary btn-magnetic" style="display:inline-block;margin-top:20px;background:linear-gradient(135deg,#6b46c1,#9f7aea);box-shadow:0 8px 30px rgba(107,70,193,0.4);">Conhecer o produto →</a>
+  </div>
+
+  <div class="reveal-right">
+    <div class="produto-screen" id="lc-screen" style="transition:transform 0.15s ease, box-shadow 0.15s ease; cursor:default;">
+      <div class="produto-screen-bar">
+        <span class="bar-dot r"></span><span class="bar-dot y"></span><span class="bar-dot g"></span>
+        <span class="bar-url">licitacao.qode7.com/analise</span>
+        <span style="font-size:0.6rem;color:#b794f4;font-weight:700;">IA ativo</span>
+      </div>
+      <!-- Mockup IA Licitação -->
+      <div style="background:#0f0d1a;min-height:380px;display:flex;flex-direction:column;">
+        <!-- Header do app -->
+        <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:0.9rem;font-weight:700;">Análise de Edital</div>
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.4);margin-top:2px;">Pregão Eletrônico 042/2024 · SABESP</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <span style="background:rgba(107,70,193,0.2);border:1px solid rgba(107,70,193,0.4);color:#b794f4;font-size:0.6rem;font-weight:700;padding:4px 10px;border-radius:6px;">IA analisando...</span>
+            <span style="background:rgba(104,211,145,0.1);border:1px solid rgba(104,211,145,0.3);color:#68d391;font-size:0.6rem;font-weight:700;padding:4px 10px;border-radius:6px;">● Habilitado</span>
+          </div>
+        </div>
+        <div style="display:flex;flex:1;overflow:hidden;">
+          <!-- Painel esquerdo: resumo IA -->
+          <div style="width:55%;padding:16px;border-right:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;gap:10px;">
+            <!-- Risco score -->
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px 14px;">
+              <div style="font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Score de risco — IA</div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="font-size:1.6rem;font-weight:900;color:#68d391;">Baixo</div>
+                <div style="flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;">
+                  <div style="width:22%;height:100%;background:linear-gradient(90deg,#68d391,#38a169);border-radius:3px;"></div>
+                </div>
+                <span style="font-size:0.7rem;color:#68d391;font-weight:700;">22%</span>
+              </div>
+            </div>
+            <!-- Alertas IA -->
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px 14px;">
+              <div style="font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Pontos de atenção</div>
+              <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#d69e2e;margin-top:4px;flex-shrink:0;"></span>
+                <span style="font-size:0.63rem;color:var(--light);line-height:1.4;">Cláusula 8.3 exige atestado de capacidade técnica de obra similar acima de 500m².</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#68d391;margin-top:4px;flex-shrink:0;"></span>
+                <span style="font-size:0.63rem;color:var(--light);line-height:1.4;">Prazo de entrega (90 dias) compatível com capacidade cadastrada.</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:flex-start;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#68d391;margin-top:4px;flex-shrink:0;"></span>
+                <span style="font-size:0.63rem;color:var(--light);line-height:1.4;">Sem restrição de ME/EPP. Empresa elegível para participação direta.</span>
+              </div>
+            </div>
+            <!-- Histórico concorrentes -->
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px 14px;">
+              <div style="font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Histórico de vencedores — licitações similares</div>
+              <div style="display:flex;justify-content:space-between;font-size:0.6rem;margin-bottom:4px;">
+                <span style="color:var(--gray);">Empresa A</span><span style="color:var(--gold2);">R$ 412.000</span><span style="color:#68d391;">Venceu 3×</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.6rem;margin-bottom:4px;">
+                <span style="color:var(--gray);">Empresa B</span><span style="color:var(--gold2);">R$ 438.500</span><span style="color:rgba(255,255,255,0.4);">Venceu 1×</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.6rem;">
+                <span style="color:var(--gray);">Empresa C</span><span style="color:var(--gold2);">R$ 455.000</span><span style="color:rgba(255,255,255,0.4);">Perdeu 2×</span>
+              </div>
+            </div>
+          </div>
+          <!-- Painel direito: chat IA -->
+          <div style="flex:1;padding:14px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;">Assistente de Licitação</div>
+            <!-- Mensagem IA -->
+            <div style="background:rgba(107,70,193,0.12);border:1px solid rgba(107,70,193,0.2);border-radius:10px 10px 10px 2px;padding:10px 12px;">
+              <div style="font-size:0.62rem;color:#b794f4;font-weight:700;margin-bottom:4px;">Qode7 IA</div>
+              <div style="font-size:0.62rem;color:var(--light);line-height:1.5;">Analisei o edital 042/2024. Risco jurídico baixo. O único ponto crítico é o atestado de capacidade da cláusula 8.3. Sugiro proposta entre R$ 395.000 e R$ 418.000 para ser competitivo com o histórico.</div>
+            </div>
+            <!-- Mensagem usuário -->
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:10px 10px 2px 10px;padding:10px 12px;align-self:flex-end;">
+              <div style="font-size:0.62rem;color:rgba(255,255,255,0.5);font-weight:700;margin-bottom:4px;">Você</div>
+              <div style="font-size:0.62rem;color:var(--light);line-height:1.5;">Temos atestado de obra de 600m². Serve?</div>
+            </div>
+            <!-- Resposta IA -->
+            <div style="background:rgba(107,70,193,0.12);border:1px solid rgba(107,70,193,0.2);border-radius:10px 10px 10px 2px;padding:10px 12px;">
+              <div style="font-size:0.62rem;color:#b794f4;font-weight:700;margin-bottom:4px;">Qode7 IA</div>
+              <div style="font-size:0.62rem;color:var(--light);line-height:1.5;">Sim, atende com folga. Pode seguir com a participação. Quer que eu gere o checklist completo de habilitação?</div>
+            </div>
+            <!-- Input -->
+            <div style="margin-top:auto;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:8px;">
+              <span style="font-size:0.62rem;color:rgba(255,255,255,0.3);flex:1;">Pergunte sobre o edital...</span>
+              <div style="width:22px;height:22px;background:linear-gradient(135deg,#6b46c1,#9f7aea);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;">↑</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ───────── SOBRE / GRANDE PORTE ───────── -->
+<section class="about-section" id="sobre">
+  <div class="about-grid">
+    <div class="about-content">
+      <div class="reveal-left">
+        <div class="section-label">Empresa</div>
+        <h2 class="section-title">Mais de 10 anos construindo<br/><span style="color:var(--accent2)">o que importa de verdade</span></h2>
+        <p>A Qode7 nasceu pequena e cresceu resolvendo problemas difíceis. Hoje temos mais de 150 pessoas em vários estados — mas a cultura continua a mesma: time enxuto por projeto, responsabilidade direta, sem terceirização de conta.</p>
+        <p>Atendemos prefeituras, indústrias, fintechs e órgãos públicos. O que eles têm em comum é que vieram com sistemas legados, planilhas ou processos quebrados — e saíram com algo que funciona.</p>
+      </div>
+      <div class="about-pillars">
+        <div class="pillar reveal reveal-delay-1">
+          <div class="pillar-icon">🎯</div>
+          <div class="pillar-text">
+            <h4>Metodologia comprovada</h4>
+            <p>Processos ágeis maduros, com rituais bem definidos e entrega previsível.</p>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-2">
+          <div class="pillar-icon">🌍</div>
+          <div class="pillar-text">
+            <h4>Presença nacional</h4>
+            <p>Escritórios e times distribuídos em mais de 8 estados brasileiros.</p>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-3">
+          <div class="pillar-icon">🏅</div>
+          <div class="pillar-text">
+            <h4>Certificações internacionais</h4>
+            <p>Equipe certificada nas principais plataformas cloud e frameworks de mercado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-visual reveal-right">
+      <div class="about-visual-inner">
+        <div class="big-number"><span class="counter" data-target="10">0</span>+</div>
+        <div class="big-number-label">anos transformando negócios</div>
+        <div class="mini-stats">
+          <div class="mini-stat">
+            <div class="n"><span class="counter" data-target="150">0</span>+</div>
+            <div class="l">Colaboradores</div>
+          </div>
+          <div class="mini-stat">
+            <div class="n"><span class="counter" data-target="8">0</span></div>
+            <div class="l">Estados atendidos</div>
+          </div>
+          <div class="mini-stat">
+            <div class="n"><span class="counter" data-target="98">0</span>%</div>
+            <div class="l">Satisfação de clientes</div>
+          </div>
+          <div class="mini-stat">
+            <div class="n"><span class="counter" data-target="24">0</span>h</div>
+            <div class="l">Suporte disponível</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ───────── CASES & DEPOIMENTOS ───────── -->
+<section class="cases-section" id="cases">
+  <div class="section-head reveal" style="max-width:640px; margin-bottom:16px;">
+    <div class="section-label">Cases de Sucesso</div>
+    <h2 class="section-title">Resultados reais,<br/><span style="color:var(--accent2)">impacto mensurável</span></h2>
+  </div>
+  <div class="cases-tabs reveal">
+    <button class="case-tab active">Todos</button>
+    <button class="case-tab">Setor Público</button>
+    <button class="case-tab">Saúde</button>
+    <button class="case-tab">Indústria</button>
+    <button class="case-tab">Financeiro</button>
+  </div>
+  <div class="cases-grid">
+    <div class="case-card reveal">
+      <div class="case-result green">
+        <div class="case-result-num green">-73%</div>
+        <div class="case-result-label">Tempo de<br/>atendimento na UBS</div>
+      </div>
+      <h3>Digitalização completa da Saúde Municipal</h3>
+      <p>Implementamos a Plataforma Municipal com o módulo de Saúde em uma prefeitura com 12 UBSs. A fila de espera caiu de 47 para 12 minutos e o agendamento se tornou 100% digital.</p>
+      <div class="case-client">
+        <!-- Logo Prefeitura de Araçatuba -->
+        <svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:10px;">
+          <defs>
+            <linearGradient id="pmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1e4a8a"/>
+              <stop offset="100%" stop-color="#0d2d5e"/>
+            </linearGradient>
+          </defs>
+          <rect width="44" height="44" rx="10" fill="url(#pmGrad)"/>
+          <!-- Brasão estilo SP: escudo + letras PM -->
+          <!-- Escudo -->
+          <path d="M 8 10 H 36 V 28 Q 22 38 8 28 Z" fill="none" stroke="#c9a227" stroke-width="1.4"/>
+          <!-- Listras horizontais dentro do escudo -->
+          <line x1="8.5" y1="16" x2="35.5" y2="16" stroke="#c9a227" stroke-width="0.6" opacity="0.5"/>
+          <line x1="8.5" y1="22" x2="35.5" y2="22" stroke="#c9a227" stroke-width="0.6" opacity="0.5"/>
+          <!-- Iniciais P M -->
+          <text x="22" y="27" font-size="11" fill="#c9a227" text-anchor="middle" font-family="Georgia,serif" font-weight="700" letter-spacing="1">PM</text>
+          <!-- Nome na base -->
+          <rect x="0" y="35" width="44" height="9" rx="0" fill="#c9a227" opacity="0.15"/>
+          <text x="22" y="41.5" font-size="4.2" fill="#c9a227" text-anchor="middle" font-family="Arial" letter-spacing="0.3" font-weight="600">ARAÇATUBA</text>
+        </svg>
+        <div>
+          <div class="case-client-name">Prefeitura de Araçatuba</div>
+          <div class="case-client-role">Secretaria de Saúde · SP</div>
+        </div>
+        <span class="case-sector-tag pub">Setor Público</span>
+      </div>
+    </div>
+    <div class="case-card gold-top reveal reveal-delay-1">
+      <div class="case-result gold">
+        <div class="case-result-num gold">R$ 2,8M</div>
+        <div class="case-result-label">Economia com<br/>gestão de contratos</div>
+      </div>
+      <h3>Contratos públicos 100% digitais e auditados</h3>
+      <p>Com o sistema de Gestão de Contratos, uma câmara municipal eliminou papel, reduziu irregularidades e passou pelo TCE sem ressalvas pela primeira vez em 8 anos.</p>
+      <div class="case-client">
+        <!-- Logo Câmara Municipal de Londrina -->
+        <svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:10px;">
+          <defs>
+            <linearGradient id="cmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2c1a6e"/>
+              <stop offset="100%" stop-color="#1a0f4a"/>
+            </linearGradient>
+          </defs>
+          <rect width="44" height="44" rx="10" fill="url(#cmGrad)"/>
+          <!-- Colunas parlamentares -->
+          <rect x="7"  y="14" width="4" height="16" rx="1" fill="#d4a843"/>
+          <rect x="13" y="14" width="4" height="16" rx="1" fill="#d4a843"/>
+          <rect x="19" y="14" width="4" height="16" rx="1" fill="#d4a843"/>
+          <rect x="25" y="14" width="4" height="16" rx="1" fill="#d4a843"/>
+          <rect x="31" y="14" width="4" height="16" rx="1" fill="#d4a843"/>
+          <!-- Topo (capitel) -->
+          <rect x="5" y="11" width="34" height="3" rx="1" fill="#d4a843"/>
+          <!-- Base -->
+          <rect x="5" y="30" width="34" height="3" rx="1" fill="#d4a843"/>
+          <!-- Tarja inferior -->
+          <rect x="0" y="36" width="44" height="8" rx="0" fill="#d4a843" opacity="0.15"/>
+          <text x="22" y="42" font-size="4" fill="#d4a843" text-anchor="middle" font-family="Arial" font-weight="700" letter-spacing="0.2">LONDRINA · PR</text>
+        </svg>
+        <div>
+          <div class="case-client-name">Câmara de Londrina</div>
+          <div class="case-client-role">Câmara Municipal · PR</div>
+        </div>
+        <span class="case-sector-tag pub">Setor Público</span>
+      </div>
+    </div>
+    <div class="case-card reveal reveal-delay-2">
+      <div class="case-result">
+        <div class="case-result-num">+4×</div>
+        <div class="case-result-label">Capacidade de<br/>processamento</div>
+      </div>
+      <h3>Modernização de ERP industrial com integração cloud</h3>
+      <p>Migramos o legado de uma indústria de médio porte para arquitetura cloud-native, reduzindo o custo de infraestrutura em 61% e quadruplicando a capacidade operacional.</p>
+      <div class="case-client">
+        <!-- Logo Cominas Metalúrgica -->
+        <svg width="52" height="44" viewBox="0 0 52 44" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:10px;">
+          <defs>
+            <linearGradient id="coGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1c1c1c"/>
+              <stop offset="100%" stop-color="#111111"/>
+            </linearGradient>
+          </defs>
+          <rect width="52" height="44" rx="10" fill="url(#coGrad)"/>
+          <!-- Marca: hexágono industrial -->
+          <polygon points="13,7 19,7 22,12 19,17 13,17 10,12" fill="#e07b00" opacity="0.95"/>
+          <polygon points="13,7 19,7 22,12 19,17 13,17 10,12" fill="none" stroke="#f5a623" stroke-width="0.8"/>
+          <!-- "C" dentro do hexágono -->
+          <text x="16" y="15.5" font-size="8" fill="white" text-anchor="middle" font-family="Arial" font-weight="900">C</text>
+          <!-- Wordmark -->
+          <text x="28" y="14" font-size="8" fill="white" font-family="Arial" font-weight="900" letter-spacing="-0.3">OMINAS</text>
+          <line x1="26" y1="18" x2="50" y2="18" stroke="#e07b00" stroke-width="1"/>
+          <text x="26" y="24" font-size="4.5" fill="#e07b00" font-family="Arial" font-weight="700" letter-spacing="0.5">METALÚRGICA</text>
+          <!-- Subtítulo -->
+          <text x="26" y="31" font-size="3.5" fill="rgba(255,255,255,0.4)" font-family="Arial" letter-spacing="0.3">CONTAGEM · MG</text>
+          <!-- Detalhe: anos -->
+          <text x="26" y="39" font-size="3.2" fill="rgba(255,255,255,0.25)" font-family="Arial">Est. 1987 · CNPJ 12.345.678/0001-99</text>
+        </svg>
+        <div>
+          <div class="case-client-name">Cominas Metalúrgica</div>
+          <div class="case-client-role">Indústria Metal-mecânica · Contagem, MG</div>
+        </div>
+        <span class="case-sector-tag">Indústria</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logos strip — Empresas que confiam na Qode7 -->
+  <div class="logos-strip reveal" style="margin:0 -5% 64px; border-radius:0;">
+    <p class="logos-label">Empresas que confiam na Qode7</p>
+    <div style="overflow:hidden">
+      <div class="logos-track" id="logos-track">
+        <span class="logo-item">Grupo Bradesco</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Ambev</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Itaú Unibanco</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Magazine Luiza</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Embraer</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Petrobras</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">TOTVS</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Natura</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Grupo Bradesco</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Ambev</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Itaú Unibanco</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Magazine Luiza</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Embraer</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Petrobras</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">TOTVS</span>
+        <span class="logo-item">●</span>
+        <span class="logo-item">Natura</span>
+        <span class="logo-item">●</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Depoimentos -->
+  <div class="section-head reveal" style="margin-bottom:36px; margin-top:20px;">
+    <div class="section-label">O que dizem sobre nós</div>
+    <h2 class="section-title" style="font-size:1.8rem;">Voz de quem vive os resultados</h2>
+  </div>
+  <div class="testimonials-strip">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <blockquote>A Qode7 transformou completamente nossa gestão de saúde. Antes tínhamos planilhas, papel e fila física. Hoje temos um sistema que me diz em tempo real quantos pacientes estão aguardando, qual a gravidade e qual profissional está disponível. Isso salva vidas.</blockquote>
+      <div class="testimonial-author">
+        <img class="t-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dra. Ana Claudia Ferreira"/>
+        <div>
+          <div class="t-name">Dra. Ana Claudia Ferreira</div>
+          <div class="t-role">Secretária Municipal de Saúde · SP</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <blockquote>Levamos anos tentando digitalizar nossos contratos com soluções genéricas. A Qode7 entendeu o contexto público — LGPD, TCE, portal de transparência — e entregou em 90 dias algo que nenhum outro fornecedor conseguiu em anos. Equipe excepcional.</blockquote>
+      <div class="testimonial-author">
+        <img class="t-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Marcos Andrade"/>
+        <div>
+          <div class="t-name">Marcos Andrade</div>
+          <div class="t-role">Diretor Administrativo · Câmara Municipal PR</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <blockquote>Contratamos a Qode7 para um projeto de 6 meses e estamos juntos há 3 anos. Eles entendem nosso negócio, antecipam problemas antes de acontecerem e sempre entregam no prazo. Hoje são um parceiro estratégico, não apenas um fornecedor.</blockquote>
+      <div class="testimonial-author">
+        <img class="t-avatar" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Renata Oliveira"/>
+        <div>
+          <div class="t-name">Renata Oliveira</div>
+          <div class="t-role">CTO · Fintech de Crédito, RJ</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="stars">★★★★★</div>
+      <div class="quote-mark">"</div>
+      <blockquote>Migrar nosso ERP para cloud parecia impossível sem parar a operação. A Qode7 fez em fases, sem downtime, com uma equipe que realmente sabia o que estava fazendo. Economizamos 61% em infra e ainda temos mais capacidade do que antes.</blockquote>
+      <div class="testimonial-author">
+        <img class="t-avatar" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Roberto Nascimento"/>
+        <div>
+          <div class="t-name">Roberto Nascimento</div>
+          <div class="t-role">Diretor de TI · Indústria Metal-mecânica, MG</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── CTA ───────── -->
+<section class="cta-section" id="contato">
+  <div class="cta-content">
+    <div class="reveal">
+      <div class="section-label" style="text-align:center">Pronto para começar?</div>
+      <h2 class="section-title">Leve sua empresa ao<br/><span style="color:var(--accent2)">próximo nível</span></h2>
+      <p class="section-sub">Fale com um de nossos especialistas e descubra como a Qode7 pode transformar a tecnologia do seu negócio.</p>
+      <div class="cta-actions">
+        <a href="mailto:contato@qode7.com" class="btn-primary">Agendar conversa gratuita</a>
+        <a href="tel:+5511999999999" class="btn-secondary">Ligar agora</a>
+      </div>
+      <div class="cta-badge">
+        <span class="cta-badge-item">Sem compromisso</span>
+        <span class="cta-sep">|</span>
+        <span class="cta-badge-item">Resposta em 24h</span>
+        <span class="cta-sep">|</span>
+        <span class="cta-badge-item">Equipe especializada</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── FOOTER ───────── -->
+<footer>
+  <canvas id="footer-canvas"></canvas>
+  <div class="footer-blob fb1"></div>
+  <div class="footer-blob fb2"></div>
+  <div class="footer-blob fb3"></div>
+  <div class="footer-blob fb4"></div>
+  <div class="footer-watermark">[Q7]</div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="margin-bottom:16px;">
+        <span class="q7-logo" style="font-size:1.5rem;"><span class="bracket">[</span>Q7<span class="bracket">]</span></span>
+      </div>
+      <p>Tecnologia que funciona no mundo real — do setor público à indústria, há mais de 10 anos.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Soluções</h5>
+      <ul>
+        <li><a href="#">Desenvolvimento</a></li>
+        <li><a href="#">Cloud</a></li>
+        <li><a href="#">Inteligência Artificial</a></li>
+        <li><a href="#">Segurança</a></li>
+        <li><a href="#">Data & Analytics</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Empresa</h5>
+      <ul>
+        <li><a href="compliance.html">Compliance</a></li>
+        <li><a href="empresa.html">Sobre nós</a></li>
+        <li><a href="#cases">Cases</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contato</h5>
+      <ul>
+        <li><a href="mailto:contato@qode7.com">contato@qode7.com</a></li>
+        <li><a href="#contato">Fale com a equipe</a></li>
+        <li><a href="tel:+5511999999999">+55 11 9 9999-9999</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 <span class="footer-accent">Qode7</span>. Todos os direitos reservados.</span>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-label="Consentimento de cookies">
+  <div class="cookie-title">Uso de cookies</div>
+  <p class="cookie-text">Utilizamos cookies necessarios para funcionamento deste site e, mediante seu consentimento, cookies opcionais de medicao e desempenho. Voce pode aceitar ou recusar os opcionais.</p>
+  <div class="cookie-actions">
+    <button class="cookie-btn primary" type="button" id="cookie-accept">Aceitar cookies</button>
+    <button class="cookie-btn" type="button" id="cookie-reject">Recusar opcionais</button>
+    <a class="cookie-link" href="compliance.html#cookies">Ler política de cookies</a>
+  </div>
+</div>
+
+<!-- ───────── SCRIPTS ───────── -->
+<script>
+  /* ─── 0. BACKGROUND CANVAS — orbs visíveis em todo o site ─── */
+  (function () {
+    const c = document.getElementById('bg-canvas');
+    const ctx = c.getContext('2d');
+
+    function resize() { c.width = window.innerWidth; c.height = document.body.scrollHeight; }
+    resize();
+    window.addEventListener('resize', () => { resize(); }, { passive: true });
+
+    // Orbs grandes que se movem lentamente
+    const orbs = [
+      // hero — grandes e bem visíveis
+      { x: 0.12, y: 0.05, r: 0.32, cr: [37, 99, 235],   speed: 0.00012, phase: 0,   alpha: 0.28 },
+      { x: 0.80, y: 0.12, r: 0.26, cr: [6, 182, 212],   speed: 0.00009, phase: 1.5, alpha: 0.26 },
+      { x: 0.48, y: 0.20, r: 0.22, cr: [109, 40, 217],  speed: 0.00015, phase: 0.8, alpha: 0.22 },
+      // meio
+      { x: 0.08, y: 0.52, r: 0.20, cr: [37, 99, 235],   speed: 0.00010, phase: 2.1, alpha: 0.18 },
+      { x: 0.90, y: 0.48, r: 0.25, cr: [6, 182, 212],   speed: 0.00013, phase: 3.0, alpha: 0.20 },
+      // fundo/footer
+      { x: 0.35, y: 0.74, r: 0.22, cr: [212, 168, 67],  speed: 0.00008, phase: 1.2, alpha: 0.18 },
+      { x: 0.68, y: 0.85, r: 0.24, cr: [37, 99, 235],   speed: 0.00011, phase: 0.4, alpha: 0.22 },
+      { x: 0.18, y: 0.93, r: 0.18, cr: [6, 182, 212],   speed: 0.00014, phase: 2.7, alpha: 0.20 },
+    ];
+
+    let t = 0;
+    function draw() {
+      ctx.clearRect(0, 0, c.width, c.height);
+      // fundo base
+      ctx.fillStyle = '#060d1f';
+      ctx.fillRect(0, 0, c.width, c.height);
+
+      const W = c.width, H = c.height;
+      t = performance.now();
+
+      orbs.forEach(o => {
+        const drift = Math.sin(t * o.speed + o.phase);
+        const drift2 = Math.cos(t * o.speed * 0.7 + o.phase + 1);
+        const px = (o.x + drift  * 0.06) * W;
+        const py = (o.y + drift2 * 0.05) * H;
+        const radius = o.r * Math.min(W, H);
+
+        const a = o.alpha || 0.18;
+        const g = ctx.createRadialGradient(px, py, 0, px, py, radius);
+        g.addColorStop(0,   `rgba(${o.cr[0]},${o.cr[1]},${o.cr[2]},${a})`);
+        g.addColorStop(0.45,`rgba(${o.cr[0]},${o.cr[1]},${o.cr[2]},${a * 0.4})`);
+        g.addColorStop(1,   `rgba(${o.cr[0]},${o.cr[1]},${o.cr[2]},0)`);
+
+        ctx.beginPath();
+        ctx.arc(px, py, radius, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Recalcula altura quando o conteúdo muda
+    new ResizeObserver(() => resize()).observe(document.body);
+  })();
+
+  /* ─── 1. SCROLL PROGRESS ─── */
+  const scrollBar = document.getElementById('scroll-bar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    scrollBar.style.width = pct + '%';
+  }, { passive: true });
+
+  /* ─── 2. NAVBAR ON SCROLL ─── */
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  /* ─── 3. SCROLL REVEAL — easing suave ─── */
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, idx) => {
+      if (!e.isIntersecting) return;
+      // stagger automático por posição no grupo
+      const siblings = [...e.target.parentElement.children].filter(c =>
+        c.classList.contains('reveal') || c.classList.contains('reveal-left') || c.classList.contains('reveal-right')
+      );
+      const i = siblings.indexOf(e.target);
+      e.target.style.transitionDelay = (i * 0.07) + 's';
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.counter').forEach(startCounter);
+      revealObs.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  /* ─── 4. CONTADORES ANIMADOS ─── */
+  function startCounter(el) {
+    if (el.dataset.started) return;
+    el.dataset.started = '1';
+    const target = +el.dataset.target;
+    const dur = 2000;
+    const t0 = performance.now();
+    (function tick(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 4); // ease-out quart
+      el.textContent = Math.round(ease * target);
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  /* ─── 5. CANVAS PARTICLES — discretas, profissionais ─── */
+  (function () {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    const NUM = 45;
+    const pts = Array.from({ length: NUM }, () => ({
+      x: Math.random() * 1600, y: Math.random() * 900,
+      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+    }));
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < NUM; i++) {
+        pts[i].x += pts[i].vx; pts[i].y += pts[i].vy;
+        if (pts[i].x < 0 || pts[i].x > W) pts[i].vx *= -1;
+        if (pts[i].y < 0 || pts[i].y > H) pts[i].vy *= -1;
+        for (let j = i + 1; j < NUM; j++) {
+          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+          const d = Math.hypot(dx, dy);
+          if (d < 140) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(91,142,249,${(1 - d / 140) * 0.18})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.stroke();
+          }
+        }
+        ctx.beginPath();
+        ctx.arc(pts[i].x, pts[i].y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(91,142,249,0.35)';
+        ctx.fill();
+      }
+      requestAnimationFrame(frame);
+    }
+    frame();
+  })();
+
+  /* ─── 6. TYPEWRITER ─── */
+  (function () {
+    const words = ['resolve', 'entrega', 'funciona', 'escala', 'conecta'];
+    const el = document.getElementById('typewriter-target');
+    if (!el) return;
+    // cursor
+    const cur = Object.assign(document.createElement('span'), { className: 'cursor' });
+    el.after(cur);
+    let wi = 0, ci = 0, del = false;
+    function tick() {
+      const w = words[wi];
+      el.textContent = del ? w.slice(0, ci--) : w.slice(0, ci++);
+      if (!del && ci > w.length) { del = true; return setTimeout(tick, 1600); }
+      if (del && ci < 0)         { del = false; wi = (wi + 1) % words.length; ci = 0; return setTimeout(tick, 400); }
+      setTimeout(tick, del ? 50 : 95);
+    }
+    setTimeout(tick, 1200);
+  })();
+
+  /* ─── 7. SPOTLIGHT nos cards ─── */
+  document.querySelectorAll('.spotlight-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--x', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+      card.style.setProperty('--y', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%');
+    });
+  });
+
+  /* ─── 8. MAGNETIC BUTTONS — sutil ─── */
+  document.querySelectorAll('.btn-magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width  / 2)) * 0.18;
+      const dy = (e.clientY - (r.top  + r.height / 2)) * 0.18;
+      btn.style.transform = `translate(${dx}px,${dy}px)`;
+    });
+    btn.addEventListener('mouseleave', () => btn.style.transform = '');
+  });
+
+  /* ─── 8b. TILT 3D NOS MOCKUPS DE PRODUTO ─── */
+  const contractLayersByScreen = new Map();
+  ['pm-hub-screen', 'ct-screen', 'lc-screen'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    if (id === 'ct-screen') {
+      const layers = [...el.querySelectorAll('.ct-parallax-layer')].map(layer => ({
+        node: layer,
+        depth: Number(layer.dataset.depth || 16),
+      }));
+      contractLayersByScreen.set(id, layers);
+    }
+
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      el.style.transform = `perspective(900px) rotateY(${x * 10}deg) rotateX(${-y * 8}deg) scale(1.02)`;
+      el.style.boxShadow = `${-x * 20}px ${y * 20}px 60px rgba(37,99,235,0.25), 0 30px 80px rgba(0,0,0,0.5)`;
+
+      if (id === 'ct-screen') {
+        const layers = contractLayersByScreen.get(id) || [];
+        layers.forEach(({ node, depth }) => {
+          const tx = x * depth * 1.15;
+          const ty = y * depth * 0.9;
+          node.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+        });
+      }
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+      el.style.boxShadow = '';
+
+      if (id === 'ct-screen') {
+        const layers = contractLayersByScreen.get(id) || [];
+        layers.forEach(({ node }) => {
+          node.style.transform = '';
+        });
+      }
+    });
+  });
+
+
+  /* ─── 9. FOOTER CANVAS ─── */
+  (function () {
+    const fc = document.getElementById('footer-canvas');
+    if (!fc) return;
+    const fctx = fc.getContext('2d');
+    const footer = fc.parentElement;
+    function resizeFC() {
+      fc.width  = footer.offsetWidth;
+      fc.height = footer.offsetHeight;
+    }
+    resizeFC();
+    new ResizeObserver(resizeFC).observe(footer);
+
+    const FN = 38;
+    const fpts = Array.from({ length: FN }, () => ({
+      x: Math.random() * footer.offsetWidth,
+      y: Math.random() * footer.offsetHeight,
+      vx: (Math.random() - 0.5) * 0.28,
+      vy: (Math.random() - 0.5) * 0.28,
+      r: Math.random() * 2 + 1,
+    }));
+    function drawFC() {
+      fctx.clearRect(0, 0, fc.width, fc.height);
+      fpts.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > fc.width)  p.vx *= -1;
+        if (p.y < 0 || p.y > fc.height) p.vy *= -1;
+      });
+      for (let i = 0; i < FN; i++) {
+        for (let j = i + 1; j < FN; j++) {
+          const d = Math.hypot(fpts[i].x - fpts[j].x, fpts[i].y - fpts[j].y);
+          if (d < 130) {
+            fctx.beginPath();
+            fctx.strokeStyle = `rgba(91,142,249,${(1 - d / 130) * 0.45})`;
+            fctx.lineWidth = 0.9;
+            fctx.moveTo(fpts[i].x, fpts[i].y);
+            fctx.lineTo(fpts[j].x, fpts[j].y);
+            fctx.stroke();
+          }
+        }
+        // ponto com glow
+        const grad = fctx.createRadialGradient(fpts[i].x, fpts[i].y, 0, fpts[i].x, fpts[i].y, fpts[i].r * 3);
+        grad.addColorStop(0, 'rgba(91,142,249,0.9)');
+        grad.addColorStop(1, 'rgba(91,142,249,0)');
+        fctx.beginPath();
+        fctx.arc(fpts[i].x, fpts[i].y, fpts[i].r * 3, 0, Math.PI * 2);
+        fctx.fillStyle = grad;
+        fctx.fill();
+      }
+      requestAnimationFrame(drawFC);
+    }
+    drawFC();
+  })();
+
+  /* ─── 10. FOOTER LINKS HOVER — slide up ─── */
+  document.querySelectorAll('.footer-col ul a').forEach(a => {
+    a.style.display = 'inline-block';
+    a.style.transition = 'color 0.3s, transform 0.3s cubic-bezier(.23,1,.32,1)';
+    a.addEventListener('mouseenter', () => a.style.transform = 'translateX(5px)');
+    a.addEventListener('mouseleave', () => a.style.transform = '');
+  });
+
+  /* ─── 9. CASE TABS ─── */
+  document.querySelectorAll('.case-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.case-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  /* ─── 10. CONSENTIMENTO DE COOKIES ─── */
+  (function () {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const rejectBtn = document.getElementById('cookie-reject');
+    if (!banner || !acceptBtn || !rejectBtn) return;
+
+    const key = 'q7_cookie_consent';
+    const saved = localStorage.getItem(key);
+    if (!saved) {
+      banner.classList.add('show');
+    }
+
+    acceptBtn.addEventListener('click', () => {
+      localStorage.setItem(key, JSON.stringify({
+        status: 'accepted',
+        at: new Date().toISOString(),
+      }));
+      banner.classList.remove('show');
+    });
+
+    rejectBtn.addEventListener('click', () => {
+      localStorage.setItem(key, JSON.stringify({
+        status: 'rejected',
+        at: new Date().toISOString(),
+      }));
+      banner.classList.remove('show');
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compliance, Privacidade e LGPD | Qode7</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #060d1f;
+      --navy2: #0b1630;
+      --accent: #2563eb;
+      --accent2: #06b6d4;
+      --gold: #d4a843;
+      --white: #ffffff;
+      --gray: #a0aec0;
+      --light: #e8edf7;
+      --line: rgba(255,255,255,0.08);
+    }
+
+    body {
+      font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1100px 700px at 85% -10%, rgba(6,182,212,0.13), transparent 65%),
+                  radial-gradient(900px 600px at 10% 5%, rgba(37,99,235,0.14), transparent 65%),
+                  var(--navy);
+      color: var(--white);
+      line-height: 1.65;
+    }
+
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { width: min(1120px, 92vw); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(6,13,31,0.82);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: var(--white);
+    }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .btn {
+      border: 1px solid rgba(255,255,255,0.18);
+      color: var(--white);
+      padding: 8px 14px;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .btn.primary {
+      border-color: rgba(37,99,235,0.7);
+      background: linear-gradient(135deg, var(--accent), #1255d4);
+    }
+    .btn:hover { text-decoration: none; }
+
+    .hero {
+      padding: 64px 0 36px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(6,182,212,0.35);
+      background: rgba(6,182,212,0.1);
+      color: var(--accent2);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(2rem, 4.6vw, 3.3rem);
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .sub {
+      max-width: 820px;
+      color: var(--gray);
+      font-size: 1rem;
+    }
+
+    .quick-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .quick {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.025);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .quick h3 { font-size: 0.93rem; margin-bottom: 8px; }
+    .quick p { font-size: 0.84rem; color: var(--gray); }
+
+    .main {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 20px;
+      padding: 14px 0 64px;
+    }
+
+    .toc {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      padding: 16px;
+    }
+    .toc h2 {
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+    .toc ul { list-style: none; display: grid; gap: 8px; }
+    .toc a {
+      display: block;
+      color: var(--light);
+      font-size: 0.84rem;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.08);
+    }
+
+    .content {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.02);
+      padding: 22px;
+    }
+    .policy {
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      padding: 18px 18px;
+      margin-bottom: 14px;
+    }
+    .policy h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+    .policy p, .policy li {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    .policy ul {
+      margin-left: 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px;
+      font-size: 0.84rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    th { color: var(--light); background: rgba(255,255,255,0.04); }
+    td { color: var(--gray); }
+
+    .warn {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #ffd27a;
+      border: 1px solid rgba(212,168,67,0.35);
+      background: rgba(212,168,67,0.1);
+      padding: 10px 12px;
+      border-radius: 10px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 40px;
+      color: rgba(255,255,255,0.46);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 980px) {
+      .quick-grid { grid-template-columns: 1fr; }
+      .main { grid-template-columns: 1fr; }
+      .toc { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="logo" href="index.html">[Q7]</a>
+      <div class="top-actions">
+        <a class="btn" href="index.html">Voltar ao site</a>
+        <a class="btn primary" href="index.html#contato">Falar com especialista</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <span class="chip">Compliance & Privacidade</span>
+      <h1>Cookies, Política de Privacidade e LGPD</h1>
+      <p class="sub">Nesta página estão as diretrizes de privacidade, uso de cookies e proteção de dados aplicáveis ao site institucional da Qode7. O objetivo é garantir transparência, segurança e conformidade com a Lei Geral de Proteção de Dados.</p>
+
+      <div class="quick-grid">
+        <article class="quick">
+          <h3>Controladora</h3>
+          <p>[RAZAO SOCIAL DA EMPRESA] - CNPJ [CNPJ DA EMPRESA]</p>
+        </article>
+        <article class="quick">
+          <h3>Canal de Privacidade</h3>
+          <p>[EMAIL PRIVACIDADE] - Atendimento a titulares de dados</p>
+        </article>
+        <article class="quick">
+          <h3>Encarregado (DPO)</h3>
+          <p>[NOME DO DPO] - [EMAIL DO DPO]</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="main">
+      <aside class="toc">
+        <h2>Navegacao</h2>
+        <ul>
+          <li><a href="#privacidade">Politica de Privacidade</a></li>
+          <li><a href="#cookies">Politica de Cookies</a></li>
+          <li><a href="#bases">Bases legais e finalidades</a></li>
+          <li><a href="#direitos">Direitos do titular</a></li>
+          <li><a href="#seguranca">Seguranca da informacao</a></li>
+          <li><a href="#retencao">Retencao e descarte</a></li>
+          <li><a href="#lgpd">LGPD e contato</a></li>
+        </ul>
+      </aside>
+
+      <div class="content">
+        <article class="policy" id="privacidade">
+          <h3>1. Politica de Privacidade</h3>
+          <p>A [RAZAO SOCIAL DA EMPRESA], na qualidade de Controladora, trata dados pessoais para finalidades legitimas e especificas, incluindo atendimento comercial, comunicacao com clientes, suporte tecnico e cumprimento de obrigacoes legais e regulatorias.</p>
+          <p>O tratamento segue os principios da necessidade, adequacao, transparencia, seguranca e prevencao, com acesso restrito a profissionais autorizados e em regime de necessidade.</p>
+        </article>
+
+        <article class="policy" id="cookies">
+          <h3>2. Politica de Cookies</h3>
+          <p>Este site utiliza cookies para funcionamento tecnico e, mediante consentimento, cookies opcionais de desempenho e analise. O titular pode aceitar ou recusar cookies opcionais no banner apresentado no acesso ao site.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>Finalidade</th>
+                <th>Base legal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Necessarios</td>
+                <td>Permitir funcionamento tecnico e seguranca basica da navegacao</td>
+                <td>Legitimo interesse / execucao do servico</td>
+              </tr>
+              <tr>
+                <td>Desempenho (opcional)</td>
+                <td>Medir uso de paginas e melhorar usabilidade</td>
+                <td>Consentimento</td>
+              </tr>
+              <tr>
+                <td>Funcionais (opcional)</td>
+                <td>Lembrar preferencias de navegacao e idioma</td>
+                <td>Consentimento</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="warn">Importante: atualizar esta tabela conforme as tecnologias de cookies efetivamente utilizadas no ambiente de producao.</p>
+        </article>
+
+        <article class="policy" id="bases">
+          <h3>3. Bases legais e finalidades</h3>
+          <ul>
+            <li>Consentimento: quando houver opcao clara e livre do titular.</li>
+            <li>Cumprimento de obrigacao legal ou regulatoria.</li>
+            <li>Execucao de contrato ou procedimentos preliminares.</li>
+            <li>Legitimo interesse, com avaliacao de impacto e proporcionalidade.</li>
+          </ul>
+        </article>
+
+        <article class="policy" id="direitos">
+          <h3>4. Direitos do titular</h3>
+          <p>Nos termos da LGPD, o titular pode solicitar, quando aplicavel:</p>
+          <ul>
+            <li>Confirmacao de existencia de tratamento e acesso aos dados.</li>
+            <li>Correcao de dados incompletos, inexatos ou desatualizados.</li>
+            <li>Anonimizacao, bloqueio ou eliminacao de dados desnecessarios.</li>
+            <li>Portabilidade dos dados e informacoes sobre compartilhamento.</li>
+            <li>Revogacao de consentimento e eliminacao de dados tratados com base nele.</li>
+          </ul>
+        </article>
+
+        <article class="policy" id="seguranca">
+          <h3>5. Seguranca da informacao</h3>
+          <p>Adotamos medidas tecnicas e administrativas para proteger dados pessoais, incluindo controle de acesso, segregacao de ambientes, monitoramento, backup e boas praticas de seguranca da informacao.</p>
+          <p>Em caso de incidente com risco relevante aos titulares, as medidas cabiveis serao adotadas, inclusive comunicacoes legais quando exigidas.</p>
+        </article>
+
+        <article class="policy" id="retencao">
+          <h3>6. Retencao e descarte de dados</h3>
+          <p>Os dados pessoais sao armazenados somente pelo periodo necessario para cumprimento das finalidades informadas, obrigacoes legais, exercicio regular de direitos e auditoria. Encerrada a necessidade, o descarte e realizado por meios seguros.</p>
+        </article>
+
+        <article class="policy" id="lgpd">
+          <h3>7. LGPD e canal de contato</h3>
+          <p>Lei aplicavel: Lei n 13.709/2018 (LGPD).</p>
+          <p>Encarregado (DPO): [NOME DO DPO] - [EMAIL DO DPO]</p>
+          <p>Solicitacoes de titulares: [EMAIL PRIVACIDADE]</p>
+          <p>Data da ultima atualizacao desta pagina: 06/06/2026.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      © 2026 Qode7. Pagina de Compliance e Privacidade.
+    </div>
+  </footer>
+</body>
+</html>
