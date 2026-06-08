@@ -67,10 +67,10 @@
       text-decoration: none;
     }
     .logo-img {
-      height: 40px;
+      height: 44px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 0 10px rgba(29,201,164,0.24));
+      filter: brightness(1.12) contrast(1.06) saturate(1.14) drop-shadow(0 0 10px rgba(29,201,164,0.26));
       transition: transform 0.28s ease, filter 0.28s ease;
     }
     .logo-shell {
@@ -78,11 +78,11 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 7px 12px;
+      padding: 4px 10px;
       border-radius: 12px;
-      border: 1px solid rgba(29,201,164,0.28);
-      background: linear-gradient(135deg, rgba(29,201,164,0.12), rgba(11,15,26,0.08));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.26);
+      border: 1px solid rgba(0,229,192,0.44);
+      background: rgba(5,10,18,0.96);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 22px rgba(0,0,0,0.34);
       transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
     }
     .logo-shell::after {
@@ -106,7 +106,7 @@
     .logo-shell:hover .logo-img,
     .footer-logo-shell:hover .footer-logo {
       transform: scale(1.02);
-      filter: drop-shadow(0 0 14px rgba(0,229,192,0.35));
+      filter: brightness(1.14) contrast(1.08) saturate(1.18) drop-shadow(0 0 14px rgba(0,229,192,0.38));
     }
     @keyframes topLogoPulse {
       0%, 100% {
@@ -314,10 +314,10 @@
       gap: 10px;
     }
     .footer-logo {
-      height: 40px;
+      height: 48px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 0 10px rgba(29,201,164,0.2));
+      filter: brightness(1.12) contrast(1.06) saturate(1.14) drop-shadow(0 0 10px rgba(29,201,164,0.22));
       transition: transform 0.28s ease, filter 0.28s ease;
     }
     .footer-logo-shell {
@@ -325,11 +325,11 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 7px 12px;
+      padding: 8px 14px;
       border-radius: 12px;
-      border: 1px solid rgba(29,201,164,0.26);
-      background: linear-gradient(135deg, rgba(29,201,164,0.1), rgba(11,15,26,0.08));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.25);
+      border: 1px solid rgba(0,229,192,0.34);
+      background: rgba(5,10,18,0.92);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 22px rgba(0,0,0,0.32);
       transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
     }
     .footer-logo-shell:hover {
@@ -340,12 +340,18 @@
     @media (max-width: 768px) {
       .logo-img,
       .footer-logo {
-        height: 32px;
+        height: 36px;
+      }
+      .footer-logo {
+        height: 38px;
       }
       .logo-shell,
       .footer-logo-shell {
         padding: 6px 10px;
         border-radius: 10px;
+      }
+      .logo-shell {
+        padding: 4px 9px;
       }
     }
 
@@ -376,7 +382,7 @@
 
   <header class="topbar">
     <div class="wrap topbar-inner">
-      <a class="logo" href="index.html" aria-label="Qode7 Home"><span class="logo-shell"><img class="logo-img" src="qodeseven_logo_v2.svg" alt="Qode7" /></span></a>
+      <a class="logo" href="index.html" aria-label="Qode7 Home"><span class="logo-shell"><img class="logo-img" src="qodeseven_logo_site.svg" alt="Qode7" /></span></a>
       <div class="top-actions">
         <a class="btn" href="index.html">Voltar ao site</a>
         <a class="btn" href="compliance.html">Compliance</a>
@@ -458,7 +464,7 @@
 
   <footer class="footer">
     <div class="wrap footer-inner">
-      <span class="footer-logo-shell"><img class="footer-logo" src="qodeseven_logo_v2.svg" alt="Qode7" /></span>
+      <span class="footer-logo-shell"><img class="footer-logo" src="qodeseven_logo_site.svg" alt="Qode7" /></span>
       <div>© 2026 Qode7. Pagina institucional da empresa.</div>
     </div>
   </footer>

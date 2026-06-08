@@ -45,14 +45,14 @@
       margin-top: 2px;
     }
     .brand-logo-img {
-      height: 40px;
+      height: 44px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 0 10px rgba(29,201,164,0.22));
+      filter: brightness(1.12) contrast(1.06) saturate(1.14) drop-shadow(0 0 10px rgba(29,201,164,0.26));
       transition: transform 0.28s ease, filter 0.28s ease;
     }
     .brand-logo-img.footer {
-      height: 40px;
+      height: 48px;
     }
     .brand-logo-shell {
       position: relative;
@@ -61,10 +61,18 @@
       justify-content: center;
       padding: 7px 12px;
       border-radius: 12px;
-      border: 1px solid rgba(29,201,164,0.26);
-      background: linear-gradient(135deg, rgba(29,201,164,0.12), rgba(11,15,26,0.08));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 18px rgba(0,0,0,0.28);
+      border: 1px solid rgba(0,229,192,0.34);
+      background: rgba(5,10,18,0.92);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 22px rgba(0,0,0,0.34);
       transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+    }
+    .brand-logo-shell.header-logo-shell {
+      padding: 4px 10px;
+      border-color: rgba(0,229,192,0.44);
+      background: rgba(5,10,18,0.96);
+    }
+    .brand-logo-shell.footer-logo-shell {
+      padding: 8px 14px;
     }
     .brand-logo-shell::after {
       content: '';
@@ -86,7 +94,7 @@
     }
     .brand-logo-shell:hover .brand-logo-img {
       transform: scale(1.02);
-      filter: drop-shadow(0 0 14px rgba(0,229,192,0.35));
+      filter: brightness(1.14) contrast(1.08) saturate(1.18) drop-shadow(0 0 14px rgba(0,229,192,0.38));
     }
     @keyframes topLogoPulse {
       0%, 100% {
@@ -124,11 +132,17 @@
     @media (max-width: 768px) {
       .brand-logo-img,
       .brand-logo-img.footer {
-        height: 32px;
+        height: 36px;
+      }
+      .brand-logo-img.footer {
+        height: 38px;
       }
       .brand-logo-shell {
         padding: 6px 10px;
         border-radius: 10px;
+      }
+      .brand-logo-shell.header-logo-shell {
+        padding: 4px 9px;
       }
     }
 
@@ -1505,7 +1519,7 @@
 <nav id="navbar">
   <a href="#" style="text-decoration:none;" aria-label="Qode7 Home">
     <span class="brand-logo-shell header-logo-shell">
-      <img class="brand-logo-img" src="qodeseven_logo_v2.svg" alt="Qode7" />
+      <img class="brand-logo-img" src="qodeseven_logo_site.svg" alt="Qode7" />
     </span>
   </a>
   <ul class="nav-links">
@@ -2483,8 +2497,8 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="footer-brand-mark">
-        <span class="brand-logo-shell">
-          <img class="brand-logo-img footer" src="qodeseven_logo_v2.svg" alt="Qode7" />
+        <span class="brand-logo-shell footer-logo-shell">
+          <img class="brand-logo-img footer" src="qodeseven_logo_site.svg" alt="Qode7" />
         </span>
       </div>
       <p>Tecnologia que funciona no mundo real — do setor público à indústria, há mais de 10 anos.</p>
