@@ -4,25 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Empresa | Qode7</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #060d1f;
-      --accent: #2563eb;
-      --accent2: #06b6d4;
-      --gold: #d4a843;
+      --navy: #0b0f1a;
+      --accent: #1dc9a4;
+      --accent2: #00e5c0;
+      --gold: #f59e0b;
       --white: #ffffff;
-      --gray: #a0aec0;
-      --line: rgba(255,255,255,0.09);
+      --gray: #9ca3af;
+      --line: rgba(255,255,255,0.11);
+      --font-display: 'Space Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
     }
 
     body {
-      font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--font-body);
       color: var(--white);
       background:
-        radial-gradient(900px 520px at 10% -5%, rgba(37,99,235,0.15), transparent 65%),
-        radial-gradient(800px 520px at 90% 10%, rgba(6,182,212,0.12), transparent 66%),
+        radial-gradient(900px 520px at 10% -5%, rgba(29,201,164,0.16), transparent 65%),
+        radial-gradient(800px 520px at 90% 10%, rgba(0,229,192,0.14), transparent 66%),
         var(--navy);
       line-height: 1.65;
       overflow-x: hidden;
@@ -43,7 +46,7 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(10px);
-      background: rgba(6,13,31,0.82);
+      background: rgba(11,15,26,0.86);
       border-bottom: 1px solid var(--line);
     }
     .topbar-inner {
@@ -54,11 +57,86 @@
       gap: 12px;
     }
     .logo {
+      display: inline-flex;
+      align-items: center;
       font-weight: 900;
       letter-spacing: -1px;
       font-size: 1.4rem;
-      color: var(--white);
+      color: var(--accent2);
+      font-family: var(--font-display);
       text-decoration: none;
+    }
+    .logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(29,201,164,0.24));
+      transition: transform 0.28s ease, filter 0.28s ease;
+    }
+    .logo-shell {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(29,201,164,0.28);
+      background: linear-gradient(135deg, rgba(29,201,164,0.12), rgba(11,15,26,0.08));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.26);
+      transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+    }
+    .logo-shell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(110deg, rgba(255,255,255,0) 15%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0) 75%);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+    .logo-shell:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0,229,192,0.58);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 22px rgba(0,0,0,0.34);
+    }
+    .logo-shell:hover::after {
+      opacity: 1;
+    }
+    .logo-shell:hover .logo-img,
+    .footer-logo-shell:hover .footer-logo {
+      transform: scale(1.02);
+      filter: drop-shadow(0 0 14px rgba(0,229,192,0.35));
+    }
+    @keyframes topLogoPulse {
+      0%, 100% {
+        border-color: rgba(29,201,164,0.28);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.26);
+      }
+      50% {
+        border-color: rgba(0,229,192,0.45);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 20px rgba(0,0,0,0.3);
+      }
+    }
+    @keyframes topLogoGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(29,201,164,0.24));
+      }
+      50% {
+        filter: drop-shadow(0 0 14px rgba(0,229,192,0.34));
+      }
+    }
+    .logo-shell {
+      animation: topLogoPulse 3.6s ease-in-out infinite;
+    }
+    .logo-shell .logo-img {
+      animation: topLogoGlow 3.6s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .logo-shell,
+      .logo-shell .logo-img {
+        animation: none;
+      }
     }
     .top-actions {
       display: flex;
@@ -78,8 +156,8 @@
     }
     .btn:hover { transform: translateY(-2px); border-color: rgba(6,182,212,0.5); }
     .btn.primary {
-      border-color: rgba(37,99,235,0.8);
-      background: linear-gradient(135deg, var(--accent), #1255d4);
+      border-color: rgba(29,201,164,0.8);
+      background: linear-gradient(135deg, var(--accent), #0fa882);
     }
 
     .hero { padding: 62px 0 30px; }
@@ -98,6 +176,7 @@
       margin-bottom: 14px;
     }
     h1 {
+      font-family: var(--font-display);
       font-size: clamp(2rem, 4.6vw, 3.4rem);
       line-height: 1.15;
       letter-spacing: -1.4px;
@@ -130,7 +209,7 @@
     }
     .kpi:hover {
       transform: translateY(-5px);
-      border-color: rgba(6,182,212,0.45);
+      border-color: rgba(29,201,164,0.5);
       box-shadow: 0 16px 40px rgba(0,0,0,0.35);
     }
     .kpi .n {
@@ -157,7 +236,7 @@
     }
     .card:hover {
       transform: translateY(-5px);
-      border-color: rgba(37,99,235,0.45);
+      border-color: rgba(29,201,164,0.45);
       box-shadow: 0 16px 42px rgba(0,0,0,0.35);
     }
     .card h2 {
@@ -172,7 +251,7 @@
       gap: 10px;
     }
     .point {
-      border-left: 2px solid rgba(37,99,235,0.6);
+      border-left: 2px solid rgba(29,201,164,0.75);
       padding-left: 10px;
     }
     .point strong { display: block; font-size: 0.86rem; margin-bottom: 2px; }
@@ -217,12 +296,57 @@
     .leader .role { color: var(--accent2); font-size: 0.78rem; margin-bottom: 8px; }
     .leader p { color: var(--gray); font-size: 0.84rem; }
 
+    h2, h3, .chip {
+      font-family: var(--font-display);
+    }
+
     .footer {
       border-top: 1px solid var(--line);
       margin-top: 20px;
       padding: 20px 0 34px;
       color: rgba(255,255,255,0.45);
       font-size: 0.82rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .footer-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(29,201,164,0.2));
+      transition: transform 0.28s ease, filter 0.28s ease;
+    }
+    .footer-logo-shell {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(29,201,164,0.26);
+      background: linear-gradient(135deg, rgba(29,201,164,0.1), rgba(11,15,26,0.08));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.25);
+      transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+    }
+    .footer-logo-shell:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0,229,192,0.58);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 22px rgba(0,0,0,0.34);
+    }
+    @media (max-width: 768px) {
+      .logo-img,
+      .footer-logo {
+        height: 32px;
+      }
+      .logo-shell,
+      .footer-logo-shell {
+        padding: 6px 10px;
+        border-radius: 10px;
+      }
     }
 
     .reveal {
@@ -252,7 +376,7 @@
 
   <header class="topbar">
     <div class="wrap topbar-inner">
-      <a class="logo" href="index.html">[Q7]</a>
+      <a class="logo" href="index.html" aria-label="Qode7 Home"><span class="logo-shell"><img class="logo-img" src="qodeseven_logo_v2.svg" alt="Qode7" /></span></a>
       <div class="top-actions">
         <a class="btn" href="index.html">Voltar ao site</a>
         <a class="btn" href="compliance.html">Compliance</a>
@@ -333,7 +457,10 @@
   </main>
 
   <footer class="footer">
-    <div class="wrap">© 2026 Qode7. Pagina institucional da empresa.</div>
+    <div class="wrap footer-inner">
+      <span class="footer-logo-shell"><img class="footer-logo" src="qodeseven_logo_v2.svg" alt="Qode7" /></span>
+      <div>© 2026 Qode7. Pagina institucional da empresa.</div>
+    </div>
   </footer>
 
   <script>

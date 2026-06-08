@@ -4,43 +4,132 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Qode7 — Tecnologia que Transforma</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --navy: #060d1f;
-      --navy2: #0b1630;
-      --blue: #1a3a6e;
-      --accent: #2563eb;
-      --accent2: #06b6d4;
-      --q7-grad: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
-      --gold: #d4a843;
-      --gold2: #f0c96a;
+      --navy: #0b0f1a;
+      --navy2: #121a2b;
+      --blue: #116d5b;
+      --accent: #1dc9a4;
+      --accent2: #00e5c0;
+      --q7-grad: linear-gradient(135deg, #1dc9a4 0%, #00e5c0 100%);
+      --gold: #f59e0b;
+      --gold2: #fbbf24;
       --white: #ffffff;
-      --gray: #a0aec0;
-      --light: #e8edf7;
+      --gray: #9ca3af;
+      --light: #dbe4f0;
+      --font-display: 'Space Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
     }
 
     /* ══ LOGO [Q7] ══ */
     .q7-logo {
       display: inline-flex; align-items: center;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-weight: 900; font-size: 1.65rem;
       letter-spacing: -1px; line-height: 1;
       background: var(--q7-grad);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; text-decoration: none;
-      filter: drop-shadow(0 0 12px rgba(6,182,212,0.35));
+      filter: drop-shadow(0 0 12px rgba(29,201,164,0.35));
       transition: filter 0.3s;
     }
-    .q7-logo:hover { filter: drop-shadow(0 0 20px rgba(6,182,212,0.6)); }
+    .q7-logo:hover { filter: drop-shadow(0 0 20px rgba(29,201,164,0.55)); }
     .q7-logo .bracket { font-weight: 300; opacity: 0.85; }
     .q7-logo-sub {
       display: block; font-size: 0.45rem; font-weight: 600;
       letter-spacing: 2.5px; text-transform: uppercase;
       background: none; -webkit-text-fill-color: rgba(255,255,255,0.35);
       margin-top: 2px;
+    }
+    .brand-logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(29,201,164,0.22));
+      transition: transform 0.28s ease, filter 0.28s ease;
+    }
+    .brand-logo-img.footer {
+      height: 40px;
+    }
+    .brand-logo-shell {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(29,201,164,0.26);
+      background: linear-gradient(135deg, rgba(29,201,164,0.12), rgba(11,15,26,0.08));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 18px rgba(0,0,0,0.28);
+      transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+    }
+    .brand-logo-shell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(110deg, rgba(255,255,255,0) 15%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0) 75%);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+    .brand-logo-shell:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0,229,192,0.58);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 24px rgba(0,0,0,0.36);
+    }
+    .brand-logo-shell:hover::after {
+      opacity: 1;
+    }
+    .brand-logo-shell:hover .brand-logo-img {
+      transform: scale(1.02);
+      filter: drop-shadow(0 0 14px rgba(0,229,192,0.35));
+    }
+    @keyframes topLogoPulse {
+      0%, 100% {
+        border-color: rgba(29,201,164,0.26);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 18px rgba(0,0,0,0.28);
+      }
+      50% {
+        border-color: rgba(0,229,192,0.42);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 22px rgba(0,0,0,0.32);
+      }
+    }
+    @keyframes topLogoGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(29,201,164,0.22));
+      }
+      50% {
+        filter: drop-shadow(0 0 14px rgba(0,229,192,0.34));
+      }
+    }
+    .brand-logo-shell.header-logo-shell {
+      animation: topLogoPulse 3.6s ease-in-out infinite;
+    }
+    .brand-logo-shell.header-logo-shell .brand-logo-img {
+      animation: topLogoGlow 3.6s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .brand-logo-shell.header-logo-shell,
+      .brand-logo-shell.header-logo-shell .brand-logo-img {
+        animation: none;
+      }
+    }
+    .footer-brand-mark {
+      margin-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+      .brand-logo-img,
+      .brand-logo-img.footer {
+        height: 32px;
+      }
+      .brand-logo-shell {
+        padding: 6px 10px;
+        border-radius: 10px;
+      }
     }
 
     /* ══ ANIMATED PAGE BACKGROUND ══ */
@@ -52,10 +141,14 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       background: transparent;
       color: var(--white);
       overflow-x: hidden;
+    }
+
+    h1, h2, h3, .nav-logo, .q7-logo {
+      font-family: var(--font-display);
     }
 
     /* ─── SCROLLBAR ─── */
@@ -69,21 +162,21 @@
       padding: 0 6%;
       height: 74px;
       display: flex; align-items: center; gap: 0;
-      background: rgba(6,13,31,0.75);
+      background: rgba(11,15,26,0.82);
       backdrop-filter: blur(24px) saturate(1.4);
       -webkit-backdrop-filter: blur(24px) saturate(1.4);
-      border-bottom: 1px solid rgba(6,182,212,0.1);
+      border-bottom: 1px solid rgba(29,201,164,0.15);
       transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     }
     nav::after {
       content: '';
       position: absolute; bottom: 0; left: 6%; right: 6%; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(6,182,212,0.25) 30%, rgba(37,99,235,0.25) 70%, transparent);
+      background: linear-gradient(90deg, transparent, rgba(29,201,164,0.28) 30%, rgba(0,229,192,0.28) 70%, transparent);
       pointer-events: none;
     }
     nav.scrolled {
       height: 62px;
-      background: rgba(6,13,31,0.94);
+      background: rgba(11,15,26,0.96);
       box-shadow: 0 8px 40px rgba(0,0,0,0.35);
     }
     .nav-cta-outline {
@@ -1410,8 +1503,10 @@
 <div id="scroll-bar"></div>
 
 <nav id="navbar">
-  <a href="#" style="text-decoration:none;">
-    <span class="q7-logo"><span class="bracket">[</span>Q7<span class="bracket">]</span></span>
+  <a href="#" style="text-decoration:none;" aria-label="Qode7 Home">
+    <span class="brand-logo-shell header-logo-shell">
+      <img class="brand-logo-img" src="qodeseven_logo_v2.svg" alt="Qode7" />
+    </span>
   </a>
   <ul class="nav-links">
     <li><a href="#servicos">Serviços</a></li>
@@ -2387,8 +2482,10 @@
   <div class="footer-watermark">[Q7]</div>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div style="margin-bottom:16px;">
-        <span class="q7-logo" style="font-size:1.5rem;"><span class="bracket">[</span>Q7<span class="bracket">]</span></span>
+      <div class="footer-brand-mark">
+        <span class="brand-logo-shell">
+          <img class="brand-logo-img footer" src="qodeseven_logo_v2.svg" alt="Qode7" />
+        </span>
       </div>
       <p>Tecnologia que funciona no mundo real — do setor público à indústria, há mais de 10 anos.</p>
     </div>

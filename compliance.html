@@ -4,25 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Compliance, Privacidade e LGPD | Qode7</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #060d1f;
-      --navy2: #0b1630;
-      --accent: #2563eb;
-      --accent2: #06b6d4;
-      --gold: #d4a843;
+      --navy: #0b0f1a;
+      --navy2: #121a2b;
+      --accent: #1dc9a4;
+      --accent2: #00e5c0;
+      --gold: #f59e0b;
       --white: #ffffff;
-      --gray: #a0aec0;
-      --light: #e8edf7;
-      --line: rgba(255,255,255,0.08);
+      --gray: #9ca3af;
+      --light: #dbe4f0;
+      --line: rgba(255,255,255,0.11);
+      --font-display: 'Space Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
     }
 
     body {
-      font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(1100px 700px at 85% -10%, rgba(6,182,212,0.13), transparent 65%),
-                  radial-gradient(900px 600px at 10% 5%, rgba(37,99,235,0.14), transparent 65%),
+      font-family: var(--font-body);
+      background: radial-gradient(1100px 700px at 85% -10%, rgba(0,229,192,0.15), transparent 65%),
+                  radial-gradient(900px 600px at 10% 5%, rgba(29,201,164,0.14), transparent 65%),
                   var(--navy);
       color: var(--white);
       line-height: 1.65;
@@ -38,7 +41,7 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(10px);
-      background: rgba(6,13,31,0.82);
+      background: rgba(11,15,26,0.86);
       border-bottom: 1px solid var(--line);
     }
     .topbar-inner {
@@ -49,10 +52,85 @@
       gap: 16px;
     }
     .logo {
+      display: inline-flex;
+      align-items: center;
       font-size: 1.4rem;
       font-weight: 900;
       letter-spacing: -1px;
-      color: var(--white);
+      color: var(--accent2);
+      font-family: var(--font-display);
+    }
+    .logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(29,201,164,0.24));
+      transition: transform 0.28s ease, filter 0.28s ease;
+    }
+    .logo-shell {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(29,201,164,0.28);
+      background: linear-gradient(135deg, rgba(29,201,164,0.12), rgba(11,15,26,0.08));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.26);
+      transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+    }
+    .logo-shell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(110deg, rgba(255,255,255,0) 15%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0) 75%);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+    .logo-shell:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0,229,192,0.58);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 22px rgba(0,0,0,0.34);
+    }
+    .logo-shell:hover::after {
+      opacity: 1;
+    }
+    .logo-shell:hover .logo-img,
+    .footer-logo-shell:hover .footer-logo {
+      transform: scale(1.02);
+      filter: drop-shadow(0 0 14px rgba(0,229,192,0.35));
+    }
+    @keyframes topLogoPulse {
+      0%, 100% {
+        border-color: rgba(29,201,164,0.28);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.26);
+      }
+      50% {
+        border-color: rgba(0,229,192,0.45);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 20px rgba(0,0,0,0.3);
+      }
+    }
+    @keyframes topLogoGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(29,201,164,0.24));
+      }
+      50% {
+        filter: drop-shadow(0 0 14px rgba(0,229,192,0.34));
+      }
+    }
+    .logo-shell {
+      animation: topLogoPulse 3.6s ease-in-out infinite;
+    }
+    .logo-shell .logo-img {
+      animation: topLogoGlow 3.6s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .logo-shell,
+      .logo-shell .logo-img {
+        animation: none;
+      }
     }
     .top-actions {
       display: flex;
@@ -70,8 +148,8 @@
       font-weight: 600;
     }
     .btn.primary {
-      border-color: rgba(37,99,235,0.7);
-      background: linear-gradient(135deg, var(--accent), #1255d4);
+      border-color: rgba(29,201,164,0.8);
+      background: linear-gradient(135deg, var(--accent), #0fa882);
     }
     .btn:hover { text-decoration: none; }
 
@@ -84,8 +162,8 @@
       gap: 8px;
       padding: 7px 14px;
       border-radius: 100px;
-      border: 1px solid rgba(6,182,212,0.35);
-      background: rgba(6,182,212,0.1);
+      border: 1px solid rgba(29,201,164,0.45);
+      background: rgba(29,201,164,0.12);
       color: var(--accent2);
       font-size: 0.75rem;
       font-weight: 700;
@@ -94,6 +172,7 @@
       margin-bottom: 16px;
     }
     h1 {
+      font-family: var(--font-display);
       font-size: clamp(2rem, 4.6vw, 3.3rem);
       letter-spacing: -1.5px;
       line-height: 1.15;
@@ -151,6 +230,10 @@
       padding: 6px 0;
       border-bottom: 1px dashed rgba(255,255,255,0.08);
     }
+    .toc a:hover {
+      color: var(--accent2);
+      text-decoration: none;
+    }
 
     .content {
       border: 1px solid var(--line);
@@ -200,11 +283,15 @@
     .warn {
       margin-top: 10px;
       font-size: 0.8rem;
-      color: #ffd27a;
-      border: 1px solid rgba(212,168,67,0.35);
-      background: rgba(212,168,67,0.1);
+      color: #fcd38d;
+      border: 1px solid rgba(245,158,11,0.35);
+      background: rgba(245,158,11,0.12);
       padding: 10px 12px;
       border-radius: 10px;
+    }
+
+    h2, h3, .chip {
+      font-family: var(--font-display);
     }
 
     .footer {
@@ -212,6 +299,47 @@
       padding: 24px 0 40px;
       color: rgba(255,255,255,0.46);
       font-size: 0.82rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .footer-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(29,201,164,0.2));
+      transition: transform 0.28s ease, filter 0.28s ease;
+    }
+    .footer-logo-shell {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(29,201,164,0.26);
+      background: linear-gradient(135deg, rgba(29,201,164,0.1), rgba(11,15,26,0.08));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.25);
+      transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+    }
+    .footer-logo-shell:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0,229,192,0.58);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 22px rgba(0,0,0,0.34);
+    }
+    @media (max-width: 768px) {
+      .logo-img,
+      .footer-logo {
+        height: 32px;
+      }
+      .logo-shell,
+      .footer-logo-shell {
+        padding: 6px 10px;
+        border-radius: 10px;
+      }
     }
 
     @media (max-width: 980px) {
@@ -224,7 +352,7 @@
 <body>
   <header class="topbar">
     <div class="wrap topbar-inner">
-      <a class="logo" href="index.html">[Q7]</a>
+      <a class="logo" href="index.html" aria-label="Qode7 Home"><span class="logo-shell"><img class="logo-img" src="qodeseven_logo_v2.svg" alt="Qode7" /></span></a>
       <div class="top-actions">
         <a class="btn" href="index.html">Voltar ao site</a>
         <a class="btn primary" href="index.html#contato">Falar com especialista</a>
@@ -352,8 +480,9 @@
   </main>
 
   <footer class="footer">
-    <div class="wrap">
-      © 2026 Qode7. Pagina de Compliance e Privacidade.
+    <div class="wrap footer-inner">
+      <span class="footer-logo-shell"><img class="footer-logo" src="qodeseven_logo_v2.svg" alt="Qode7" /></span>
+      <div>© 2026 Qode7. Pagina de Compliance e Privacidade.</div>
     </div>
   </footer>
 </body>
