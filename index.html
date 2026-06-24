@@ -4,6 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Qode7 — Tecnologia que Transforma</title>
+  <meta name="description" content="A Qode7 entrega software, cloud, IA e plataformas para setor publico e empresas com foco em resultado real." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Qode7 — Tecnologia que Transforma" />
+  <meta property="og:description" content="Software, cloud, IA e plataformas para operacoes criticas no setor publico e privado." />
+  <meta property="og:url" content="/" />
+  <meta property="og:image" content="qodeseven_logo_site.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Qode7 — Tecnologia que Transforma" />
+  <meta name="twitter:description" content="Tecnologia que resolve de verdade, com entregas para desafios reais de negocio." />
+  <meta name="twitter:image" content="qodeseven_logo_site.svg" />
+  <meta name="q7-ga4-id" content="" />
+  <meta name="q7-plausible-domain" content="" />
+  <meta name="q7-whatsapp-number" content="5511999999999" />
+  <meta name="q7-whatsapp-message" content="Ola! Quero falar com o comercial da Qode7." />
+  <meta name="theme-color" content="#0b0f1a" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -578,6 +596,8 @@
       animation: fadeInUp 0.9s 0.3s ease both;
     }
     .btn-primary {
+      position: relative;
+      overflow: hidden;
       background: linear-gradient(135deg, var(--accent), #1255d4);
       color: white; border: none; padding: 16px 36px;
       border-radius: 10px; font-size: 1rem; font-weight: 700;
@@ -585,11 +605,31 @@
       box-shadow: 0 8px 30px rgba(47, 110, 247, 0.4);
       text-decoration: none; display: inline-block;
     }
+    .btn-primary::after,
+    .btn-secondary::after {
+      content: '';
+      position: absolute;
+      top: -45%;
+      left: -35%;
+      width: 65%;
+      height: 170%;
+      background: linear-gradient(110deg, rgba(255,255,255,0), rgba(255,255,255,0.28), rgba(255,255,255,0));
+      transform: translateX(-120%) rotate(10deg);
+      transition: transform 0.55s ease;
+      pointer-events: none;
+      opacity: 0.85;
+    }
     .btn-primary:hover {
       transform: translateY(-3px);
       box-shadow: 0 14px 40px rgba(47, 110, 247, 0.55);
     }
+    .btn-primary:hover::after,
+    .btn-secondary:hover::after {
+      transform: translateX(220%) rotate(10deg);
+    }
     .btn-secondary {
+      position: relative;
+      overflow: hidden;
       background: transparent;
       color: var(--white); border: 1.5px solid rgba(255,255,255,0.2);
       padding: 16px 36px; border-radius: 10px; font-size: 1rem; font-weight: 600;
@@ -1155,30 +1195,19 @@
       .testimonials-strip { grid-template-columns: 1fr; }
     }
 
-    /* ─── CTA ─── */
-    .cta-section {
-      background: rgba(6,13,31,0.5);
+    /* ─── CONTACT PAGE CTA ─── */
+    .contact-page-cta {
+      background: rgba(6,13,31,0.44);
       backdrop-filter: blur(8px);
-      text-align: center; position: relative; overflow: hidden;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .cta-section::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 90% at 50% 50%, rgba(47,110,247,0.15) 0%, transparent 70%);
+    .contact-page-cta .section-sub {
+      margin: 0 auto 26px;
+      text-align: center;
+      max-width: 760px;
     }
-    .cta-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
-    .cta-section .section-title { margin-bottom: 20px; }
-    .cta-section .section-sub { margin: 0 auto 44px; text-align: center; }
-    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .cta-badge {
-      display: flex; align-items: center; gap: 10px;
-      margin-top: 36px; justify-content: center;
-    }
-    .cta-badge-item {
-      font-size: 0.82rem; color: var(--gray);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .cta-badge-item::before { content: '✓'; color: var(--accent2); font-weight: 700; }
-    .cta-sep { color: rgba(255,255,255,0.1); }
 
     /* ─── COOKIE BANNER ─── */
     .cookie-banner {
@@ -1236,6 +1265,47 @@
       margin-left: auto;
     }
     .cookie-link:hover { text-decoration: underline; }
+
+    .whatsapp-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2400;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: #25d366;
+      border: 2px solid #ffffff;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.26);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+    .whatsapp-fab:hover {
+      transform: translateY(-2px) scale(1.02);
+      background: #20bd5a;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+    .whatsapp-fab svg {
+      width: 30px;
+      height: 30px;
+      fill: currentColor;
+    }
+    @media (max-width: 768px) {
+      .whatsapp-fab {
+        width: 56px;
+        height: 56px;
+        right: 14px;
+        bottom: 14px;
+      }
+      .whatsapp-fab svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
 
     /* ─── FOOTER ─── */
     footer {
@@ -1502,9 +1572,25 @@
       .services-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .contact-grid { grid-template-columns: 1fr; }
       .cookie-actions { flex-direction: column; align-items: stretch; }
       .cookie-link { margin-left: 0; }
       section { padding: 72px 5%; }
+    }
+    @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+      .btn-primary,
+      .btn-primary:hover,
+      .btn-secondary,
+      .btn-secondary:hover {
+        transform: none;
+      }
+      .btn-primary::after,
+      .btn-primary:hover::after,
+      .btn-secondary::after,
+      .btn-secondary:hover::after {
+        transform: translateX(-120%) rotate(10deg);
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -1515,9 +1601,14 @@
 <canvas id="bg-canvas"></canvas>
 <!-- Scroll progress -->
 <div id="scroll-bar"></div>
+<a id="whatsapp-fab" class="whatsapp-fab" href="#" target="_blank" rel="noopener noreferrer" aria-label="Falar com o comercial no WhatsApp" data-track="whatsapp_fab">
+  <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <path d="M16 4.2c-6.5 0-11.8 5.1-11.8 11.4 0 2 .5 3.9 1.6 5.6L4.3 27.8l6.9-1.8c1.5.8 3.1 1.2 4.8 1.2 6.5 0 11.8-5.1 11.8-11.4S22.5 4.2 16 4.2zm0 20.9c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.1 1.1 1.1-3.9-.2-.3a9.7 9.7 0 0 1-1.5-5.1c0-5.2 4.2-9.4 9.4-9.4s9.4 4.2 9.4 9.4-4.3 9.6-9.5 9.6zm5.1-7.2c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.1-1.3-1.3-1.6-.1-.2 0-.3.1-.4l.4-.5.2-.4c.1-.1 0-.3 0-.4l-.8-1.8c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.7-.8 1.8s.8 2.2.9 2.3c.1.2 1.6 2.4 3.9 3.4.5.2 1 .4 1.3.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/>
+  </svg>
+</a>
 
 <nav id="navbar">
-  <a href="#" style="text-decoration:none;" aria-label="Qode7 Home">
+  <a href="index.html" style="text-decoration:none;" aria-label="Qode7 Home">
     <span class="brand-logo-shell header-logo-shell">
       <img class="brand-logo-img" src="qodeseven_logo_site.svg" alt="Qode7" />
     </span>
@@ -1526,7 +1617,7 @@
     <li><a href="#servicos">Serviços</a></li>
     <li><a href="#produtos">Plataformas</a></li>
     <li><a href="empresa.html">Empresa</a></li>
-    <li><a href="#contato">Contato</a></li>
+    <li><a href="contato.html">Contato</a></li>
   </ul>
 </nav>
 
@@ -1882,7 +1973,7 @@
         </div>
 
       </div>
-      <a href="#contato" class="btn-primary btn-magnetic" style="display:inline-block; margin-top:8px;">Conhecer a plataforma →</a>
+      <a href="contato.html" class="btn-primary btn-magnetic" style="display:inline-block; margin-top:8px;">Conhecer a plataforma →</a>
     </div>
 
     <div class="reveal-right">
@@ -1998,7 +2089,7 @@
         <div class="modulo-tag"><span class="modulo-dot gold"></span>Conformidade LGPD</div>
         <div class="modulo-tag"><span class="modulo-dot gold"></span>Relatórios TCE/TCU</div>
       </div>
-      <a href="#contato" class="btn-primary" style="display:inline-block; margin-top:8px; background:linear-gradient(135deg,#c59b28,#e8b84b); box-shadow:0 8px 30px rgba(212,168,67,0.35);">Conhecer o sistema →</a>
+      <a href="contato.html" class="btn-primary" style="display:inline-block; margin-top:8px; background:linear-gradient(135deg,#c59b28,#e8b84b); box-shadow:0 8px 30px rgba(212,168,67,0.35);">Conhecer o sistema →</a>
     </div>
 
     <div class="reveal-left">
@@ -2078,7 +2169,7 @@
       <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Compliance Lei 14.133/21</div>
       <div class="modulo-tag"><span class="modulo-dot" style="background:#b794f4;"></span>Integração com PNCP/ComprasGov</div>
     </div>
-    <a href="#contato" class="btn-primary btn-magnetic" style="display:inline-block;margin-top:20px;background:linear-gradient(135deg,#6b46c1,#9f7aea);box-shadow:0 8px 30px rgba(107,70,193,0.4);">Conhecer o produto →</a>
+    <a href="contato.html" class="btn-primary btn-magnetic" style="display:inline-block;margin-top:20px;background:linear-gradient(135deg,#6b46c1,#9f7aea);box-shadow:0 8px 30px rgba(107,70,193,0.4);">Conhecer o produto →</a>
   </div>
 
   <div class="reveal-right">
@@ -2464,25 +2555,13 @@
   </div>
 </section>
 
-<!-- ───────── CTA ───────── -->
-<section class="cta-section" id="contato">
-  <div class="cta-content">
-    <div class="reveal">
-      <div class="section-label" style="text-align:center">Pronto para começar?</div>
-      <h2 class="section-title">Leve sua empresa ao<br/><span style="color:var(--accent2)">próximo nível</span></h2>
-      <p class="section-sub">Fale com um de nossos especialistas e descubra como a Qode7 pode transformar a tecnologia do seu negócio.</p>
-      <div class="cta-actions">
-        <a href="mailto:contato@qode7.com" class="btn-primary">Agendar conversa gratuita</a>
-        <a href="tel:+5511999999999" class="btn-secondary">Ligar agora</a>
-      </div>
-      <div class="cta-badge">
-        <span class="cta-badge-item">Sem compromisso</span>
-        <span class="cta-sep">|</span>
-        <span class="cta-badge-item">Resposta em 24h</span>
-        <span class="cta-sep">|</span>
-        <span class="cta-badge-item">Equipe especializada</span>
-      </div>
-    </div>
+<!-- ───────── CONTACT PAGE CTA ───────── -->
+<section class="contact-page-cta">
+  <div class="reveal">
+    <div class="section-label" style="text-align:center">Pronto para começar?</div>
+    <h2 class="section-title">Fale com a equipe da Qode7</h2>
+    <p class="section-sub">Centralizamos contatos e formulario em uma pagina dedicada para acelerar seu atendimento.</p>
+    <a href="contato.html" class="btn-primary btn-magnetic" data-track="home_contato_page">Ir para pagina de contato</a>
   </div>
 </section>
 
@@ -2506,11 +2585,11 @@
     <div class="footer-col">
       <h5>Soluções</h5>
       <ul>
-        <li><a href="#">Desenvolvimento</a></li>
-        <li><a href="#">Cloud</a></li>
-        <li><a href="#">Inteligência Artificial</a></li>
-        <li><a href="#">Segurança</a></li>
-        <li><a href="#">Data & Analytics</a></li>
+        <li><a href="#servicos" data-track="footer_solucao_desenvolvimento">Desenvolvimento</a></li>
+        <li><a href="#servicos" data-track="footer_solucao_cloud">Cloud</a></li>
+        <li><a href="#servicos" data-track="footer_solucao_ia">Inteligência Artificial</a></li>
+        <li><a href="#servicos" data-track="footer_solucao_seguranca">Segurança</a></li>
+        <li><a href="#servicos" data-track="footer_solucao_data">Data & Analytics</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -2524,9 +2603,9 @@
     <div class="footer-col">
       <h5>Contato</h5>
       <ul>
-        <li><a href="mailto:contato@qode7.com">contato@qode7.com</a></li>
-        <li><a href="#contato">Fale com a equipe</a></li>
-        <li><a href="tel:+5511999999999">+55 11 9 9999-9999</a></li>
+        <li><a href="mailto:contato@qode7.com" data-track="footer_email">contato@qode7.com</a></li>
+        <li><a href="contato.html" data-track="footer_fale_equipe">Fale com a equipe</a></li>
+        <li><a href="mailto:contato@qode7.com?subject=Solicitacao%20de%20contato%20telefonico" data-track="footer_solicitar_telefone">Solicitar contato telefonico</a></li>
       </ul>
     </div>
   </div>
@@ -2547,6 +2626,82 @@
 
 <!-- ───────── SCRIPTS ───────── -->
 <script>
+  /* ─── 0. BOOTSTRAP ANALYTICS (CONSENTIMENTO) ─── */
+  (function () {
+    const consentKey = 'q7_cookie_consent';
+    const ga4Id = (document.querySelector('meta[name="q7-ga4-id"]')?.content || '').trim();
+    const plausibleDomain = (document.querySelector('meta[name="q7-plausible-domain"]')?.content || '').trim();
+
+    let initialized = false;
+
+    function hasOptionalConsent() {
+      try {
+        const raw = localStorage.getItem(consentKey);
+        if (!raw) return false;
+        const parsed = JSON.parse(raw);
+        return parsed && parsed.status === 'accepted';
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function loadGa4() {
+      if (!ga4Id) return;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4Id)}`;
+      document.head.appendChild(script);
+
+      window.gtag('js', new Date());
+      window.gtag('config', ga4Id, {
+        anonymize_ip: true,
+        page_path: window.location.pathname,
+      });
+    }
+
+    function loadPlausible() {
+      if (!plausibleDomain) return;
+      const script = document.createElement('script');
+      script.defer = true;
+      script.dataset.domain = plausibleDomain;
+      script.src = 'https://plausible.io/js/script.js';
+      document.head.appendChild(script);
+    }
+
+    function enableOptionalAnalytics() {
+      if (initialized) return;
+      initialized = true;
+      loadGa4();
+      loadPlausible();
+    }
+
+    if (hasOptionalConsent()) {
+      enableOptionalAnalytics();
+    }
+
+    window.q7EnableOptionalAnalytics = enableOptionalAnalytics;
+  })();
+
+  (function () {
+    const fab = document.getElementById('whatsapp-fab');
+    if (!fab) return;
+
+    const phoneRaw = document.querySelector('meta[name="q7-whatsapp-number"]')?.content || '';
+    const messageRaw = document.querySelector('meta[name="q7-whatsapp-message"]')?.content || 'Ola! Quero falar com o comercial da Qode7.';
+    const phone = phoneRaw.replace(/\D/g, '');
+    const message = messageRaw.trim();
+
+    if (!phone) {
+      fab.style.display = 'none';
+      return;
+    }
+
+    fab.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  })();
+
   /* ─── 0. BACKGROUND CANVAS — orbs visíveis em todo o site ─── */
   (function () {
     const c = document.getElementById('bg-canvas');
@@ -2725,15 +2880,21 @@
   });
 
   /* ─── 8. MAGNETIC BUTTONS — sutil ─── */
-  document.querySelectorAll('.btn-magnetic').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const r = btn.getBoundingClientRect();
-      const dx = (e.clientX - (r.left + r.width  / 2)) * 0.18;
-      const dy = (e.clientY - (r.top  + r.height / 2)) * 0.18;
-      btn.style.transform = `translate(${dx}px,${dy}px)`;
+  (function () {
+    const canMagnet = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!canMagnet) return;
+
+    document.querySelectorAll('.btn-magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width  / 2)) * 0.18;
+        const dy = (e.clientY - (r.top  + r.height / 2)) * 0.18;
+        btn.style.transform = `translate(${dx}px,${dy}px)`;
+      });
+      btn.addEventListener('mouseleave', () => btn.style.transform = '');
     });
-    btn.addEventListener('mouseleave', () => btn.style.transform = '');
-  });
+  })();
 
   /* ─── 8b. TILT 3D NOS MOCKUPS DE PRODUTO ─── */
   const contractLayersByScreen = new Map();
@@ -2867,6 +3028,9 @@
         status: 'accepted',
         at: new Date().toISOString(),
       }));
+      if (typeof window.q7EnableOptionalAnalytics === 'function') {
+        window.q7EnableOptionalAnalytics();
+      }
       banner.classList.remove('show');
     });
 
@@ -2878,6 +3042,50 @@
       banner.classList.remove('show');
     });
   })();
+
+  /* ─── 11. ANALYTICS BASE (CLICKS E SCROLL) ─── */
+  (function () {
+    const sentDepth = new Set();
+
+    function trackEvent(eventName, params) {
+      const payload = Object.assign({
+        page_path: window.location.pathname,
+        page_title: document.title,
+      }, params || {});
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, payload);
+      }
+      if (Array.isArray(window.dataLayer)) {
+        window.dataLayer.push(Object.assign({ event: eventName }, payload));
+      }
+    }
+
+    document.addEventListener('click', (event) => {
+      const target = event.target.closest('[data-track]');
+      if (!target) return;
+      trackEvent('cta_click', {
+        cta_id: target.getAttribute('data-track') || 'unknown',
+        cta_text: (target.textContent || '').trim().slice(0, 80),
+        cta_href: target.getAttribute('href') || '',
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      if (maxScroll <= 0) return;
+      const pct = Math.round((window.scrollY / maxScroll) * 100);
+      [25, 50, 75, 100].forEach((mark) => {
+        if (pct >= mark && !sentDepth.has(mark)) {
+          sentDepth.add(mark);
+          trackEvent('scroll_depth', { percent: mark });
+        }
+      });
+    }, { passive: true });
+
+    window.q7TrackEvent = trackEvent;
+  })();
+
 </script>
 </body>
 </html>

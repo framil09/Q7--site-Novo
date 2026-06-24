@@ -7,6 +7,7 @@ Site institucional estático da Qode7.
 - `index.html` -> Página inicial
 - `empresa.html` -> Página da Empresa
 - `compliance.html` -> Página de Compliance, Privacidade e LGPD
+- `contato.html` -> Página de Contato com canais e formulário
 
 ## Requisitos
 
@@ -27,6 +28,7 @@ Abra no navegador:
 - Home: `http://localhost:5500/`
 - Empresa: `http://localhost:5500/empresa.html`
 - Compliance: `http://localhost:5500/compliance.html`
+- Contato: `http://localhost:5500/contato.html`
 
 Para parar o servidor: `Ctrl + C` no terminal.
 
@@ -53,11 +55,12 @@ O projeto ja esta pronto para Cloudflare (site estatico com `index.html` na raiz
    - `index.html`
    - `empresa.html`
    - `compliance.html`
+   - `contato.html`
 4. Finalize o deploy.
 
 ## Checklist antes de publicar
 
-- Conferir links internos funcionando (`/`, `/empresa.html`, `/compliance.html`)
+- Conferir links internos funcionando (`/`, `/empresa.html`, `/compliance.html`, `/contato.html`)
 - Atualizar dados reais da empresa (contato, CNPJ, DPO, e-mails)
 - Testar em mobile e desktop
 

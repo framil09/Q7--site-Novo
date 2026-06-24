@@ -4,6 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Compliance, Privacidade e LGPD | Qode7</title>
+  <meta name="description" content="Politicas de compliance, privacidade e LGPD da Qode7, com diretrizes de uso de dados e cookies." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="/compliance.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Compliance, Privacidade e LGPD | Qode7" />
+  <meta property="og:description" content="Transparencia e governanca no tratamento de dados, cookies e privacidade." />
+  <meta property="og:url" content="/compliance.html" />
+  <meta property="og:image" content="qodeseven_logo_site.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Compliance, Privacidade e LGPD | Qode7" />
+  <meta name="twitter:description" content="Consulte as politicas de privacidade, cookies e conformidade LGPD da Qode7." />
+  <meta name="twitter:image" content="qodeseven_logo_site.svg" />
+  <meta name="q7-ga4-id" content="" />
+  <meta name="q7-plausible-domain" content="" />
+  <meta name="q7-whatsapp-number" content="5511999999999" />
+  <meta name="q7-whatsapp-message" content="Ola! Quero falar com o comercial da Qode7." />
+  <meta name="theme-color" content="#0b0f1a" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -11,9 +29,12 @@
     :root {
       --navy: #0b0f1a;
       --navy2: #121a2b;
+      --blue: #116d5b;
       --accent: #1dc9a4;
       --accent2: #00e5c0;
       --gold: #f59e0b;
+      --gold2: #fbbf24;
+      --q7-grad: linear-gradient(135deg, #1dc9a4 0%, #00e5c0 100%);
       --white: #ffffff;
       --gray: #9ca3af;
       --light: #dbe4f0;
@@ -22,17 +43,46 @@
       --font-body: 'DM Sans', sans-serif;
     }
 
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
     body {
       font-family: var(--font-body);
-      background: radial-gradient(1100px 700px at 85% -10%, rgba(0,229,192,0.15), transparent 65%),
-                  radial-gradient(900px 600px at 10% 5%, rgba(29,201,164,0.14), transparent 65%),
-                  var(--navy);
+      background: transparent;
       color: var(--white);
       line-height: 1.65;
+      overflow-x: hidden;
     }
 
     a { color: var(--accent2); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent2);
+      outline-offset: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -44px;
+      left: 10px;
+      z-index: 120;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--accent2);
+      color: #05211c;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 10px;
+    }
 
     .wrap { width: min(1120px, 92vw); margin: 0 auto; }
 
@@ -140,18 +190,42 @@
       justify-content: flex-end;
     }
     .btn {
+      position: relative;
+      overflow: hidden;
       border: 1px solid rgba(255,255,255,0.18);
       color: var(--white);
       padding: 8px 14px;
       border-radius: 9px;
       font-size: 0.82rem;
       font-weight: 600;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: -45%;
+      left: -35%;
+      width: 65%;
+      height: 170%;
+      background: linear-gradient(110deg, rgba(255,255,255,0), rgba(255,255,255,0.28), rgba(255,255,255,0));
+      transform: translateX(-120%) rotate(10deg);
+      transition: transform 0.55s ease;
+      pointer-events: none;
+      opacity: 0.85;
     }
     .btn.primary {
       border-color: rgba(29,201,164,0.8);
       background: linear-gradient(135deg, var(--accent), #0fa882);
     }
-    .btn:hover { text-decoration: none; }
+    .btn:hover {
+      text-decoration: none;
+      transform: translateY(-2px);
+      border-color: rgba(6,182,212,0.5);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.26);
+    }
+    .btn:hover::after {
+      transform: translateX(220%) rotate(10deg);
+    }
 
     .hero {
       padding: 64px 0 36px;
@@ -290,6 +364,90 @@
       border-radius: 10px;
     }
 
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 10px;
+    }
+
+    .consent-panel {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      padding: 14px;
+    }
+    .consent-status {
+      font-size: 0.84rem;
+      color: var(--light);
+      margin-bottom: 10px;
+    }
+    .consent-status strong {
+      color: var(--accent2);
+    }
+    .consent-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .consent-btn {
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      background: rgba(255,255,255,0.03);
+      border-radius: 9px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .consent-btn.primary {
+      border-color: rgba(29,201,164,0.8);
+      background: linear-gradient(135deg, var(--accent), #0fa882);
+    }
+    .consent-btn:hover {
+      border-color: rgba(0,229,192,0.5);
+    }
+
+    .whatsapp-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2400;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: #25d366;
+      border: 2px solid #ffffff;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.26);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+    .whatsapp-fab:hover {
+      transform: translateY(-2px) scale(1.02);
+      background: #20bd5a;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+    .whatsapp-fab svg {
+      width: 30px;
+      height: 30px;
+      fill: currentColor;
+    }
+    @media (max-width: 768px) {
+      .whatsapp-fab {
+        width: 56px;
+        height: 56px;
+        right: 14px;
+        bottom: 14px;
+      }
+      .whatsapp-fab svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
     h2, h3, .chip {
       font-family: var(--font-display);
     }
@@ -352,21 +510,46 @@
       .quick-grid { grid-template-columns: 1fr; }
       .main { grid-template-columns: 1fr; }
       .toc { position: static; }
+      th, td {
+        min-width: 180px;
+      }
+      .top-actions {
+        justify-content: flex-start;
+      }
+    }
+    @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+      .btn,
+      .btn:hover {
+        transform: none;
+      }
+      .btn::after,
+      .btn:hover::after {
+        transform: translateX(-120%) rotate(10deg);
+        transition: none;
+      }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteudo principal</a>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <a id="whatsapp-fab" class="whatsapp-fab" href="#" target="_blank" rel="noopener noreferrer" aria-label="Falar com o comercial no WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path d="M16 4.2c-6.5 0-11.8 5.1-11.8 11.4 0 2 .5 3.9 1.6 5.6L4.3 27.8l6.9-1.8c1.5.8 3.1 1.2 4.8 1.2 6.5 0 11.8-5.1 11.8-11.4S22.5 4.2 16 4.2zm0 20.9c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.1 1.1 1.1-3.9-.2-.3a9.7 9.7 0 0 1-1.5-5.1c0-5.2 4.2-9.4 9.4-9.4s9.4 4.2 9.4 9.4-4.3 9.6-9.5 9.6zm5.1-7.2c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.1-1.3-1.3-1.6-.1-.2 0-.3.1-.4l.4-.5.2-.4c.1-.1 0-.3 0-.4l-.8-1.8c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.7-.8 1.8s.8 2.2.9 2.3c.1.2 1.6 2.4 3.9 3.4.5.2 1 .4 1.3.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/>
+    </svg>
+  </a>
   <header class="topbar">
     <div class="wrap topbar-inner">
       <a class="logo" href="index.html" aria-label="Qode7 Home"><span class="logo-shell"><img class="logo-img" src="qodeseven_logo_site.svg" alt="Qode7" /></span></a>
       <div class="top-actions">
         <a class="btn" href="index.html">Voltar ao site</a>
-        <a class="btn primary" href="index.html#contato">Falar com especialista</a>
+        <a class="btn" href="contato.html">Contato</a>
+        <a class="btn primary" href="contato.html#contact-form">Falar com especialista</a>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="conteudo">
     <section class="hero">
       <span class="chip">Compliance & Privacidade</span>
       <h1>Cookies, Política de Privacidade e LGPD</h1>
@@ -375,15 +558,15 @@
       <div class="quick-grid">
         <article class="quick">
           <h3>Controladora</h3>
-          <p>[RAZAO SOCIAL DA EMPRESA] - CNPJ [CNPJ DA EMPRESA]</p>
+          <p>Qode7 - Dados cadastrais completos disponibilizados em proposta e contrato.</p>
         </article>
         <article class="quick">
           <h3>Canal de Privacidade</h3>
-          <p>[EMAIL PRIVACIDADE] - Atendimento a titulares de dados</p>
+          <p><a href="mailto:privacidade@qode7.com">privacidade@qode7.com</a> - Atendimento a titulares de dados</p>
         </article>
         <article class="quick">
           <h3>Encarregado (DPO)</h3>
-          <p>[NOME DO DPO] - [EMAIL DO DPO]</p>
+          <p>Contato do DPO: <a href="mailto:privacidade@qode7.com">privacidade@qode7.com</a></p>
         </article>
       </div>
     </section>
@@ -394,6 +577,7 @@
         <ul>
           <li><a href="#privacidade">Politica de Privacidade</a></li>
           <li><a href="#cookies">Politica de Cookies</a></li>
+          <li><a href="#consentimento">Gerenciar consentimento</a></li>
           <li><a href="#bases">Bases legais e finalidades</a></li>
           <li><a href="#direitos">Direitos do titular</a></li>
           <li><a href="#seguranca">Seguranca da informacao</a></li>
@@ -405,44 +589,59 @@
       <div class="content">
         <article class="policy" id="privacidade">
           <h3>1. Politica de Privacidade</h3>
-          <p>A [RAZAO SOCIAL DA EMPRESA], na qualidade de Controladora, trata dados pessoais para finalidades legitimas e especificas, incluindo atendimento comercial, comunicacao com clientes, suporte tecnico e cumprimento de obrigacoes legais e regulatorias.</p>
+          <p>A Qode7, na qualidade de Controladora no contexto deste site institucional, trata dados pessoais para finalidades legitimas e especificas, incluindo atendimento comercial, comunicacao com clientes, suporte tecnico e cumprimento de obrigacoes legais e regulatorias.</p>
           <p>O tratamento segue os principios da necessidade, adequacao, transparencia, seguranca e prevencao, com acesso restrito a profissionais autorizados e em regime de necessidade.</p>
         </article>
 
         <article class="policy" id="cookies">
           <h3>2. Politica de Cookies</h3>
           <p>Este site utiliza cookies para funcionamento tecnico e, mediante consentimento, cookies opcionais de desempenho e analise. O titular pode aceitar ou recusar cookies opcionais no banner apresentado no acesso ao site.</p>
-          <table>
-            <thead>
-              <tr>
-                <th>Categoria</th>
-                <th>Finalidade</th>
-                <th>Base legal</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Necessarios</td>
-                <td>Permitir funcionamento tecnico e seguranca basica da navegacao</td>
-                <td>Legitimo interesse / execucao do servico</td>
-              </tr>
-              <tr>
-                <td>Desempenho (opcional)</td>
-                <td>Medir uso de paginas e melhorar usabilidade</td>
-                <td>Consentimento</td>
-              </tr>
-              <tr>
-                <td>Funcionais (opcional)</td>
-                <td>Lembrar preferencias de navegacao e idioma</td>
-                <td>Consentimento</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-wrap" role="region" aria-label="Tabela de categorias de cookies">
+            <table>
+              <thead>
+                <tr>
+                  <th>Categoria</th>
+                  <th>Finalidade</th>
+                  <th>Base legal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Necessarios</td>
+                  <td>Permitir funcionamento tecnico e seguranca basica da navegacao</td>
+                  <td>Legitimo interesse / execucao do servico</td>
+                </tr>
+                <tr>
+                  <td>Desempenho (opcional)</td>
+                  <td>Medir uso de paginas e melhorar usabilidade</td>
+                  <td>Consentimento</td>
+                </tr>
+                <tr>
+                  <td>Funcionais (opcional)</td>
+                  <td>Lembrar preferencias de navegacao e idioma</td>
+                  <td>Consentimento</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <p class="warn">Importante: atualizar esta tabela conforme as tecnologias de cookies efetivamente utilizadas no ambiente de producao.</p>
         </article>
 
+        <article class="policy" id="consentimento">
+          <h3>3. Gerenciar consentimento</h3>
+          <p>Voce pode atualizar sua escolha de cookies opcionais a qualquer momento nesta pagina.</p>
+          <div class="consent-panel">
+            <div class="consent-status">Status atual: <strong id="cookie-status">Nao definido</strong></div>
+            <div class="consent-actions">
+              <button type="button" class="consent-btn primary" id="consent-accept">Aceitar opcionais</button>
+              <button type="button" class="consent-btn" id="consent-reject">Recusar opcionais</button>
+              <button type="button" class="consent-btn" id="consent-reset">Limpar escolha</button>
+            </div>
+          </div>
+        </article>
+
         <article class="policy" id="bases">
-          <h3>3. Bases legais e finalidades</h3>
+          <h3>4. Bases legais e finalidades</h3>
           <ul>
             <li>Consentimento: quando houver opcao clara e livre do titular.</li>
             <li>Cumprimento de obrigacao legal ou regulatoria.</li>
@@ -452,7 +651,7 @@
         </article>
 
         <article class="policy" id="direitos">
-          <h3>4. Direitos do titular</h3>
+          <h3>5. Direitos do titular</h3>
           <p>Nos termos da LGPD, o titular pode solicitar, quando aplicavel:</p>
           <ul>
             <li>Confirmacao de existencia de tratamento e acesso aos dados.</li>
@@ -460,26 +659,28 @@
             <li>Anonimizacao, bloqueio ou eliminacao de dados desnecessarios.</li>
             <li>Portabilidade dos dados e informacoes sobre compartilhamento.</li>
             <li>Revogacao de consentimento e eliminacao de dados tratados com base nele.</li>
+            <li>Informacao sobre possibilidade de nao fornecer consentimento e consequencias.</li>
           </ul>
         </article>
 
         <article class="policy" id="seguranca">
-          <h3>5. Seguranca da informacao</h3>
+          <h3>6. Seguranca da informacao</h3>
           <p>Adotamos medidas tecnicas e administrativas para proteger dados pessoais, incluindo controle de acesso, segregacao de ambientes, monitoramento, backup e boas praticas de seguranca da informacao.</p>
           <p>Em caso de incidente com risco relevante aos titulares, as medidas cabiveis serao adotadas, inclusive comunicacoes legais quando exigidas.</p>
         </article>
 
         <article class="policy" id="retencao">
-          <h3>6. Retencao e descarte de dados</h3>
+          <h3>7. Retencao e descarte de dados</h3>
           <p>Os dados pessoais sao armazenados somente pelo periodo necessario para cumprimento das finalidades informadas, obrigacoes legais, exercicio regular de direitos e auditoria. Encerrada a necessidade, o descarte e realizado por meios seguros.</p>
         </article>
 
         <article class="policy" id="lgpd">
-          <h3>7. LGPD e canal de contato</h3>
+          <h3>8. LGPD e canal de contato</h3>
           <p>Lei aplicavel: Lei n 13.709/2018 (LGPD).</p>
-          <p>Encarregado (DPO): [NOME DO DPO] - [EMAIL DO DPO]</p>
-          <p>Solicitacoes de titulares: [EMAIL PRIVACIDADE]</p>
-          <p>Data da ultima atualizacao desta pagina: 06/06/2026.</p>
+          <p>Encarregado (DPO): <a href="mailto:privacidade@qode7.com">privacidade@qode7.com</a></p>
+          <p>Solicitacoes de titulares: <a href="mailto:privacidade@qode7.com?subject=Solicitacao%20LGPD">privacidade@qode7.com</a></p>
+          <p>Prazo de resposta: ate 15 dias, ressalvadas hipoteses legais especificas.</p>
+          <p>Data da ultima atualizacao desta pagina: <span id="last-updated">--/--/----</span>.</p>
         </article>
       </div>
     </section>
@@ -491,5 +692,211 @@
       <div>© 2026 Qode7. Pagina de Compliance e Privacidade.</div>
     </div>
   </footer>
+  <script>
+    (function () {
+      const c = document.getElementById('bg-canvas');
+      if (!c) return;
+      const ctx = c.getContext('2d');
+
+      function resize() {
+        c.width = window.innerWidth;
+        c.height = Math.max(window.innerHeight, document.body.scrollHeight);
+      }
+
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      const orbs = [
+        { x: 0.12, y: 0.06, r: 0.32, cr: [37, 99, 235], speed: 0.00012, phase: 0, alpha: 0.24 },
+        { x: 0.82, y: 0.15, r: 0.28, cr: [6, 182, 212], speed: 0.00009, phase: 1.5, alpha: 0.24 },
+        { x: 0.48, y: 0.23, r: 0.22, cr: [109, 40, 217], speed: 0.00015, phase: 0.8, alpha: 0.18 },
+        { x: 0.15, y: 0.78, r: 0.22, cr: [37, 99, 235], speed: 0.0001, phase: 2.1, alpha: 0.16 },
+        { x: 0.75, y: 0.85, r: 0.24, cr: [212, 168, 67], speed: 0.00008, phase: 1.2, alpha: 0.16 }
+      ];
+
+      function draw() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.fillStyle = '#060d1f';
+        ctx.fillRect(0, 0, c.width, c.height);
+
+        const t = performance.now();
+        const W = c.width;
+        const H = c.height;
+
+        orbs.forEach((o) => {
+          const drift = Math.sin(t * o.speed + o.phase);
+          const driftY = Math.cos(t * (o.speed * 0.82) + o.phase);
+          const px = (o.x + drift * 0.045) * W;
+          const py = (o.y + driftY * 0.05) * H;
+          const radius = o.r * Math.min(W, H);
+
+          const g = ctx.createRadialGradient(px, py, 0, px, py, radius);
+          g.addColorStop(0, `rgba(${o.cr[0]},${o.cr[1]},${o.cr[2]},${o.alpha})`);
+          g.addColorStop(0.45, `rgba(${o.cr[0]},${o.cr[1]},${o.cr[2]},${o.alpha * 0.42})`);
+          g.addColorStop(1, `rgba(${o.cr[0]},${o.cr[1]},${o.cr[2]},0)`);
+
+          ctx.beginPath();
+          ctx.arc(px, py, radius, 0, Math.PI * 2);
+          ctx.fillStyle = g;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+      new ResizeObserver(() => resize()).observe(document.body);
+    })();
+
+    (function () {
+      const el = document.getElementById('last-updated');
+      if (!el) return;
+      const now = new Date();
+      el.textContent = now.toLocaleDateString('pt-BR');
+    })();
+
+    (function () {
+      const canMagnet = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!canMagnet) return;
+
+      document.querySelectorAll('.top-actions .btn').forEach((btn) => {
+        btn.addEventListener('mousemove', (e) => {
+          const r = btn.getBoundingClientRect();
+          const dx = (e.clientX - (r.left + r.width / 2)) * 0.14;
+          const dy = (e.clientY - (r.top + r.height / 2)) * 0.14;
+          btn.style.transform = `translate(${dx}px, ${dy - 2}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+      });
+    })();
+
+    (function () {
+      const key = 'q7_cookie_consent';
+      const statusEl = document.getElementById('cookie-status');
+      const acceptBtn = document.getElementById('consent-accept');
+      const rejectBtn = document.getElementById('consent-reject');
+      const resetBtn = document.getElementById('consent-reset');
+      if (!statusEl || !acceptBtn || !rejectBtn || !resetBtn) return;
+
+      function readStatus() {
+        try {
+          const raw = localStorage.getItem(key);
+          if (!raw) return 'nao-definido';
+          const parsed = JSON.parse(raw);
+          return parsed?.status || 'nao-definido';
+        } catch (_) {
+          return 'nao-definido';
+        }
+      }
+
+      function updateStatusLabel() {
+        const status = readStatus();
+        const map = {
+          accepted: 'Aceitou cookies opcionais',
+          rejected: 'Recusou cookies opcionais',
+          'nao-definido': 'Nao definido',
+        };
+        statusEl.textContent = map[status] || 'Nao definido';
+      }
+
+      function saveStatus(status) {
+        localStorage.setItem(key, JSON.stringify({ status, at: new Date().toISOString() }));
+        updateStatusLabel();
+
+        if (status === 'accepted' && typeof window.q7EnableOptionalAnalytics === 'function') {
+          window.q7EnableOptionalAnalytics();
+        }
+
+        if (typeof window.q7TrackEvent === 'function') {
+          window.q7TrackEvent('privacy_preferences_updated', { consent_status: status });
+        }
+      }
+
+      acceptBtn.addEventListener('click', () => saveStatus('accepted'));
+      rejectBtn.addEventListener('click', () => saveStatus('rejected'));
+      resetBtn.addEventListener('click', () => {
+        localStorage.removeItem(key);
+        updateStatusLabel();
+      });
+
+      updateStatusLabel();
+    })();
+
+    (function () {
+      const fab = document.getElementById('whatsapp-fab');
+      if (!fab) return;
+
+      const phoneRaw = document.querySelector('meta[name="q7-whatsapp-number"]')?.content || '';
+      const messageRaw = document.querySelector('meta[name="q7-whatsapp-message"]')?.content || 'Ola! Quero falar com o comercial da Qode7.';
+      const phone = phoneRaw.replace(/\D/g, '');
+      const message = messageRaw.trim();
+
+      if (!phone) {
+        fab.style.display = 'none';
+        return;
+      }
+
+      fab.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    })();
+
+    (function () {
+      const consentKey = 'q7_cookie_consent';
+      const ga4Id = (document.querySelector('meta[name="q7-ga4-id"]')?.content || '').trim();
+      const plausibleDomain = (document.querySelector('meta[name="q7-plausible-domain"]')?.content || '').trim();
+      let initialized = false;
+
+      function hasOptionalConsent() {
+        try {
+          const raw = localStorage.getItem(consentKey);
+          if (!raw) return false;
+          const parsed = JSON.parse(raw);
+          return parsed && parsed.status === 'accepted';
+        } catch (_) {
+          return false;
+        }
+      }
+
+      function loadGa4() {
+        if (!ga4Id) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4Id)}`;
+        document.head.appendChild(gaScript);
+        window.gtag('js', new Date());
+        window.gtag('config', ga4Id, {
+          anonymize_ip: true,
+          page_path: window.location.pathname,
+        });
+      }
+
+      function loadPlausible() {
+        if (!plausibleDomain) return;
+        const plausibleScript = document.createElement('script');
+        plausibleScript.defer = true;
+        plausibleScript.dataset.domain = plausibleDomain;
+        plausibleScript.src = 'https://plausible.io/js/script.js';
+        document.head.appendChild(plausibleScript);
+      }
+
+      function enableOptionalAnalytics() {
+        if (initialized) return;
+        initialized = true;
+        loadGa4();
+        loadPlausible();
+      }
+
+      if (hasOptionalConsent()) {
+        enableOptionalAnalytics();
+      }
+
+      window.q7EnableOptionalAnalytics = enableOptionalAnalytics;
+    })();
+  </script>
 </body>
 </html>

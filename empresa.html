@@ -4,15 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Empresa | Qode7</title>
+  <meta name="description" content="Conheca a Qode7, sua historia, valores e capacidade de entrega em projetos de tecnologia para desafios reais." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="/empresa.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Empresa | Qode7" />
+  <meta property="og:description" content="Mais de uma decada construindo tecnologia que funciona no mundo real." />
+  <meta property="og:url" content="/empresa.html" />
+  <meta property="og:image" content="qodeseven_logo_site.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Empresa | Qode7" />
+  <meta name="twitter:description" content="Conheca nossa historia, cultura e foco em resultados concretos." />
+  <meta name="twitter:image" content="qodeseven_logo_site.svg" />
+  <meta name="q7-ga4-id" content="" />
+  <meta name="q7-plausible-domain" content="" />
+  <meta name="q7-whatsapp-number" content="5511999999999" />
+  <meta name="q7-whatsapp-message" content="Ola! Quero falar com o comercial da Qode7." />
+  <meta name="theme-color" content="#0b0f1a" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --navy: #0b0f1a;
+      --navy2: #121a2b;
+      --blue: #116d5b;
       --accent: #1dc9a4;
       --accent2: #00e5c0;
       --gold: #f59e0b;
+      --gold2: #fbbf24;
+      --q7-grad: linear-gradient(135deg, #1dc9a4 0%, #00e5c0 100%);
       --white: #ffffff;
       --gray: #9ca3af;
       --line: rgba(255,255,255,0.11);
@@ -23,10 +45,7 @@
     body {
       font-family: var(--font-body);
       color: var(--white);
-      background:
-        radial-gradient(900px 520px at 10% -5%, rgba(29,201,164,0.16), transparent 65%),
-        radial-gradient(800px 520px at 90% 10%, rgba(0,229,192,0.14), transparent 66%),
-        var(--navy);
+      background: transparent;
       line-height: 1.65;
       overflow-x: hidden;
     }
@@ -36,7 +55,6 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      opacity: 0.95;
     }
 
     .wrap { width: min(1100px, 92vw); margin: 0 auto; }
@@ -145,6 +163,8 @@
       justify-content: flex-end;
     }
     .btn {
+      position: relative;
+      overflow: hidden;
       border: 1px solid rgba(255,255,255,0.2);
       border-radius: 9px;
       color: var(--white);
@@ -152,9 +172,33 @@
       font-size: 0.82rem;
       font-weight: 600;
       padding: 8px 14px;
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
-    .btn:hover { transform: translateY(-2px); border-color: rgba(6,182,212,0.5); }
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: -45%;
+      left: -35%;
+      width: 65%;
+      height: 170%;
+      background: linear-gradient(110deg, rgba(255,255,255,0), rgba(255,255,255,0.28), rgba(255,255,255,0));
+      transform: translateX(-120%) rotate(10deg);
+      transition: transform 0.55s ease;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(6,182,212,0.5);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.26);
+    }
+    .btn:hover::after {
+      transform: translateX(220%) rotate(10deg);
+    }
+    .btn:focus-visible {
+      outline: 2px solid rgba(0,229,192,0.8);
+      outline-offset: 2px;
+    }
     .btn.primary {
       border-color: rgba(29,201,164,0.8);
       background: linear-gradient(135deg, var(--accent), #0fa882);
@@ -199,8 +243,57 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
     }
+    .kpi,
+    .card,
+    .value,
+    .leader {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.015)),
+        rgba(255,255,255,0.03);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 10px 28px rgba(0,0,0,0.2);
+    }
+    .kpi::before,
+    .card::before,
+    .value::before,
+    .leader::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, rgba(29,201,164,0.08) 0%, rgba(0,229,192,0.03) 40%, rgba(0,0,0,0) 70%);
+      opacity: 0.95;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .kpi::after,
+    .card::after,
+    .value::after,
+    .leader::after {
+      content: '';
+      position: absolute;
+      top: -55%;
+      left: -45%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(circle, rgba(0,229,192,0.18), rgba(0,229,192,0));
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.45s ease, opacity 0.45s ease;
+      opacity: 0.65;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .kpi:hover::after,
+    .card:hover::after,
+    .value:hover::after,
+    .leader:hover::after {
+      transform: translate3d(10px, 14px, 0);
+      opacity: 1;
+    }
     .kpi {
-      background: rgba(255,255,255,0.03);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 18px 14px;
@@ -228,7 +321,6 @@
       gap: 16px;
     }
     .card {
-      background: rgba(255,255,255,0.03);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 18px;
@@ -263,15 +355,15 @@
       gap: 12px;
     }
     .value {
-      background: rgba(255,255,255,0.03);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 16px;
-      transition: transform 0.28s cubic-bezier(.23,1,.32,1), border-color 0.28s;
+      transition: transform 0.28s cubic-bezier(.23,1,.32,1), border-color 0.28s, box-shadow 0.28s;
     }
     .value:hover {
       transform: translateY(-4px);
       border-color: rgba(212,168,67,0.42);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.28);
     }
     .value h3 { font-size: 0.95rem; margin-bottom: 6px; }
     .value p { font-size: 0.85rem; color: var(--gray); }
@@ -282,15 +374,15 @@
       gap: 12px;
     }
     .leader {
-      background: rgba(255,255,255,0.03);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 16px;
-      transition: transform 0.28s cubic-bezier(.23,1,.32,1), border-color 0.28s;
+      transition: transform 0.28s cubic-bezier(.23,1,.32,1), border-color 0.28s, box-shadow 0.28s;
     }
     .leader:hover {
       transform: translateY(-4px);
       border-color: rgba(6,182,212,0.42);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.28);
     }
     .leader h3 { font-size: 0.95rem; margin-bottom: 2px; }
     .leader .role { color: var(--accent2); font-size: 0.78rem; margin-bottom: 8px; }
@@ -337,6 +429,46 @@
       border-color: rgba(0,229,192,0.58);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 22px rgba(0,0,0,0.34);
     }
+    .whatsapp-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2400;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: #25d366;
+      border: 2px solid #ffffff;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.26);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+    .whatsapp-fab:hover {
+      transform: translateY(-2px) scale(1.02);
+      background: #20bd5a;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+    .whatsapp-fab svg {
+      width: 30px;
+      height: 30px;
+      fill: currentColor;
+    }
+    @media (max-width: 768px) {
+      .whatsapp-fab {
+        width: 56px;
+        height: 56px;
+        right: 14px;
+        bottom: 14px;
+      }
+      .whatsapp-fab svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
     @media (max-width: 768px) {
       .logo-img,
       .footer-logo {
@@ -374,11 +506,30 @@
       .two-col { grid-template-columns: 1fr; }
       .values { grid-template-columns: 1fr; }
       .leaders { grid-template-columns: 1fr; }
+      .top-actions {
+        justify-content: flex-start;
+      }
+    }
+    @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+      .btn,
+      .btn:hover {
+        transform: none;
+      }
+      .btn::after,
+      .btn:hover::after {
+        transform: translateX(-120%) rotate(10deg);
+        transition: none;
+      }
     }
   </style>
 </head>
 <body>
   <canvas id="bg-canvas"></canvas>
+  <a id="whatsapp-fab" class="whatsapp-fab" href="#" target="_blank" rel="noopener noreferrer" aria-label="Falar com o comercial no WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path d="M16 4.2c-6.5 0-11.8 5.1-11.8 11.4 0 2 .5 3.9 1.6 5.6L4.3 27.8l6.9-1.8c1.5.8 3.1 1.2 4.8 1.2 6.5 0 11.8-5.1 11.8-11.4S22.5 4.2 16 4.2zm0 20.9c-1.5 0-3-.4-4.3-1.2l-.3-.2-4.1 1.1 1.1-3.9-.2-.3a9.7 9.7 0 0 1-1.5-5.1c0-5.2 4.2-9.4 9.4-9.4s9.4 4.2 9.4 9.4-4.3 9.6-9.5 9.6zm5.1-7.2c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.1-1.3-1.3-1.6-.1-.2 0-.3.1-.4l.4-.5.2-.4c.1-.1 0-.3 0-.4l-.8-1.8c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.7-.8 1.8s.8 2.2.9 2.3c.1.2 1.6 2.4 3.9 3.4.5.2 1 .4 1.3.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/>
+    </svg>
+  </a>
 
   <header class="topbar">
     <div class="wrap topbar-inner">
@@ -386,7 +537,8 @@
       <div class="top-actions">
         <a class="btn" href="index.html">Voltar ao site</a>
         <a class="btn" href="compliance.html">Compliance</a>
-        <a class="btn primary" href="index.html#contato">Falar com a Qode7</a>
+        <a class="btn" href="contato.html">Contato</a>
+        <a class="btn primary" href="contato.html#contact-form">Falar com a Qode7</a>
       </div>
     </div>
   </header>
@@ -471,6 +623,64 @@
 
   <script>
     (function () {
+      const consentKey = 'q7_cookie_consent';
+      const ga4Id = (document.querySelector('meta[name="q7-ga4-id"]')?.content || '').trim();
+      const plausibleDomain = (document.querySelector('meta[name="q7-plausible-domain"]')?.content || '').trim();
+
+      function hasOptionalConsent() {
+        try {
+          const raw = localStorage.getItem(consentKey);
+          if (!raw) return false;
+          const parsed = JSON.parse(raw);
+          return parsed && parsed.status === 'accepted';
+        } catch (_) {
+          return false;
+        }
+      }
+
+      if (!hasOptionalConsent()) return;
+
+      if (ga4Id) {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4Id)}`;
+        document.head.appendChild(gaScript);
+        window.gtag('js', new Date());
+        window.gtag('config', ga4Id, {
+          anonymize_ip: true,
+          page_path: window.location.pathname,
+        });
+      }
+
+      if (plausibleDomain) {
+        const plausibleScript = document.createElement('script');
+        plausibleScript.defer = true;
+        plausibleScript.dataset.domain = plausibleDomain;
+        plausibleScript.src = 'https://plausible.io/js/script.js';
+        document.head.appendChild(plausibleScript);
+      }
+    })();
+
+    (function () {
+      const fab = document.getElementById('whatsapp-fab');
+      if (!fab) return;
+
+      const phoneRaw = document.querySelector('meta[name="q7-whatsapp-number"]')?.content || '';
+      const messageRaw = document.querySelector('meta[name="q7-whatsapp-message"]')?.content || 'Ola! Quero falar com o comercial da Qode7.';
+      const phone = phoneRaw.replace(/\D/g, '');
+      const message = messageRaw.trim();
+
+      if (!phone) {
+        fab.style.display = 'none';
+        return;
+      }
+
+      fab.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    })();
+
+    (function () {
       const c = document.getElementById('bg-canvas');
       const ctx = c.getContext('2d');
       function resize() {
@@ -481,22 +691,33 @@
       window.addEventListener('resize', resize, { passive: true });
 
       const orbs = [
-        { x: 0.12, y: 0.08, r: 0.28, color: [37,99,235], a: 0.2, s: 0.00012, p: 0 },
-        { x: 0.85, y: 0.2, r: 0.24, color: [6,182,212], a: 0.18, s: 0.0001, p: 1.2 },
-        { x: 0.42, y: 0.74, r: 0.22, color: [212,168,67], a: 0.12, s: 0.00008, p: 2.4 }
+        { x: 0.12, y: 0.06, r: 0.32, cr: [37, 99, 235], speed: 0.00012, phase: 0, alpha: 0.24 },
+        { x: 0.82, y: 0.15, r: 0.28, cr: [6, 182, 212], speed: 0.00009, phase: 1.5, alpha: 0.24 },
+        { x: 0.48, y: 0.23, r: 0.22, cr: [109, 40, 217], speed: 0.00015, phase: 0.8, alpha: 0.18 },
+        { x: 0.15, y: 0.78, r: 0.22, cr: [37, 99, 235], speed: 0.0001, phase: 2.1, alpha: 0.16 },
+        { x: 0.75, y: 0.85, r: 0.24, cr: [212, 168, 67], speed: 0.00008, phase: 1.2, alpha: 0.16 }
       ];
 
       function draw() {
         ctx.clearRect(0, 0, c.width, c.height);
+        ctx.fillStyle = '#060d1f';
+        ctx.fillRect(0, 0, c.width, c.height);
+
         const t = performance.now();
+        const W = c.width;
+        const H = c.height;
+
         orbs.forEach(o => {
-          const px = (o.x + Math.sin(t * o.s + o.p) * 0.06) * c.width;
-          const py = (o.y + Math.cos(t * o.s * 0.75 + o.p) * 0.05) * c.height;
-          const radius = o.r * Math.min(c.width, c.height);
+          const drift = Math.sin(t * o.speed + o.phase);
+          const driftY = Math.cos(t * (o.speed * 0.82) + o.phase);
+          const px = (o.x + drift * 0.045) * W;
+          const py = (o.y + driftY * 0.05) * H;
+          const radius = o.r * Math.min(W, H);
+
           const g = ctx.createRadialGradient(px, py, 0, px, py, radius);
-          g.addColorStop(0, `rgba(${o.color[0]},${o.color[1]},${o.color[2]},${o.a})`);
-          g.addColorStop(0.5, `rgba(${o.color[0]},${o.color[1]},${o.color[2]},${o.a * 0.38})`);
-          g.addColorStop(1, `rgba(${o.color[0]},${o.color[1]},${o.color[2]},0)`);
+          g.addColorStop(0, `rgba(${o.cr[0]},${o.cr[1]},${o.cr[2]},${o.alpha})`);
+          g.addColorStop(0.45, `rgba(${o.cr[0]},${o.cr[1]},${o.cr[2]},${o.alpha * 0.42})`);
+          g.addColorStop(1, `rgba(${o.cr[0]},${o.cr[1]},${o.cr[2]},0)`);
           ctx.beginPath();
           ctx.arc(px, py, radius, 0, Math.PI * 2);
           ctx.fillStyle = g;
@@ -505,6 +726,8 @@
         requestAnimationFrame(draw);
       }
       draw();
+
+      new ResizeObserver(() => resize()).observe(document.body);
     })();
 
     (function () {
@@ -549,6 +772,25 @@
       }, { threshold: 0.5 });
 
       counters.forEach(counter => counterObserver.observe(counter));
+    })();
+
+    (function () {
+      const canMagnet = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!canMagnet) return;
+
+      document.querySelectorAll('.top-actions .btn').forEach((btn) => {
+        btn.addEventListener('mousemove', (e) => {
+          const r = btn.getBoundingClientRect();
+          const dx = (e.clientX - (r.left + r.width / 2)) * 0.14;
+          const dy = (e.clientY - (r.top + r.height / 2)) * 0.14;
+          btn.style.transform = `translate(${dx}px, ${dy - 2}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+      });
     })();
   </script>
 </body>
