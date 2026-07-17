@@ -6,12 +6,12 @@
   <title>Empresa | Qode7</title>
   <meta name="description" content="Conheca a Qode7, sua historia, valores e capacidade de entrega em projetos de tecnologia para desafios reais." />
   <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="/empresa.html" />
+  <link rel="canonical" id="canonical-url" href="/empresa.html" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:title" content="Empresa | Qode7" />
   <meta property="og:description" content="Mais de uma decada construindo tecnologia que funciona no mundo real." />
-  <meta property="og:url" content="/empresa.html" />
+  <meta property="og:url" id="og-url" content="/empresa.html" />
   <meta property="og:image" content="qodeseven_logo_site.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Empresa | Qode7" />
@@ -21,6 +21,7 @@
   <meta name="q7-plausible-domain" content="" />
   <meta name="q7-whatsapp-number" content="5511999999999" />
   <meta name="q7-whatsapp-message" content="Ola! Quero falar com o comercial da Qode7." />
+  <meta name="q7-site-origin" content="" />
   <meta name="theme-color" content="#0b0f1a" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
@@ -40,6 +41,8 @@
       --line: rgba(255,255,255,0.11);
       --font-display: 'Space Mono', monospace;
       --font-body: 'DM Sans', sans-serif;
+      --motion-soft: cubic-bezier(.23,1,.32,1);
+      --motion-lux: cubic-bezier(.22,1,.36,1);
     }
 
     body {
@@ -161,6 +164,40 @@
       gap: 10px;
       flex-wrap: wrap;
       justify-content: flex-end;
+    }
+    .motion-mini {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .motion-mini-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: rgba(219,228,240,0.7);
+      margin-right: 2px;
+    }
+    .motion-mini-btn {
+      border: 1px solid rgba(125,211,252,0.3);
+      background: rgba(15,23,42,0.82);
+      color: rgba(219,228,240,0.92);
+      border-radius: 8px;
+      padding: 5px 9px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .motion-mini-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0,229,192,0.56);
+    }
+    .motion-mini-btn.active {
+      border-color: rgba(0,229,192,0.8);
+      background: linear-gradient(135deg, rgba(29,201,164,0.18), rgba(251,191,36,0.12));
+      color: #fff;
     }
     .btn {
       position: relative;
@@ -520,6 +557,14 @@
         transform: translateX(-120%) rotate(10deg);
         transition: none;
       }
+      .logo-shell,
+      .logo-shell .logo-img,
+      .reveal,
+      .reveal.visible {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+      }
     }
   </style>
 </head>
@@ -539,6 +584,12 @@
         <a class="btn" href="compliance.html">Compliance</a>
         <a class="btn" href="contato.html">Contato</a>
         <a class="btn primary" href="contato.html#contact-form">Falar com a Qode7</a>
+        <div class="motion-mini" role="group" aria-label="Perfil de animacao">
+          <span class="motion-mini-label">Motion</span>
+          <button type="button" class="motion-mini-btn" data-motion-profile="suave">Suave</button>
+          <button type="button" class="motion-mini-btn" data-motion-profile="premium">Premium</button>
+          <button type="button" class="motion-mini-btn" data-motion-profile="impacto">Impacto</button>
+        </div>
       </div>
     </div>
   </header>
@@ -623,6 +674,127 @@
 
   <script>
     (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const presets = {
+        suave: {
+          wipeIn: 'transform 760ms cubic-bezier(.22,1,.36,1), opacity 620ms ease',
+          wipeOut: 'transform 700ms cubic-bezier(.22,1,.36,1), opacity 560ms ease-out',
+          travelMs: 520,
+          entryOpacity: 0.22,
+          exitOpacity: 0.86,
+        },
+        premium: {
+          wipeIn: 'transform 680ms cubic-bezier(.16,1,.3,1), opacity 600ms ease',
+          wipeOut: 'transform 620ms cubic-bezier(.18,1,.22,1), opacity 520ms ease-out',
+          travelMs: 460,
+          entryOpacity: 0.28,
+          exitOpacity: 0.92,
+        },
+        impacto: {
+          wipeIn: 'transform 620ms cubic-bezier(.12,.95,.2,1), opacity 540ms ease',
+          wipeOut: 'transform 540ms cubic-bezier(.16,1,.22,1), opacity 460ms ease-out',
+          travelMs: 410,
+          entryOpacity: 0.34,
+          exitOpacity: 0.96,
+        },
+      };
+      let profile = localStorage.getItem('q7_motion_profile') || 'premium';
+      let motion = presets[profile] || presets.premium;
+      const motionButtons = document.querySelectorAll('.motion-mini-btn');
+
+      function updateMotionUi() {
+        motionButtons.forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.motionProfile === profile);
+        });
+      }
+
+      motionButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const selected = btn.dataset.motionProfile || 'premium';
+          if (!presets[selected]) return;
+          profile = selected;
+          motion = presets[selected];
+          localStorage.setItem('q7_motion_profile', selected);
+          updateMotionUi();
+        });
+      });
+
+      updateMotionUi();
+      const wipeId = 'q7-page-wipe';
+      let wipe = document.getElementById(wipeId);
+
+      if (!wipe) {
+        wipe = document.createElement('div');
+        wipe.id = wipeId;
+        document.body.appendChild(wipe);
+      }
+
+      Object.assign(wipe.style, {
+        position: 'fixed',
+        inset: '0',
+        zIndex: '5000',
+        pointerEvents: 'none',
+        transform: 'scaleX(1)',
+        transformOrigin: 'left center',
+        opacity: '0',
+        background: 'linear-gradient(120deg, rgba(29,201,164,0.95) 0%, rgba(0,229,192,0.94) 55%, rgba(251,191,36,0.9) 100%)',
+        mixBlendMode: 'screen'
+      });
+
+      if (!reduce) {
+        requestAnimationFrame(() => {
+          wipe.style.transition = motion.wipeIn;
+          wipe.style.opacity = String(motion.entryOpacity);
+          wipe.style.transform = 'scaleX(0)';
+          setTimeout(() => { wipe.style.opacity = '0'; }, 620);
+        });
+      }
+
+      document.addEventListener('click', (event) => {
+        const anchor = event.target.closest('a[href]');
+        if (!anchor) return;
+        if (anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+
+        const href = anchor.getAttribute('href') || '';
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+
+        const targetUrl = new URL(anchor.href, window.location.href);
+        if (targetUrl.origin !== window.location.origin) return;
+        if (reduce) return;
+
+        event.preventDefault();
+        wipe.style.pointerEvents = 'auto';
+        wipe.style.transition = 'none';
+        wipe.style.transformOrigin = 'right center';
+        wipe.style.transform = 'scaleX(0)';
+        wipe.style.opacity = '0';
+
+        requestAnimationFrame(() => {
+          wipe.style.transition = motion.wipeOut;
+          wipe.style.transform = 'scaleX(1)';
+          wipe.style.opacity = String(motion.exitOpacity);
+        });
+
+        setTimeout(() => {
+          window.location.href = targetUrl.href;
+        }, motion.travelMs);
+      }, { capture: true });
+    })();
+
+    (function () {
+      const canonicalEl = document.getElementById('canonical-url');
+      const ogUrlEl = document.getElementById('og-url');
+      if (!canonicalEl || !ogUrlEl) return;
+
+      const configuredOrigin = (document.querySelector('meta[name="q7-site-origin"]')?.content || '').trim();
+      const safeOrigin = configuredOrigin || window.location.origin;
+      const absoluteUrl = `${safeOrigin}${window.location.pathname}`;
+
+      canonicalEl.href = absoluteUrl;
+      ogUrlEl.content = absoluteUrl;
+    })();
+
+    (function () {
       const consentKey = 'q7_cookie_consent';
       const ga4Id = (document.querySelector('meta[name="q7-ga4-id"]')?.content || '').trim();
       const plausibleDomain = (document.querySelector('meta[name="q7-plausible-domain"]')?.content || '').trim();
@@ -693,7 +865,7 @@
       const orbs = [
         { x: 0.12, y: 0.06, r: 0.32, cr: [37, 99, 235], speed: 0.00012, phase: 0, alpha: 0.24 },
         { x: 0.82, y: 0.15, r: 0.28, cr: [6, 182, 212], speed: 0.00009, phase: 1.5, alpha: 0.24 },
-        { x: 0.48, y: 0.23, r: 0.22, cr: [109, 40, 217], speed: 0.00015, phase: 0.8, alpha: 0.18 },
+        { x: 0.48, y: 0.23, r: 0.22, cr: [17, 109, 91], speed: 0.00015, phase: 0.8, alpha: 0.18 },
         { x: 0.15, y: 0.78, r: 0.22, cr: [37, 99, 235], speed: 0.0001, phase: 2.1, alpha: 0.16 },
         { x: 0.75, y: 0.85, r: 0.24, cr: [212, 168, 67], speed: 0.00008, phase: 1.2, alpha: 0.16 }
       ];

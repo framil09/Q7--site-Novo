@@ -6,12 +6,12 @@
   <title>Qode7 — Tecnologia que Transforma</title>
   <meta name="description" content="A Qode7 entrega software, cloud, IA e plataformas para governo e empresas privadas com foco em resultado real." />
   <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="/" />
+  <link rel="canonical" id="canonical-url" href="/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:title" content="Qode7 — Tecnologia que Transforma" />
   <meta property="og:description" content="Software, cloud, IA e plataformas para operacoes criticas em governo e empresas privadas." />
-  <meta property="og:url" content="/" />
+  <meta property="og:url" id="og-url" content="/" />
   <meta property="og:image" content="qodeseven_logo_site.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Qode7 — Tecnologia que Transforma" />
@@ -21,6 +21,7 @@
   <meta name="q7-plausible-domain" content="" />
   <meta name="q7-whatsapp-number" content="5511999999999" />
   <meta name="q7-whatsapp-message" content="Ola! Quero falar com o comercial da Qode7." />
+  <meta name="q7-site-origin" content="" />
   <meta name="theme-color" content="#0b0f1a" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
@@ -40,6 +41,9 @@
       --light: #dbe4f0;
       --font-display: 'Space Mono', monospace;
       --font-body: 'DM Sans', sans-serif;
+      --motion-snap: cubic-bezier(.22,1,.36,1);
+      --motion-soft: cubic-bezier(.23,1,.32,1);
+      --motion-lux: cubic-bezier(.16,1,.3,1);
     }
 
     /* ══ LOGO [Q7] ══ */
@@ -235,6 +239,46 @@
       background-clip: text;
     }
     .nav-links { display: flex; gap: 2rem; list-style: none; flex: 1; justify-content: center; }
+    .motion-mini-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-right: 12px;
+      padding: 5px 7px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,229,192,0.3);
+      background: rgba(10,16,28,0.6);
+    }
+    .motion-mini-top-label {
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: rgba(219,228,240,0.72);
+      padding: 0 3px;
+      user-select: none;
+    }
+    .motion-mini-btn {
+      border: 1px solid rgba(125,211,252,0.3);
+      background: rgba(15,23,42,0.84);
+      color: rgba(219,228,240,0.9);
+      border-radius: 7px;
+      padding: 5px 8px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .motion-mini-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0,229,192,0.55);
+      color: #fff;
+    }
+    .motion-mini-btn.active {
+      border-color: rgba(0,229,192,0.8);
+      background: linear-gradient(135deg, rgba(29,201,164,0.18), rgba(251,191,36,0.12));
+      color: #fff;
+    }
     .nav-links a {
       color: var(--gray); font-size: 0.9rem; font-weight: 500;
       text-decoration: none;
@@ -276,6 +320,55 @@
       box-shadow: 0 8px 30px rgba(47, 110, 247, 0.5);
     }
 
+    .motion-switcher {
+      position: fixed;
+      left: 18px;
+      bottom: 20px;
+      z-index: 1400;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 229, 192, 0.34);
+      background: rgba(5, 10, 18, 0.78);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.34);
+    }
+    .motion-switcher-label {
+      font-size: 0.64rem;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      color: rgba(219, 228, 240, 0.72);
+      margin-right: 2px;
+      padding: 0 4px;
+      user-select: none;
+    }
+    .motion-btn {
+      appearance: none;
+      border: 1px solid rgba(125, 211, 252, 0.28);
+      background: rgba(15, 23, 42, 0.84);
+      color: rgba(219, 228, 240, 0.9);
+      border-radius: 9px;
+      padding: 6px 10px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      transition: transform 0.2s var(--motion-snap), border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+    }
+    .motion-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0, 229, 192, 0.5);
+      color: #ffffff;
+    }
+    .motion-btn.active {
+      border-color: rgba(0, 229, 192, 0.82);
+      color: #ffffff;
+      background: linear-gradient(135deg, rgba(29, 201, 164, 0.18), rgba(251, 191, 36, 0.12));
+      box-shadow: 0 0 0 1px rgba(0, 229, 192, 0.28), 0 8px 20px rgba(0, 0, 0, 0.34);
+    }
+
     /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
@@ -308,7 +401,7 @@
       animation: aurora1 12s ease-in-out infinite alternate;
     }
     .aurora-layer-2 {
-      background: radial-gradient(ellipse 50% 35% at 70% 30%, rgba(120,80,255,0.35) 0%, transparent 55%),
+      background: radial-gradient(ellipse 50% 35% at 70% 30%, rgba(29,201,164,0.28) 0%, transparent 55%),
                   radial-gradient(ellipse 45% 40% at 20% 70%, rgba(212,168,67,0.2) 0%, transparent 50%);
       animation: aurora2 15s ease-in-out infinite alternate;
     }
@@ -478,6 +571,7 @@
       flex: 0 0 auto; width: 460px;
       text-align: left;
       display: flex; flex-direction: column; align-items: flex-start;
+      will-change: transform;
     }
     .hero-content h1 { text-align: left; }
     .hero-content p   { text-align: left; max-width: 460px; }
@@ -498,6 +592,7 @@
       position: relative; z-index: 1;
       flex: 0 0 auto; width: 520px;
       animation: heroFadeSlide 1s 0.5s ease both;
+      will-change: transform;
     }
     @keyframes heroFadeSlide {
       from { opacity: 0; transform: translateX(50px); }
@@ -851,6 +946,7 @@
       gap: 10px; margin: 28px 0;
     }
     .modulo-tag {
+      .motion-mini-top { display: none; }
       display: flex; align-items: center; gap: 10px;
       padding: 12px 16px;
       background: rgba(255,255,255,0.03);
@@ -1309,57 +1405,101 @@
 
     /* ─── FOOTER ─── */
     footer {
-      background: rgba(3,7,15,0.7);
-      backdrop-filter: blur(12px);
+      background:
+        radial-gradient(120% 80% at 50% 0%, rgba(29,201,164,0.08) 0%, rgba(6,13,31,0) 55%),
+        linear-gradient(180deg, rgba(8,17,34,0.92) 0%, rgba(5,10,20,0.96) 100%);
+      backdrop-filter: blur(14px) saturate(1.15);
       padding: 60px 5% 32px;
       border-top: 1px solid rgba(255,255,255,0.06);
       position: relative; overflow: hidden;
     }
+    .footer-glow-core {
+      position: absolute;
+      width: 58%;
+      height: 240px;
+      left: 21%;
+      top: -120px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(ellipse at center, rgba(29,201,164,0.16) 0%, rgba(29,201,164,0.04) 45%, rgba(29,201,164,0) 75%);
+      animation: coreBreath 7s ease-in-out infinite;
+    }
     #footer-canvas {
-      position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.7;
+      position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.72;
     }
     /* ── FOOTER BLOBS VISÍVEIS ── */
     .footer-blob {
       position: absolute; border-radius: 50%;
-      filter: blur(90px); pointer-events: none; z-index: 0;
+      filter: blur(78px);
+      mix-blend-mode: screen;
+      pointer-events: none; z-index: 0;
     }
     .fb1 {
       width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(47,110,247,0.55) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(29,201,164,0.4) 0%, transparent 72%);
       bottom: -120px; left: -80px;
-      animation: fb1move 12s ease-in-out infinite alternate;
+      animation: fbA 14s ease-in-out infinite alternate;
     }
     .fb2 {
       width: 420px; height: 420px;
-      background: radial-gradient(circle, rgba(120,80,255,0.45) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,229,192,0.32) 0%, transparent 72%);
       bottom: -60px; right: 10%;
-      animation: fb1move 15s 2s ease-in-out infinite alternate-reverse;
+      animation: fbB 17s 1.5s ease-in-out infinite alternate-reverse;
     }
     .fb3 {
       width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(212,168,67,0.3) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(251,191,36,0.24) 0%, transparent 72%);
       top: 20px; left: 38%;
-      animation: fb1move 10s 1s ease-in-out infinite alternate;
+      animation: fbC 11s 1s ease-in-out infinite alternate;
     }
     .fb4 {
       width: 260px; height: 260px;
-      background: radial-gradient(circle, rgba(0,180,150,0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(29,201,164,0.22) 0%, transparent 72%);
       top: -40px; right: 25%;
-      animation: fb1move 13s 3s ease-in-out infinite alternate-reverse;
+      animation: fbD 13s 2.5s ease-in-out infinite alternate-reverse;
     }
-    @keyframes fb1move {
+    @keyframes fbA {
       0%   { transform: translate(0, 0) scale(1); }
-      50%  { transform: translate(30px, -20px) scale(1.08); }
-      100% { transform: translate(-20px, 25px) scale(0.95); }
+      50%  { transform: translate(26px, -16px) scale(1.06); }
+      100% { transform: translate(-16px, 20px) scale(0.96); }
+    }
+    @keyframes fbB {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-22px, -10px) scale(1.05); }
+      100% { transform: translate(14px, 18px) scale(0.97); }
+    }
+    @keyframes fbC {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(14px, -14px) scale(1.09); }
+      100% { transform: translate(-12px, 12px) scale(0.93); }
+    }
+    @keyframes fbD {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(12px, 10px) scale(1.07); }
+      100% { transform: translate(-14px, -8px) scale(0.95); }
     }
     /* linha luminosa no topo do footer */
     footer::before {
       content: '';
       position: absolute; top: 0; left: 10%; right: 10%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(47,110,247,0.6) 30%, rgba(240,201,106,0.5) 70%, transparent);
+      background: linear-gradient(90deg, transparent, rgba(29,201,164,0.58) 30%, rgba(251,191,36,0.48) 70%, transparent);
       animation: lineGlow 4s ease-in-out infinite alternate;
       z-index: 1;
+    }
+    footer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.14;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.95) 50%, rgba(0,0,0,0.65) 100%);
     }
     @keyframes lineGlow {
       0%   { opacity: 0.5; left: 15%; right: 15%; }
@@ -1372,6 +1512,10 @@
       pointer-events: none; z-index: 0; user-select: none;
       animation: wmPulse 8s ease-in-out infinite;
     }
+    @keyframes coreBreath {
+      0%, 100% { opacity: 0.72; transform: translateY(0) scale(1); }
+      50%      { opacity: 1; transform: translateY(4px) scale(1.06); }
+    }
     @keyframes wmPulse {
       0%,100% { opacity: 0.8; transform: translateY(0); }
       50%      { opacity: 1;   transform: translateY(-8px); }
@@ -1380,11 +1524,45 @@
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
     .footer-brand .nav-logo { font-size: 1.4rem; display: block; margin-bottom: 16px; }
     .footer-brand p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; max-width: 280px; }
+    .footer-brand,
+    .footer-col {
+      border: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      transition: border-color 0.34s var(--motion-soft), box-shadow 0.34s var(--motion-soft), transform 0.34s var(--motion-soft);
+    }
+    #site-footer[data-region='brand'] .fb1,
+    #site-footer[data-region='brand'] .fb2 {
+      opacity: 1;
+    }
+    #site-footer[data-region='solutions'] .fb1,
+    #site-footer[data-region='solutions'] .fb4 {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+    #site-footer[data-region='company'] .fb2,
+    #site-footer[data-region='company'] .fb3 {
+      opacity: 0.95;
+      transform: scale(1.05);
+    }
+    #site-footer[data-region='contact'] .fb3,
+    #site-footer[data-region='contact'] .fb4 {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+    .footer-brand:hover,
+    .footer-col:hover {
+      border-color: rgba(29,201,164,0.35);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 30px rgba(0,0,0,0.25);
+      transform: translateY(-2px);
+    }
     .footer-col h5 { font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; letter-spacing: 0.3px; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-col ul a {
       font-size: 0.85rem; color: var(--gray); text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.3s var(--motion-soft), transform 0.3s var(--motion-soft);
     }
     .footer-col ul a:hover { color: var(--white); }
     .footer-bottom {
@@ -1576,6 +1754,9 @@
       .cookie-actions { flex-direction: column; align-items: stretch; }
       .cookie-link { margin-left: 0; }
       section { padding: 72px 5%; }
+      .footer-blob { filter: blur(56px); opacity: 0.72; }
+      .footer-watermark { opacity: 0.55; font-size: clamp(6rem, 24vw, 10rem); }
+      #footer-canvas { opacity: 0.5; }
     }
     @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
       .btn-primary,
@@ -1619,10 +1800,16 @@
     <li><a href="empresa.html">Empresa</a></li>
     <li><a href="contato.html">Contato</a></li>
   </ul>
+  <div class="motion-mini-top" data-motion-switcher role="group" aria-label="Perfil de animacao">
+    <span class="motion-mini-top-label">Motion</span>
+    <button type="button" class="motion-mini-btn" data-motion-profile="suave">Suave</button>
+    <button type="button" class="motion-mini-btn" data-motion-profile="premium">Premium</button>
+    <button type="button" class="motion-mini-btn" data-motion-profile="impacto">Impacto</button>
+  </div>
 </nav>
 
 <!-- ───────── HERO ───────── -->
-<section class="hero" style="min-height:100vh; padding:110px 6% 100px; display:flex; align-items:center; justify-content:center; gap:60px; position:relative;">
+<section class="hero hero-parallax-root" style="min-height:100vh; padding:110px 6% 100px; display:flex; align-items:center; justify-content:center; gap:60px; position:relative;">
   <div class="hero-grid"></div>
   <!-- Vinheta: escurece bordas, abre o centro para os orbs aparecerem -->
   <div style="position:absolute;inset:0;z-index:0;pointer-events:none;
@@ -1631,7 +1818,7 @@
       linear-gradient(180deg, rgba(6,13,31,0.45) 0%, transparent 40%, transparent 70%, rgba(6,13,31,0.6) 100%);"></div>
 
   <!-- ESQUERDA: texto -->
-  <div class="hero-content">
+  <div class="hero-content" data-parallax-speed="0.12" data-parallax-max="54">
     <div class="hero-badge" style="animation: fadeInDown 0.8s ease both;">Software · Setor Público · Empresas · IA · Cloud</div>
     <h1 style="animation: fadeInUp 0.9s 0.15s ease both; font-size:clamp(2.6rem,4.5vw,4.2rem); letter-spacing:-2px;">
       Software que<br/>
@@ -1665,7 +1852,7 @@
   </div>
 
   <!-- DIREITA: dashboard -->
-  <div class="hero-dashboard-wrap">
+  <div class="hero-dashboard-wrap" data-parallax-speed="-0.08" data-parallax-max="38">
     <div style="position:relative;">
       <div class="hero-dash-tilt">
         <div class="hero-dash-bar">
@@ -1819,7 +2006,7 @@
 
     <div class="service-card spotlight-card reveal reveal-delay-1">
       <div class="spotlight-glow"></div>
-      <div class="service-icon" style="background:linear-gradient(135deg,rgba(120,80,255,0.2),rgba(120,80,255,0.05));border:1px solid rgba(120,80,255,0.2);">◈</div>
+      <div class="service-icon" style="background:linear-gradient(135deg,rgba(29,201,164,0.2),rgba(29,201,164,0.05));border:1px solid rgba(29,201,164,0.2);">◈</div>
       <h3>Inteligência Artificial</h3>
       <p>Não vendemos IA como tendência. Implementamos modelos que resolvem problemas reais — automação, análise preditiva e triagem de dados com resultado mensurável.</p>
       <span class="service-tag">Modelos customizados · Automação · Predição</span>
@@ -2155,7 +2342,7 @@
 <!-- ───────── PRODUTO 3 — IA LICITAÇÃO ───────── -->
 <div class="produto-block" style="padding: 0 5% 100px;">
   <div class="produto-content reveal-left">
-    <div class="produto-badge pub" style="background:rgba(120,80,255,0.12);border-color:rgba(120,80,255,0.3);color:#b794f4;">IA · Operações Críticas</div>
+    <div class="produto-badge pub" style="background:rgba(29,201,164,0.12);border-color:rgba(29,201,164,0.3);color:#66efd3;">IA · Operações Críticas</div>
     <h2>Inteligência Artificial<br/><span style="color:#b794f4;">para Licitações</span></h2>
     <p>Um assistente de IA treinado especificamente para o processo licitatório brasileiro. Ele lê editais, identifica riscos, verifica habilitação, cruza dados com o histórico de licitantes e sugere estratégias de proposta — tudo em minutos, não em dias.</p>
     <p>Funciona como um analista sênior de licitações disponível 24h: sem custo de hora extra, sem erro de digitação, sem prazo perdido por falta de atenção.</p>
@@ -2509,7 +2696,7 @@
       <div class="quote-mark">"</div>
       <blockquote>A Qode7 transformou completamente nossa gestão de saúde. Antes tínhamos planilhas, papel e fila física. Hoje temos um sistema que me diz em tempo real quantos pacientes estão aguardando, qual a gravidade e qual profissional está disponível. Isso salva vidas.</blockquote>
       <div class="testimonial-author">
-        <img class="t-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dra. Ana Claudia Ferreira"/>
+        <img class="t-avatar" src="qodeseven_logo_v2.svg" alt="Dra. Ana Claudia Ferreira" loading="lazy" decoding="async"/>
         <div>
           <div class="t-name">Dra. Ana Claudia Ferreira</div>
           <div class="t-role">Secretária Municipal de Saúde · SP</div>
@@ -2521,7 +2708,7 @@
       <div class="quote-mark">"</div>
       <blockquote>Levamos anos tentando digitalizar nossos contratos e fluxos internos com soluções genéricas. A Qode7 entendeu nosso contexto regulado, alinhou compliance e entregou em 90 dias algo que nenhum outro fornecedor conseguiu em anos. Equipe excepcional.</blockquote>
       <div class="testimonial-author">
-        <img class="t-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Marcos Andrade"/>
+        <img class="t-avatar" src="qodeseven_logo_v2.svg" alt="Marcos Andrade" loading="lazy" decoding="async"/>
         <div>
           <div class="t-name">Marcos Andrade</div>
           <div class="t-role">Diretor Administrativo · Empresa de Serviços, PR</div>
@@ -2533,7 +2720,7 @@
       <div class="quote-mark">"</div>
       <blockquote>Contratamos a Qode7 para um projeto de 6 meses e estamos juntos há 3 anos. Eles entendem nosso negócio, antecipam problemas antes de acontecerem e sempre entregam no prazo. Hoje são um parceiro estratégico, não apenas um fornecedor.</blockquote>
       <div class="testimonial-author">
-        <img class="t-avatar" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Renata Oliveira"/>
+        <img class="t-avatar" src="qodeseven_logo_v2.svg" alt="Renata Oliveira" loading="lazy" decoding="async"/>
         <div>
           <div class="t-name">Renata Oliveira</div>
           <div class="t-role">CTO · Fintech de Crédito, RJ</div>
@@ -2545,7 +2732,7 @@
       <div class="quote-mark">"</div>
       <blockquote>Migrar nosso ERP para cloud parecia impossível sem parar a operação. A Qode7 fez em fases, sem downtime, com uma equipe que realmente sabia o que estava fazendo. Economizamos 61% em infra e ainda temos mais capacidade do que antes.</blockquote>
       <div class="testimonial-author">
-        <img class="t-avatar" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Roberto Nascimento"/>
+        <img class="t-avatar" src="qodeseven_logo_v2.svg" alt="Roberto Nascimento" loading="lazy" decoding="async"/>
         <div>
           <div class="t-name">Roberto Nascimento</div>
           <div class="t-role">Diretor de TI · Indústria Metal-mecânica, MG</div>
@@ -2566,15 +2753,16 @@
 </section>
 
 <!-- ───────── FOOTER ───────── -->
-<footer>
+<footer id="site-footer" data-region="default">
   <canvas id="footer-canvas"></canvas>
+  <div class="footer-glow-core" aria-hidden="true"></div>
   <div class="footer-blob fb1"></div>
   <div class="footer-blob fb2"></div>
   <div class="footer-blob fb3"></div>
   <div class="footer-blob fb4"></div>
   <div class="footer-watermark">[Q7]</div>
   <div class="footer-grid">
-    <div class="footer-brand">
+    <div class="footer-brand" data-footer-region="brand">
       <div class="footer-brand-mark">
         <span class="brand-logo-shell footer-logo-shell">
           <img class="brand-logo-img footer" src="qodeseven_logo_site.svg" alt="Qode7" />
@@ -2582,7 +2770,7 @@
       </div>
       <p>Tecnologia que funciona no mundo real — para governo e empresas privadas, há mais de 10 anos.</p>
     </div>
-    <div class="footer-col">
+    <div class="footer-col" data-footer-region="solutions">
       <h5>Soluções</h5>
       <ul>
         <li><a href="#servicos" data-track="footer_solucao_desenvolvimento">Desenvolvimento</a></li>
@@ -2592,7 +2780,7 @@
         <li><a href="#servicos" data-track="footer_solucao_data">Data & Analytics</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div class="footer-col" data-footer-region="company">
       <h5>Empresa</h5>
       <ul>
         <li><a href="compliance.html">Compliance</a></li>
@@ -2600,7 +2788,7 @@
         <li><a href="#cases">Cases</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div class="footer-col" data-footer-region="contact">
       <h5>Contato</h5>
       <ul>
         <li><a href="mailto:contato@qode7.com" data-track="footer_email">contato@qode7.com</a></li>
@@ -2624,8 +2812,170 @@
   </div>
 </div>
 
+<div class="motion-switcher" id="motion-switcher" data-motion-switcher role="group" aria-label="Perfil de animacao">
+  <span class="motion-switcher-label">Motion</span>
+  <button type="button" class="motion-btn" data-motion-profile="suave">Suave</button>
+  <button type="button" class="motion-btn" data-motion-profile="premium">Premium</button>
+  <button type="button" class="motion-btn" data-motion-profile="impacto">Impacto</button>
+</div>
+
 <!-- ───────── SCRIPTS ───────── -->
 <script>
+  (function () {
+    const key = 'q7_motion_profile';
+    const presets = {
+      suave: {
+        wipeIn: 'transform 760ms cubic-bezier(.22,1,.36,1), opacity 620ms ease',
+        wipeOut: 'transform 700ms cubic-bezier(.22,1,.36,1), opacity 560ms ease-out',
+        travelMs: 520,
+        entryOpacity: 0.22,
+        exitOpacity: 0.86,
+        parallaxMouse: 0.7,
+        parallaxScroll: 0.74,
+        footerBoost: 0.7,
+      },
+      premium: {
+        wipeIn: 'transform 680ms cubic-bezier(.16,1,.3,1), opacity 600ms ease',
+        wipeOut: 'transform 620ms cubic-bezier(.18,1,.22,1), opacity 520ms ease-out',
+        travelMs: 460,
+        entryOpacity: 0.28,
+        exitOpacity: 0.92,
+        parallaxMouse: 1,
+        parallaxScroll: 1,
+        footerBoost: 1,
+      },
+      impacto: {
+        wipeIn: 'transform 620ms cubic-bezier(.12,.95,.2,1), opacity 540ms ease',
+        wipeOut: 'transform 540ms cubic-bezier(.16,1,.22,1), opacity 460ms ease-out',
+        travelMs: 410,
+        entryOpacity: 0.34,
+        exitOpacity: 0.96,
+        parallaxMouse: 1.25,
+        parallaxScroll: 1.24,
+        footerBoost: 1.28,
+      },
+    };
+
+    function readProfile() {
+      const raw = localStorage.getItem(key);
+      if (raw && presets[raw]) return raw;
+      return 'premium';
+    }
+
+    function getPreset() {
+      const profile = readProfile();
+      return { profile, settings: presets[profile] };
+    }
+
+    function applySwitcherUi(profile) {
+      document.querySelectorAll('[data-motion-switcher] [data-motion-profile]').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.motionProfile === profile);
+      });
+      document.body.dataset.motionProfile = profile;
+    }
+
+    function saveProfile(profile) {
+      if (!presets[profile]) return;
+      localStorage.setItem(key, profile);
+      applySwitcherUi(profile);
+      window.dispatchEvent(new CustomEvent('q7-motion-profile-change', {
+        detail: { profile, settings: presets[profile] },
+      }));
+    }
+
+    window.q7GetMotionPreset = getPreset;
+    applySwitcherUi(readProfile());
+
+    document.querySelectorAll('[data-motion-switcher] [data-motion-profile]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        saveProfile(btn.dataset.motionProfile || 'premium');
+      });
+    });
+  })();
+
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const preset = typeof window.q7GetMotionPreset === 'function' ? window.q7GetMotionPreset().settings : {
+      wipeIn: 'transform 680ms cubic-bezier(.16,1,.3,1), opacity 600ms ease',
+      wipeOut: 'transform 620ms cubic-bezier(.18,1,.22,1), opacity 520ms ease-out',
+      travelMs: 460,
+      entryOpacity: 0.28,
+      exitOpacity: 0.92,
+    };
+    const wipeId = 'q7-page-wipe';
+    let wipe = document.getElementById(wipeId);
+
+    if (!wipe) {
+      wipe = document.createElement('div');
+      wipe.id = wipeId;
+      document.body.appendChild(wipe);
+    }
+
+    Object.assign(wipe.style, {
+      position: 'fixed',
+      inset: '0',
+      zIndex: '5000',
+      pointerEvents: 'none',
+      transform: 'scaleX(1)',
+      transformOrigin: 'left center',
+      opacity: '0',
+      background: 'linear-gradient(120deg, rgba(29,201,164,0.95) 0%, rgba(0,229,192,0.94) 55%, rgba(251,191,36,0.9) 100%)',
+      mixBlendMode: 'screen'
+    });
+
+    if (!reduce) {
+      requestAnimationFrame(() => {
+        wipe.style.transition = preset.wipeIn;
+        wipe.style.opacity = String(preset.entryOpacity);
+        wipe.style.transform = 'scaleX(0)';
+        setTimeout(() => { wipe.style.opacity = '0'; }, 620);
+      });
+    }
+
+    document.addEventListener('click', (event) => {
+      const anchor = event.target.closest('a[href]');
+      if (!anchor) return;
+      if (anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+
+      const href = anchor.getAttribute('href') || '';
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+
+      const targetUrl = new URL(anchor.href, window.location.href);
+      if (targetUrl.origin !== window.location.origin) return;
+      if (reduce) return;
+
+      event.preventDefault();
+      wipe.style.pointerEvents = 'auto';
+      wipe.style.transition = 'none';
+      wipe.style.transformOrigin = 'right center';
+      wipe.style.transform = 'scaleX(0)';
+      wipe.style.opacity = '0';
+
+      requestAnimationFrame(() => {
+        wipe.style.transition = preset.wipeOut;
+        wipe.style.transform = 'scaleX(1)';
+        wipe.style.opacity = String(preset.exitOpacity);
+      });
+
+      setTimeout(() => {
+        window.location.href = targetUrl.href;
+      }, preset.travelMs);
+    }, { capture: true });
+  })();
+
+  (function () {
+    const canonicalEl = document.getElementById('canonical-url');
+    const ogUrlEl = document.getElementById('og-url');
+    if (!canonicalEl || !ogUrlEl) return;
+
+    const configuredOrigin = (document.querySelector('meta[name="q7-site-origin"]')?.content || '').trim();
+    const safeOrigin = configuredOrigin || window.location.origin;
+    const absoluteUrl = `${safeOrigin}${window.location.pathname}`;
+
+    canonicalEl.href = absoluteUrl;
+    ogUrlEl.content = absoluteUrl;
+  })();
+
   /* ─── 0. BOOTSTRAP ANALYTICS (CONSENTIMENTO) ─── */
   (function () {
     const consentKey = 'q7_cookie_consent';
@@ -2716,7 +3066,7 @@
       // hero — grandes e bem visíveis
       { x: 0.12, y: 0.05, r: 0.32, cr: [37, 99, 235],   speed: 0.00012, phase: 0,   alpha: 0.28 },
       { x: 0.80, y: 0.12, r: 0.26, cr: [6, 182, 212],   speed: 0.00009, phase: 1.5, alpha: 0.26 },
-      { x: 0.48, y: 0.20, r: 0.22, cr: [109, 40, 217],  speed: 0.00015, phase: 0.8, alpha: 0.22 },
+      { x: 0.48, y: 0.20, r: 0.22, cr: [17, 109, 91],   speed: 0.00015, phase: 0.8, alpha: 0.22 },
       // meio
       { x: 0.08, y: 0.52, r: 0.20, cr: [37, 99, 235],   speed: 0.00010, phase: 2.1, alpha: 0.18 },
       { x: 0.90, y: 0.48, r: 0.25, cr: [6, 182, 212],   speed: 0.00013, phase: 3.0, alpha: 0.20 },
@@ -2775,6 +3125,66 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
+
+  /* ─── 2b. HERO PARALLAX MULTICAMADA ─── */
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    if (reduce || coarse) return;
+
+    const root = document.querySelector('.hero-parallax-root');
+    if (!root) return;
+
+    const layers = [...root.querySelectorAll('[data-parallax-speed]')].map((el) => ({
+      el,
+      speed: Number(el.dataset.parallaxSpeed || 0),
+      max: Number(el.dataset.parallaxMax || 48)
+    }));
+    if (!layers.length) return;
+
+    const state = { tx: 0, ty: 0, mx: 0, my: 0 };
+    let ticking = false;
+    function clamp(n, min, max) {
+      return Math.max(min, Math.min(max, n));
+    }
+
+    function paintParallax() {
+      ticking = false;
+      const motion = typeof window.q7GetMotionPreset === 'function' ? window.q7GetMotionPreset().settings : { parallaxMouse: 1, parallaxScroll: 1 };
+      const y = Math.min(window.scrollY, window.innerHeight * 1.2);
+      const rect = root.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const dx = clamp((state.mx - centerX) / Math.max(rect.width / 2, 1), -1, 1);
+      const dy = clamp((state.my - centerY) / Math.max(rect.height / 2, 1), -1, 1);
+      state.tx += (dx - state.tx) * 0.12;
+      state.ty += (dy - state.ty) * 0.12;
+
+      layers.forEach(({ el, speed, max }) => {
+        const scrollOffset = clamp(y * speed * motion.parallaxScroll, -max, max);
+        const mouseX = state.tx * Math.abs(speed) * 26 * motion.parallaxMouse;
+        const mouseY = state.ty * Math.abs(speed) * 16 * motion.parallaxMouse;
+        el.style.transform = `translate3d(${mouseX.toFixed(2)}px, ${(scrollOffset + mouseY).toFixed(2)}px, 0)`;
+      });
+    }
+
+    function queuePaint() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(paintParallax);
+    }
+
+    window.addEventListener('scroll', queuePaint, { passive: true });
+    window.addEventListener('mousemove', (event) => {
+      state.mx = event.clientX;
+      state.my = event.clientY;
+      queuePaint();
+    }, { passive: true });
+
+    state.mx = window.innerWidth / 2;
+    state.my = window.innerHeight / 2;
+    paintParallax();
+  })();
 
   /* ─── 3. SCROLL REVEAL — easing suave ─── */
   const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
@@ -2953,15 +3363,72 @@
     resizeFC();
     new ResizeObserver(resizeFC).observe(footer);
 
-    const FN = 38;
+    const regionCards = footer.querySelectorAll('[data-footer-region]');
+    let regionStrength = 0;
+    let targetStrength = 0;
+
+    function setRegion(region, strength) {
+      footer.dataset.region = region;
+      targetStrength = strength;
+    }
+
+    regionCards.forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        setRegion(card.dataset.footerRegion || 'default', 1);
+      });
+      card.addEventListener('mouseleave', () => {
+        setRegion('default', 0);
+      });
+      card.addEventListener('focusin', () => {
+        setRegion(card.dataset.footerRegion || 'default', 1);
+      });
+    });
+    footer.addEventListener('focusout', () => {
+      setRegion('default', 0);
+    });
+
+    function paletteByRegion(region, tint) {
+      const map = {
+        default: {
+          teal: [0, 229, 192],
+          gold: [251, 191, 36],
+        },
+        brand: {
+          teal: [29, 201, 164],
+          gold: [240, 201, 106],
+        },
+        solutions: {
+          teal: [0, 229, 192],
+          gold: [251, 191, 36],
+        },
+        company: {
+          teal: [6, 182, 212],
+          gold: [212, 168, 67],
+        },
+        contact: {
+          teal: [29, 201, 164],
+          gold: [251, 191, 36],
+        },
+      };
+      const selected = map[region] || map.default;
+      return tint === 'gold' ? selected.gold : selected.teal;
+    }
+
+    const FN = 44;
     const fpts = Array.from({ length: FN }, () => ({
       x: Math.random() * footer.offsetWidth,
       y: Math.random() * footer.offsetHeight,
-      vx: (Math.random() - 0.5) * 0.28,
-      vy: (Math.random() - 0.5) * 0.28,
-      r: Math.random() * 2 + 1,
+      vx: (Math.random() - 0.5) * 0.22,
+      vy: (Math.random() - 0.5) * 0.22,
+      r: Math.random() * 1.6 + 0.8,
+      tint: Math.random() > 0.2 ? 'teal' : 'gold',
     }));
     function drawFC() {
+      const region = footer.dataset.region || 'default';
+      const motion = typeof window.q7GetMotionPreset === 'function' ? window.q7GetMotionPreset().settings : { footerBoost: 1 };
+      const boost = motion.footerBoost || 1;
+      regionStrength += (targetStrength - regionStrength) * 0.08;
+      const linkRange = 122 + regionStrength * (34 * boost);
       fctx.clearRect(0, 0, fc.width, fc.height);
       fpts.forEach(p => {
         p.x += p.vx; p.y += p.vy;
@@ -2971,19 +3438,26 @@
       for (let i = 0; i < FN; i++) {
         for (let j = i + 1; j < FN; j++) {
           const d = Math.hypot(fpts[i].x - fpts[j].x, fpts[i].y - fpts[j].y);
-          if (d < 130) {
+          if (d < linkRange) {
+            const ratio = (1 - d / linkRange);
+            const teal = fpts[i].tint === 'teal' || fpts[j].tint === 'teal';
+            const rgb = paletteByRegion(region, teal ? 'teal' : 'gold');
             fctx.beginPath();
-            fctx.strokeStyle = `rgba(91,142,249,${(1 - d / 130) * 0.45})`;
-            fctx.lineWidth = 0.9;
+            const alphaBoost = 1 + regionStrength * (0.55 * boost);
+            fctx.strokeStyle = `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${ratio * (teal ? 0.34 : 0.24) * alphaBoost})`;
+            fctx.lineWidth = 0.85 + regionStrength * (0.24 * boost);
             fctx.moveTo(fpts[i].x, fpts[i].y);
             fctx.lineTo(fpts[j].x, fpts[j].y);
             fctx.stroke();
           }
         }
         // ponto com glow
-        const grad = fctx.createRadialGradient(fpts[i].x, fpts[i].y, 0, fpts[i].x, fpts[i].y, fpts[i].r * 3);
-        grad.addColorStop(0, 'rgba(91,142,249,0.9)');
-        grad.addColorStop(1, 'rgba(91,142,249,0)');
+        const glowRadius = fpts[i].r * (3 + regionStrength * (1.2 * boost));
+        const grad = fctx.createRadialGradient(fpts[i].x, fpts[i].y, 0, fpts[i].x, fpts[i].y, glowRadius);
+        const dotRgb = paletteByRegion(region, fpts[i].tint);
+        const dotAlpha = (fpts[i].tint === 'gold' ? 0.72 : 0.78) + regionStrength * (0.12 * boost);
+        grad.addColorStop(0, `rgba(${dotRgb[0]},${dotRgb[1]},${dotRgb[2]},${dotAlpha})`);
+        grad.addColorStop(1, `rgba(${dotRgb[0]},${dotRgb[1]},${dotRgb[2]},0)`);
         fctx.beginPath();
         fctx.arc(fpts[i].x, fpts[i].y, fpts[i].r * 3, 0, Math.PI * 2);
         fctx.fillStyle = grad;
@@ -2997,7 +3471,7 @@
   /* ─── 10. FOOTER LINKS HOVER — slide up ─── */
   document.querySelectorAll('.footer-col ul a').forEach(a => {
     a.style.display = 'inline-block';
-    a.style.transition = 'color 0.3s, transform 0.3s cubic-bezier(.23,1,.32,1)';
+    a.style.transition = 'color 0.32s cubic-bezier(.22,1,.36,1), transform 0.32s cubic-bezier(.22,1,.36,1)';
     a.addEventListener('mouseenter', () => a.style.transform = 'translateX(5px)');
     a.addEventListener('mouseleave', () => a.style.transform = '');
   });

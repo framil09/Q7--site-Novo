@@ -16,10 +16,10 @@ Site institucional estático da Qode7.
 
 ## Como rodar localmente
 
-No terminal, entre na pasta do projeto e rode um servidor HTTP:
+No terminal, entre na pasta raiz do projeto e rode um servidor HTTP:
 
 ```bash
-cd "/Users/Mac-Kener/Desktop/Q7-Projetos/qode7 Site"
+cd Q7--site-Novo
 python3 -m http.server 5500
 ```
 
